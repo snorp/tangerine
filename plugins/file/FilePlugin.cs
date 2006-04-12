@@ -136,10 +136,10 @@ namespace Tangerine.Plugins {
         }
 
         private void AddSong (string file) {
-            AudioFileWrapper afw;
+            AudioFile af;
 
             try {
-                afw = new AudioFileWrapper (file);
+                af = new AudioFile (file);
             } catch (CannotReadException e) {
                 return;
             }
@@ -150,20 +150,20 @@ namespace Tangerine.Plugins {
                 db.AddSong (song);
             }
 
-            song.Artist = afw.Artist;
-            song.Album = afw.Album;
-            song.Title = afw.Title;
-            song.Duration = TimeSpan.FromSeconds (afw.Duration);
+            song.Artist = af.Artist;
+            song.Album = af.Album;
+            song.Title = af.Title;
+            song.Duration = af.Duration;
             song.FileName = file;
             song.Format = Path.GetExtension (file).Substring (1);
-            song.Genre = afw.Genre;
+            song.Genre = af.Genre;
 
             FileInfo info = new FileInfo (file);
             song.Size = (int) info.Length;
-            song.TrackCount = afw.TrackCount;
-            song.TrackNumber = afw.TrackNumber;
-            song.Year = afw.Year;
-            song.BitRate = (short) afw.Bitrate;
+            song.TrackCount = af.TrackCount;
+            song.TrackNumber = af.TrackNumber;
+            song.Year = af.Year;
+            song.BitRate = (short) af.Bitrate;
 
             songHash[file] = song;
         }
