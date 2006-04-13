@@ -140,7 +140,7 @@ namespace Tangerine.Plugins {
 
             try {
                 af = new AudioFile (file);
-            } catch (CannotReadException e) {
+            } catch (UnsupportedFormatException e) {
                 return;
             }
 
