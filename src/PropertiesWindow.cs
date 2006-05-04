@@ -96,7 +96,7 @@ namespace Tangerine {
             enabledButton.Toggled += delegate {
                 SetSensitive ();
             };
-            
+
             VBox.Add (prefsContent);
 
             configPath = Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
@@ -109,9 +109,17 @@ namespace Tangerine {
             SetSensitive ();
         }
 
+        private bool HaveBeaglePlugin () {
+            return File.Exists (Combine (AppDomain.CurrentDomain.BaseDirectory, "plugins", "tangerine-beagle.dll"));
+        }
+
         private void SetSensitive () {
             prefsControls.Sensitive = enabledButton.Active;
             directoryButton.Sensitive = specifyRadio.Active;
+
+            if (!HaveBeaglePlugin ()) {
+                beagleRadio.Sensitive = false;
+            }
         }
 
         private string Combine (params string[] paths) {
@@ -133,9 +141,9 @@ namespace Tangerine {
             Daemon.ParseConfig (configPath);
 
             nameEntry.Text = Daemon.Name;
-            if (Daemon.PluginNames == null ||
-                Daemon.PluginNames.Length == 0 ||
-                Daemon.PluginNames[0] == "beagle") {
+            if ((Daemon.PluginNames == null ||
+                 Daemon.PluginNames.Length == 0 ||
+                 Daemon.PluginNames[0] == "beagle") && HaveBeaglePlugin ()) {
                 beagleRadio.Active = true;
             } else {
                 specifyRadio.Active = true;
