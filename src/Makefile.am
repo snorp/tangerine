@@ -53,7 +53,8 @@ TANG_PROPSOURCES = $(srcdir)/PropertiesWindow.cs
 $(TANG_PROPS_ASSEMBLY): $(TANG_PROPSOURCES)
 	$(MCS) $(MCS_FLAGS) -out:$@ $(TANG_PROPSOURCES) -r:tangerine.dll \
 	$(TANG_DEPS) -pkg:gtk-sharp-2.0,glade-sharp-2.0 \
-	-resource:$(srcdir)/tangerine-properties.glade,tangerine-properties.glade
+	-resource:$(srcdir)/tangerine-properties.glade,tangerine-properties.glade \
+	-resource:$(srcdir)/tangerine.png,tangerine.png
 
 tangerine: tangerine.in
 	sed -e 's,@libdir\@,$(libdir),g' \

@@ -70,6 +70,7 @@ namespace Tangerine {
         private Entry passwordEntry;
 
         public PropertiesWindow () : base ("Tangerine Music Sharing", null, DialogFlags.NoSeparator) {
+            DefaultIcon = new Gdk.Pixbuf (null, "tangerine.png");
             AddButton (Stock.Close, ResponseType.Close);
             Response += delegate {
                 Hide ();
