@@ -7,8 +7,8 @@ pkgcfgdir = $(libdir)/pkgconfig
 pkgcfg_DATA = tangerine.pc
 
 release: distcheck
-	svn cp svn://snorp.net/source/trunk/tangerine \
-	svn://snorp.net/source/tags/tangerine-$(VERSION) -m "tag for $(VERSION)"
+	svn cp http://snorp.net/source/trunk/tangerine \
+	http://snorp.net/source/tags/tangerine-$(VERSION) -m "tag for $(VERSION)"
 	scp tangerine-$(VERSION).tar.gz root@snorp.net:/var/www/files/dopi
 
 EXTRA_DIST = tangerine.pc.in
