@@ -9,6 +9,6 @@ pkgcfg_DATA = tangerine.pc
 release: distcheck
 	svn cp http://snorp.net/source/trunk/tangerine \
 	http://snorp.net/source/tags/tangerine-$(VERSION) -m "tag for $(VERSION)"
-	scp tangerine-$(VERSION).tar.gz root@snorp.net:/var/www/files/dopi
+	scp tangerine-$(VERSION).tar.gz root@snorp.net:/var/www/files/tangerine
 
 EXTRA_DIST = tangerine.pc.in
