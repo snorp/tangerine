@@ -72,6 +72,7 @@ EXTRA_DIST =				\
 	$(app_DATA)			\
 	$(icon_DATA)			\
 	tangerine-properties.glade	\
+	tangerine-properties.in		\
 	tangerine.in
 
 CLEANFILES = $(TANG_ASSEMBLY) $(TANG_DAEMON) tangerine
