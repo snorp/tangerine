@@ -1,7 +1,7 @@
 AC_INIT(README)
 
 MAJOR_VERSION=0
-MINOR_VERSION=1
+MINOR_VERSION=2
 MICRO_VERSION=0
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
                                                                                 
@@ -28,20 +28,34 @@ if test "x$MCS" = "x" ; then
    AC_MSG_ERROR([Can not find "mcs" in your PATH])
 fi
 
+dnl beagle
+BEAGLE_REQUIRED=0.1.4
+PKG_CHECK_MODULES(BEAGLE, beagle-0.0 >= $BEAGLE_REQUIRED,
+                  have_beagle=yes, have_beagle=no)
+if test "x$have_beagle" = "xyes"; then \
+    BEAGLE_PATH="`$PKG_CONFIG --variable=libdir beagle-0.0`/beagle"
+    BEAGLE_ASSEMBLIES="$BEAGLE_PATH/Beagle.dll $BEAGLE_PATH/Util.dll"
+    AC_SUBST(BEAGLE_LIBS)
+    AC_SUBST(BEAGLE_ASSEMBLIES)
+fi
+
+dnl ipod-sharp
+IPOD_SHARP_REQUIRED=0.5.16
+PKG_CHECK_MODULES(IPOD_SHARP, ipod-sharp >= $IPOD_SHARP_REQUIRED,
+                  have_ipod=yes, have_ipod=no)
+if test "x$have_ipod" = "xyes"; then \
+    IPOD_SHARP_ASSEMBLIES=`$PKG_CONFIG --variable=Libraries ipod-sharp`
+    AC_SUBST(IPOD_SHARP_LIBS)
+    AC_SUBST(IPOD_SHARP_ASSEMBLIES)
+fi
+
 PKG_CHECK_MODULES(TANGERINE, daap-sharp >= 0.2.0)
 
 DAAP_LIBRARY=`pkg-config --variable=Libraries daap-sharp`
 AC_SUBST(DAAP_LIBRARY)
 
-enable_ipod="yes"
-IPOD_LIBRARY=`pkg-config --variable=Libraries ipod-sharp`
-AC_SUBST(IPOD_LIBRARY)
-
-if test "x$IPOD_LIBRARY" = "x"; then \
-   enable_ipod="no"
-fi
-
-AM_CONDITIONAL(ENABLE_IPOD, test "x$enable_ipod" = "xyes")
+AM_CONDITIONAL(ENABLE_IPOD, test "x$have_ipod" = "xyes")
+AM_CONDITIONAL(ENABLE_BEAGLE, test "x$have_beagle" = "xyes")
 
 AC_OUTPUT([
 Makefile
@@ -50,12 +64,12 @@ src/Makefile
 plugins/Makefile
 plugins/file/Makefile
 plugins/ipod/Makefile
-plugins/banshee/Makefile
-plugins/rhythmbox/Makefile
+plugins/beagle/Makefile
 tangerine.pc
 ])
 
 echo
 echo "tangerine prefix:    $prefix"
-echo "iPod plugin:         $enable_ipod"
+echo "     iPod plugin:    $have_ipod"
+echo "   Beagle plugin:    $have_beagle"
 echo

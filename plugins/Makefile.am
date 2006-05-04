@@ -1,2 +1,2 @@
 
-SUBDIRS = file ipod banshee rhythmbox
+SUBDIRS = file ipod beagle

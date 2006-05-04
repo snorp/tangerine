@@ -8,6 +8,7 @@ using Entagged.Audioformats.Exceptions;
 using Nini;
 using DAAP;
 using log4net;
+using com.db4o;
 
 namespace Tangerine.Plugins {
 
@@ -21,17 +22,20 @@ namespace Tangerine.Plugins {
         private string[] directories;
         private bool running = true;
 
+        private ObjectContainer odb;
+
         private Server server;
         private Database db;
         private ILog log;
         
         public FilePlugin () {
-            string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "Music");
 
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 return;
             }
 
+            string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "Music");
+            
             directories = Daemon.ConfigSource.Configs["FilePlugin"].Get ("directories", defaultDir).Split (':');
 
             server = Daemon.Server;
@@ -44,10 +48,11 @@ namespace Tangerine.Plugins {
                 log.Warn ("inotify is not available, filesystem changes will not be observed");
             }
 
+            LoadFromDatabase ();
+            ScanDirectories ();
+
             Thread commitThread = new Thread (CommitLoop);
             commitThread.Start ();
-            
-            Refresh ();
 
             log.Info ("Finished adding songs");
         }
@@ -58,6 +63,8 @@ namespace Tangerine.Plugins {
             lock (commitLock) {
                 Monitor.Pulse (commitLock);
             }
+
+            odb.Close ();
         }
 
         private void CommitLoop () {
@@ -81,9 +88,28 @@ namespace Tangerine.Plugins {
             }
         }
 
-        private void Refresh () {
-            db.Clear ();
+        private void LoadFromDatabase () {
+            if (odb == null) {
+                if (!Directory.Exists (Daemon.ConfigDirectory)) {
+                    Directory.CreateDirectory (Daemon.ConfigDirectory);
+                }
+                
+                odb = Db4o.OpenFile (Path.Combine (Daemon.ConfigDirectory, "songs.db"));
+            }
 
+            ObjectSet result = odb.Get (typeof (Song));
+            foreach (Song song in result) {
+                if (!File.Exists (song.FileName)) {
+                    odb.Delete (song);
+                    continue;
+                }
+                
+                db.AddSong (song);
+                songHash[song.FileName] = song;
+            }
+        }
+
+        private void ScanDirectories () {
             foreach (string dir in directories) {
                 log.InfoFormat ("Adding songs in '{0}'", dir);
                 AddDirectory (dir);
@@ -136,6 +162,9 @@ namespace Tangerine.Plugins {
         }
 
         private void AddSong (string file) {
+            if (songHash[file] != null)
+                return;
+            
             AudioFile af;
 
             try {
@@ -166,6 +195,8 @@ namespace Tangerine.Plugins {
             song.BitRate = (short) af.Bitrate;
 
             songHash[file] = song;
+
+            odb.Set (song);
         }
 
         private void RemoveSong (string file) {
@@ -173,6 +204,7 @@ namespace Tangerine.Plugins {
             if (song != null) {
                 db.RemoveSong (song);
                 songHash.Remove (file);
+                odb.Delete (song);
             }
         }
 
@@ -206,8 +238,10 @@ namespace Tangerine.Plugins {
         }
 
         private void RemovePlaylist (string file) {
-            if (playlistHash[file] != null) {
-                db.RemovePlaylist ((Playlist) playlistHash[file]);
+            Playlist pl = (Playlist) playlistHash[file];
+
+            if (pl != null) {
+                db.RemovePlaylist (pl);
                 playlistHash.Remove (file);
             }
         }

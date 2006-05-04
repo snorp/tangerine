@@ -1,22 +1,26 @@
+if ENABLE_BEAGLE
 
-PLUGIN_ASSEMBLY = tangerine-rb.dll
+PLUGIN_ASSEMBLY = tangerine-beagle.dll
 
 plugindir = $(prefix)/lib/tangerine/plugins
-plugin_DATA = $(PLUGIN_ASSEMBLY)
+plugin_DATA = $(PLUGIN_ASSEMBLY) $(BEAGLE_ASSEMBLIES)
 
 CLEANFILES = $(PLUGIN_ASSEMBLY)
 
-PLUGINSOURCES = $(srcdir)/RBPlugin.cs
+PLUGINSOURCES = $(srcdir)/BeaglePlugin.cs
 
 PLUGIN_DEPS = 						\
+	$(BEAGLE_LIBS)					\
 	-pkg:daap-sharp					\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\
 	-r:$(top_builddir)/src/tangerine.dll
 
-tangerine-rb.dll: $(PLUGINSOURCES)
+tangerine-beagle.dll: $(PLUGINSOURCES)
 	$(MCS) $(MCS_FLAGS) -target:library -out:$@ $(PLUGINSOURCES) \
 	$(PLUGIN_DEPS)
+
+endif
 
 EXTRA_DIST = $(PLUGINSOURCES)
