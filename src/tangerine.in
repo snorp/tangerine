@@ -1,4 +1,4 @@
 #!/bin/sh
 
 export LD_LIBRARY_PATH=@libdir@/tangerine:$LD_LIBRARY_PATH
-exec mono @prefix@/lib/tangerine/tangerine-daemon.exe "$@"
+exec -a tangerine mono @prefix@/lib/tangerine/tangerine-daemon.exe "$@"

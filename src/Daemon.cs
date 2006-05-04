@@ -165,7 +165,12 @@ namespace Tangerine {
             Hierarchy h = LogManager.GetRepository () as Hierarchy;
 
             Logger l = h.Root;
-            l.Level = Level.Debug;
+
+            if (Debug) {
+                l.Level = Level.Debug;
+            } else {
+                l.Level = Level.Info;
+            }
 
             PatternLayout layout = new PatternLayout ();
             layout.ConversionPattern = "%date %level %message%newline";

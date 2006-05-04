@@ -19,12 +19,12 @@ namespace Tangerine.Plugins {
 
         private Query query;
         
-        private static string [] supportedMimeTypes = new string [] {
+        private static string[] supportedMimeTypes = new string [] {
             "audio/mpeg",
-            "application/ogg",
+            "audio/x-vorbis+ogg",
             "audio/x-m4a"
         };
-        
+
         public BeaglePlugin () {
             server = Daemon.Server;
             db = Daemon.DefaultDatabase;
@@ -79,7 +79,11 @@ namespace Tangerine.Plugins {
                 song.Title = hit.GetFirstProperty ("fixme:title");
                 song.Genre = hit.GetFirstProperty ("fixme:genre");
                 song.FileName = hit.Uri.LocalPath;
-                db.AddSong (song);
+
+                // gotta have at least a title
+                if (song.Title != null && song.Title != String.Empty) {
+                    db.AddSong (song);
+                }
             }
         }
 

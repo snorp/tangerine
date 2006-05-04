@@ -88,6 +88,16 @@ namespace Tangerine.Plugins {
             }
         }
 
+        private bool IsInDirectories (string file) {
+            foreach (string dir in directories) {
+                if (file.StartsWith (dir)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void LoadFromDatabase () {
             if (odb == null) {
                 if (!Directory.Exists (Daemon.ConfigDirectory)) {
@@ -98,8 +108,11 @@ namespace Tangerine.Plugins {
             }
 
             ObjectSet result = odb.Get (typeof (Song));
+            log.DebugFormat ("{0} songs in database", result.Count);
+            
             foreach (Song song in result) {
-                if (!File.Exists (song.FileName)) {
+                if (!File.Exists (song.FileName) || !IsInDirectories (song.FileName)) {
+                    log.Debug ("Ignoring song from db: " + song);
                     odb.Delete (song);
                     continue;
                 }
