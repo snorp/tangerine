@@ -1,10 +1,13 @@
 TANG_ASSEMBLY = tangerine.dll
 TANG_DAEMON = tangerine-daemon.exe
 
+TANG_PROPS_ASSEMBLY = tangerine-properties.exe
+
 asmdir = $(prefix)/lib/tangerine
 asm_DATA =			\
 	$(TANG_ASSEMBLY)	\
 	$(TANG_DAEMON)		\
+	$(TANG_PROPS_ASSEMBLY)	\
 	$(TANG_PLUGINS)		\
 	$(DAAP_LIBRARY)
 
@@ -13,7 +16,13 @@ gluelib_LTLIBRARIES = libtangglue.la
 
 libtangglue_la_SOURCES = inotify-glue.c inotify.h inotify-syscalls.h
 
-bin_SCRIPTS = tangerine
+bin_SCRIPTS = tangerine tangerine-properties
+
+appdir = $(prefix)/share/applications
+app_DATA = tangerine-properties.desktop
+
+icondir = $(prefix)/share/icons/hicolor/48x48/apps
+icon_DATA = tangerine.png
 
 TANGSOURCES =				\
 	$(srcdir)/AssemblyInfo.cs	\
@@ -39,15 +48,30 @@ $(TANG_DAEMON): $(TANG_DAEMONSOURCES)
 	$(MCS) $(MCS_FLAGS) -out:$@ $(TANG_DAEMONSOURCES) -r:tangerine.dll \
 	$(TANG_DEPS)
 
+TANG_PROPSOURCES = $(srcdir)/PropertiesWindow.cs
+
+$(TANG_PROPS_ASSEMBLY): $(TANG_PROPSOURCES)
+	$(MCS) $(MCS_FLAGS) -out:$@ $(TANG_PROPSOURCES) -r:tangerine.dll \
+	$(TANG_DEPS) -pkg:gtk-sharp-2.0,glade-sharp-2.0 \
+	-resource:$(srcdir)/tangerine-properties.glade,tangerine-properties.glade
+
 tangerine: tangerine.in
 	sed -e 's,@libdir\@,$(libdir),g' \
 	    -e 's,\${exec_prefix},$(prefix),g' \
 	    -e 's,\@prefix\@,$(prefix),g' $< > $@
 
+tangerine-properties: tangerine-properties.in
+	sed -e 's,@libdir\@,$(libdir),g' \
+	    -e 's,\${exec_prefix},$(prefix),g' \
+	    -e 's,\@prefix\@,$(prefix),g' $< > $@
 
-EXTRA_DIST =			\
-	$(TANGSOURCES)		\
-	$(TANG_DAEMONSOURCES)	\
+EXTRA_DIST =				\
+	$(TANGSOURCES)			\
+	$(TANG_DAEMONSOURCES)		\
+	$(TANG_PROPSOURCES)		\
+	$(app_DATA)			\
+	$(icon_DATA)			\
+	tangerine-properties.glade	\
 	tangerine.in
 
 CLEANFILES = $(TANG_ASSEMBLY) $(TANG_DAEMON) tangerine

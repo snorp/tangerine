@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Net;
 using System.Reflection;
+using System.Text;
 using log4net;
 using log4net.Core;
 using log4net.Repository;
@@ -65,6 +66,10 @@ namespace Tangerine {
             cfgSource = new IniConfigSource (file);
 
             IConfig cfg = cfgSource.Configs["Tangerine"];
+            if (cfg == null) {
+                cfg = cfgSource.AddConfig ("Tangerine");
+            }
+            
             cfg.Alias.AddAlias ("yes", true);
             cfg.Alias.AddAlias ("true", true);
             cfg.Alias.AddAlias ("no", false);
@@ -80,6 +85,27 @@ namespace Tangerine {
 
             if (names != null)
                 PluginNames = names.Split(',');
+        }
+
+        public static void SaveConfig () {
+            IConfig cfg = cfgSource.Configs["Tangerine"];
+            cfg.Set ("name", Name);
+            cfg.Set ("password_file", PasswordFile);
+            cfg.Set ("debug", Debug);
+            cfg.Set ("max_users", MaxUsers);
+            cfg.Set ("log_file", LogFile);
+            cfg.Set ("port", Port);
+
+            StringBuilder plugins = new StringBuilder ();
+            foreach (string plugin in PluginNames) {
+                if (plugin != PluginNames[0])
+                    plugins.Append (",");
+
+                plugins.Append (plugin);
+            }
+
+            cfg.Set ("plugins", plugins.ToString ());
+            cfgSource.Save ();
         }
 
         public static void Run () {
@@ -196,14 +222,16 @@ namespace Tangerine {
                     
                     while ((line = reader.ReadLine ()) != null) {
                         string[] splitLine = line.Split (':');
-                        if (splitLine.Length != 2)
-                            continue;
-
-                        server.AddCredential (new NetworkCredential (splitLine[0], splitLine[1]));
+                        if (splitLine.Length < 2) {
+                            server.AddCredential (new NetworkCredential (null, line));
+                            server.AuthenticationMethod = AuthenticationMethod.Password;
+                        } else {
+                            server.AddCredential (new NetworkCredential (splitLine[0], splitLine[1]));
+                            server.AuthenticationMethod = AuthenticationMethod.UserAndPassword;
+                        }
                     }
                 }
 
-                server.AuthenticationMethod = AuthenticationMethod.UserAndPassword;
             } catch (Exception e) {
                 LogError ("Problem adding users", e);
             }

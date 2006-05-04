@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Tangerine Music Sharing
+Encoding=UTF-8
+Version=1.0
+Exec=tangerine-properties
+Type=Application
+Icon=tangerine
+Categories=Application;Settings;Utility;X-SuSE-ControlCenter-System;

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH=@libdir@/tangerine:$LD_LIBRARY_PATH
+exec -a tangerine-properties mono @prefix@/lib/tangerine/tangerine-properties.exe "$@"

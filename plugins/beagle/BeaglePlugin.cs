@@ -18,6 +18,7 @@ namespace Tangerine.Plugins {
         private ILog log;
 
         private Query query;
+        private Hashtable songHash = new Hashtable ();
         
         private static string[] supportedMimeTypes = new string [] {
             "audio/mpeg",
@@ -83,6 +84,7 @@ namespace Tangerine.Plugins {
                 // gotta have at least a title
                 if (song.Title != null && song.Title != String.Empty) {
                     db.AddSong (song);
+                    songHash[song.FileName] = song;
                 }
             }
         }
@@ -93,11 +95,10 @@ namespace Tangerine.Plugins {
                     continue;
 
                 string path = uri.LocalPath;
-                foreach (Song song in db.Songs) {
-                    if (song.FileName == path) {
-                        db.RemoveSong (song);
-                        break;
-                    }
+                Song song = songHash[path] as Song;
+                if (song != null) {
+                    songHash.Remove (path);
+                    db.RemoveSong (song);
                 }
             }
         }
@@ -112,6 +113,10 @@ namespace Tangerine.Plugins {
                 query.FinishedEvent -= OnFinished;
                 query.Close ();
                 query = null;
+            }
+
+            foreach (Song song in songHash.Values) {
+                db.RemoveSong (song);
             }
         }
     }
