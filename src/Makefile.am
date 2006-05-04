@@ -75,4 +75,9 @@ EXTRA_DIST =				\
 	tangerine-properties.in		\
 	tangerine.in
 
-CLEANFILES = $(TANG_ASSEMBLY) $(TANG_DAEMON) tangerine
+CLEANFILES =			\
+	$(TANG_ASSEMBLY)	\
+	$(TANG_DAEMON)		\
+	$(TANG_PROPS_ASSEMBLY)	\
+	tangerine		\
+	tangerine-properties
