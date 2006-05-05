@@ -6,4 +6,4 @@ includedir=@includedir@
 Name: tangerine
 Description: tangerine - a DAAP server
 Version: @VERSION@
-Libs: -r:${prefix}/lib/tangerine/tangerine.dll -r:$(prefix)/lib/Nini.dll -r:$(prefix)/log4net.dll
+Libs: -r:${prefix}/lib/tangerine/tangerine.dll -r:${prefix}/lib/tangerine/Nini.dll -r:${prefix}/lib/tangerine/log4net.dll
