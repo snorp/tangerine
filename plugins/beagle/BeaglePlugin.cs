@@ -96,6 +96,8 @@ namespace Tangerine.Plugins {
                 if (song.Title != null && song.Title != String.Empty) {
                     db.AddSong (song);
                     songHash[song.FileName] = song;
+                } else {
+                    log.Debug ("No metadata for: " + song.FileName);
                 }
             }
         }
