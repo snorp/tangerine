@@ -252,17 +252,11 @@ namespace Tangerine {
             }
         }
 
-        [DllImport ("libgnome-desktop-2.so.2")]
-        private static extern IntPtr gnome_desktop_item_new_from_file (string file,
-                                                                       int flags, IntPtr error);
-
-        [DllImport ("libgnome-desktop-2.so.2")]
-        private static extern int gnome_desktop_item_launch (IntPtr ditem, IntPtr files, int flags,
-                                                             IntPtr error);
+        [DllImport ("libglib-2.0.so.0")]
+        private static extern int g_spawn_command_line_async (string cmd, IntPtr error);
 
         private void StartDaemon () {
-            IntPtr ditem = gnome_desktop_item_new_from_file (autostartPath, 0, IntPtr.Zero);
-            gnome_desktop_item_launch (ditem, IntPtr.Zero, 0, IntPtr.Zero);
+            g_spawn_command_line_async ("tangerine", IntPtr.Zero);
         }
     }
 }
