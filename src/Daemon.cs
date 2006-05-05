@@ -149,7 +149,13 @@ namespace Tangerine {
         }
 
         public static void Stop () {
-            QuitLoop ();
+            if (loop != IntPtr.Zero) {
+                QuitLoop ();
+            } else {
+                // haven't finished starting up yet
+                // might be hung or something, so just die.
+                Syscall.exit (0);
+            }
         }
 
         private static void OnSignal (Signum sig) {

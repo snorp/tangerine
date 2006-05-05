@@ -55,7 +55,18 @@ namespace Tangerine.Plugins {
             query.HitsAddedEvent += OnHitsAdded;
             query.HitsSubtractedEvent += OnHitsSubtracted;
             query.FinishedEvent += OnFinished;
-            query.SendAsync ();
+
+            while (true) {
+                try {
+                    query.SendAsync ();
+                    break;
+                } catch (Exception e) {
+                    // something bad happened, wait a sec and try again
+                    log.Debug ("Sending query failed: " + e.Message);
+                    log.Debug ("Waiting 3 seconds...");
+                    Thread.Sleep (3000);
+                }
+            }
         }
 
         private int GetHitInteger (Hit hit, string key) {
