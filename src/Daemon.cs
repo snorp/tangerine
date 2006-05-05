@@ -17,7 +17,6 @@ using Nini.Config;
 using Mono.Unix;
 using Mono.Unix.Native;
 using DAAP;
-using Avahi;
 
 namespace Tangerine {
 
@@ -262,8 +261,7 @@ namespace Tangerine {
         }
 
         private static void OnCollision (object o, EventArgs args) {
-            string name = EntryGroup.GetAlternativeServiceName (server.Name);
-
+            string name = server.Name + " [1]";
             log.WarnFormat ("The name '{0}' collided with another on the network, trying '{1}'",
                             server.Name, name);
             server.Name = name;

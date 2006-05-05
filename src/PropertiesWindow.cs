@@ -210,9 +210,9 @@ namespace Tangerine {
             Daemon.Name = nameEntry.Text;
 
             if (beagleRadio.Active) {
-                Daemon.PluginNames = new string[] { "beagle" };
+                Daemon.PluginNames = new string[] { "beagle,session" };
             } else {
-                Daemon.PluginNames = new string[] { "file" };
+                Daemon.PluginNames = new string[] { "file,session" };
             }
 
             IConfig cfg = Daemon.ConfigSource.Configs["FilePlugin"];

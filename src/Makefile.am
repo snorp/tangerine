@@ -32,11 +32,10 @@ TANGSOURCES =				\
 	$(srcdir)/UnixSignal.cs
 
 TANG_DEPS =						\
-	-pkg:daap-sharp					\
+	$(DAAP_SHARP_LIBS)				\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
-	-r:Mono.Posix					\
-	-pkg:avahi-sharp
+	-r:Mono.Posix
 
 $(TANG_ASSEMBLY): $(TANGSOURCES)
 	$(MCS) $(MCS_FLAGS) -unsafe -target:library -out:$@ $(TANGSOURCES) \
@@ -52,7 +51,7 @@ TANG_PROPSOURCES = $(srcdir)/PropertiesWindow.cs
 
 $(TANG_PROPS_ASSEMBLY): $(TANG_PROPSOURCES)
 	$(MCS) $(MCS_FLAGS) -out:$@ $(TANG_PROPSOURCES) -r:tangerine.dll \
-	$(TANG_DEPS) -pkg:gtk-sharp-2.0,glade-sharp-2.0 \
+	$(TANG_DEPS) $(GNOME_SHARP_LIBS) $(GLADE_SHARP_LIBS) \
 	-resource:$(srcdir)/tangerine-properties.glade,tangerine-properties.glade \
 	-resource:$(srcdir)/tangerine.png,tangerine.png
 

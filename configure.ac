@@ -28,6 +28,19 @@ if test "x$MCS" = "x" ; then
    AC_MSG_ERROR([Can not find "mcs" in your PATH])
 fi
 
+dnl gtk-sharp-2.0, gnome-sharp-2.0, glade-sharp-2.0, daap-sharp
+PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0)
+AC_SUBST(GTK_SHARP_LIBS)
+
+PKG_CHECK_MODULES(GNOME_SHARP, gnome-sharp-2.0)
+AC_SUBST(GNOME_SHARP_LIBS)
+
+PKG_CHECK_MODULES(GLADE_SHARP, glade-sharp-2.0)
+AC_SUBST(GLADE_SHARP_LIBS)
+
+PKG_CHECK_MODULES(DAAP_SHARP, daap-sharp)
+AC_SUBST(DAAP_SHARP_LIBS)
+
 dnl beagle
 BEAGLE_REQUIRED=0.1.4
 PKG_CHECK_MODULES(BEAGLE, beagle-0.0 >= $BEAGLE_REQUIRED,

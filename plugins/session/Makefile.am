@@ -9,7 +9,8 @@ PLUGINSOURCES = $(srcdir)/SessionPlugin.cs
 
 PLUGIN_DEPS = 						\
 	$(SESSION_LIBS)					\
-	-pkg:daap-sharp,gnome-sharp-2.0			\
+	$(GNOME_SHARP_LIBS)				\
+	$(DAAP_SHARP_LIBS)				\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\
