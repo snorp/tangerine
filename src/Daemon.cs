@@ -75,7 +75,7 @@ namespace Tangerine {
             cfg.Alias.AddAlias ("no", false);
             cfg.Alias.AddAlias ("false", false);
 
-            Name = cfg.Get ("name", String.Format ("{0}'s Tangerine", Environment.UserName));
+            Name = cfg.Get ("name", String.Format ("{0}'s Music", Environment.UserName));
             PasswordFile = cfg.Get ("password_file");
             Debug = cfg.GetBoolean ("debug", false);
             MaxUsers = cfg.GetInt ("max_users", 0);
