@@ -1,1 +1,4 @@
-Tangerine is a DAAP server.
+Tangerine is a DAAP server.  You can use it to listen to music remotely though
+a number of applications, including iTunes, Banshee, and Rhythmbox.
+
+There is a graphical tool for configuring it (tangerine-properties).  You can also edit the config file yourself (~/.tangerine by default).  A sample config, sample.conf, is included as a template.
