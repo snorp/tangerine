@@ -214,7 +214,7 @@ namespace Tangerine {
 
             h.Configured = true;
 
-            log.InfoFormat ("Tangerine started, version {0}", Assembly.GetExecutingAssembly ().GetName ().Version);
+            log.InfoFormat ("Tangerine started");
         }
         
         private static void AddUsers () {
