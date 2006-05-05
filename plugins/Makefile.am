@@ -1,2 +1,2 @@
 
-SUBDIRS = file ipod beagle
+SUBDIRS = file ipod beagle session

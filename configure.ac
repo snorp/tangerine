@@ -65,6 +65,7 @@ plugins/Makefile
 plugins/file/Makefile
 plugins/ipod/Makefile
 plugins/beagle/Makefile
+plugins/session/Makefile
 tangerine.pc
 ])
 
