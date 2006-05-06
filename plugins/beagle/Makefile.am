@@ -13,6 +13,7 @@ PLUGIN_DEPS = 						\
 	$(BEAGLE_LIBS)					\
 	$(DAAP_SHARP_LIBS)				\
 	-r:$(top_srcdir)/deps/Nini.dll			\
+	-r:$(top_srcdir)/deps/entagged-sharp.dll	\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\
 	-r:$(top_builddir)/src/tangerine.dll

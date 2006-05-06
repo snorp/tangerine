@@ -7,6 +7,7 @@ using Nini;
 using DAAP;
 using log4net;
 using Beagle;
+using Entagged;
 
 namespace Tangerine.Plugins {
 
@@ -84,27 +85,58 @@ namespace Tangerine.Plugins {
             }
         }
 
+        private Song GetSongFromFile (string file) {
+            AudioFile af;
+
+            try {
+                af = new AudioFile (file);
+            } catch (Exception e) {
+                return null;
+            }
+
+            Song song = new Song ();
+            song.Artist = af.Artist;
+            song.Album = af.Album;
+            song.Title = af.Title;
+            song.Duration = af.Duration;
+            song.FileName = file;
+            song.Format = Path.GetExtension (file).Substring (1);
+            song.Genre = af.Genre;
+
+            FileInfo info = new FileInfo (file);
+            song.Size = (int) info.Length;
+            song.TrackCount = af.TrackCount;
+            song.TrackNumber = af.TrackNumber;
+            song.Year = af.Year;
+            song.BitRate = (short) af.Bitrate;
+
+            return song;
+        }
+
         private void OnHitsAdded (HitsAddedResponse response) {
             foreach (Hit hit in response.Hits) {
                 if (hit.Uri.Scheme != Uri.UriSchemeFile)
                     continue;
 
-                Song song = new Song ();
-                song.TrackNumber = GetHitInteger (hit, "fixme:tracknumber");
-                song.TrackCount = GetHitInteger (hit, "fixme:trackcount");
-                song.Year = GetHitInteger (hit, "fixme:year");
-                song.Album = hit.GetFirstProperty ("fixme:album");
-                song.Artist = hit.GetFirstProperty ("fixme:artist");
-                song.Title = hit.GetFirstProperty ("fixme:title");
-                song.Genre = hit.GetFirstProperty ("fixme:genre");
-                song.FileName = hit.Uri.LocalPath;
+                Song song;
+                
+                if (hit.GetFirstProperty ("fixme:title") != null) {
+                    song = new Song ();
+                    song.TrackNumber = GetHitInteger (hit, "fixme:tracknumber");
+                    song.TrackCount = GetHitInteger (hit, "fixme:trackcount");
+                    song.Year = GetHitInteger (hit, "fixme:year");
+                    song.Album = hit.GetFirstProperty ("fixme:album");
+                    song.Artist = hit.GetFirstProperty ("fixme:artist");
+                    song.Title = hit.GetFirstProperty ("fixme:title");
+                    song.Genre = hit.GetFirstProperty ("fixme:genre");
+                    song.FileName = hit.Uri.LocalPath;
+                } else {
+                    song = GetSongFromFile (hit.Uri.LocalPath);
+                }
 
-                // gotta have at least a title
-                if (song.Title != null && song.Title != String.Empty) {
+                if (song != null && song.Title != null && song.Title != String.Empty) {
                     db.AddSong (song);
                     songHash[song.FileName] = song;
-                } else {
-                    log.Debug ("No metadata for: " + song.FileName);
                 }
             }
         }
