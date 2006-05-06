@@ -41,15 +41,21 @@ AC_SUBST(GLADE_SHARP_LIBS)
 PKG_CHECK_MODULES(DAAP_SHARP, daap-sharp)
 AC_SUBST(DAAP_SHARP_LIBS)
 
-dnl beagle
-BEAGLE_REQUIRED=0.1.4
-PKG_CHECK_MODULES(BEAGLE, beagle-0.0 >= $BEAGLE_REQUIRED,
-                  have_beagle=yes, have_beagle=no)
-if test "x$have_beagle" = "xyes"; then \
-    BEAGLE_PATH="`$PKG_CONFIG --variable=libdir beagle-0.0`/beagle"
-    BEAGLE_ASSEMBLIES="$BEAGLE_PATH/Beagle.dll $BEAGLE_PATH/Util.dll"
-    AC_SUBST(BEAGLE_LIBS)
-    AC_SUBST(BEAGLE_ASSEMBLIES)
+AC_ARG_ENABLE(beagle, AC_HELP_STRING([--disable-beagle], [Do not build the beagle plugin]), enable_beagle="no", enable_beagle="yes")
+
+if test "x$enable_beagle" = "xyes"; then \
+    dnl beagle
+    BEAGLE_REQUIRED=0.1.4
+    PKG_CHECK_MODULES(BEAGLE, beagle-0.0 >= $BEAGLE_REQUIRED,
+                      have_beagle=yes, have_beagle=no)
+    if test "x$have_beagle" = "xyes"; then \
+        BEAGLE_PATH="`$PKG_CONFIG --variable=libdir beagle-0.0`/beagle"
+        BEAGLE_ASSEMBLIES="$BEAGLE_PATH/Beagle.dll $BEAGLE_PATH/Util.dll"
+        AC_SUBST(BEAGLE_LIBS)
+        AC_SUBST(BEAGLE_ASSEMBLIES)
+    fi
+else
+    have_beagle=no
 fi
 
 dnl ipod-sharp
