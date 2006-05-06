@@ -56,11 +56,18 @@ namespace Tangerine.Plugins {
             query.HitsSubtractedEvent += OnHitsSubtracted;
             query.FinishedEvent += OnFinished;
 
+            int attempts = 0;
             while (true) {
                 try {
                     query.SendAsync ();
                     break;
                 } catch (Exception e) {
+                    if (attempts++ >= 5) {
+                        log.Warn ("Failed to initialize beagle plugin");
+                        query = null;
+                        break;
+                    }
+
                     // something bad happened, wait a sec and try again
                     log.Debug ("Sending query failed: " + e.Message);
                     log.Debug ("Waiting 3 seconds...");
