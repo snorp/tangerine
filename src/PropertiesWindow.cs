@@ -176,6 +176,10 @@ namespace Tangerine {
                 File.Delete (autostartPath);
             }
 
+            if (!Directory.Exists (System.IO.Path.GetDirectoryName (autostartPath))) {
+                Directory.CreateDirectory (System.IO.Path.GetDirectoryName (autostartPath));
+            }
+
             using (StreamWriter writer = new StreamWriter (File.Open (autostartPath, FileMode.Create))) {
                 writer.Write ("[Desktop Entry]\nName=No name\nEncoding=UTF-8\nVersion=1.0\nExec=tangerine\n" +
                               "Type=Application\nX-GNOME-Autostart-enabled=true");
