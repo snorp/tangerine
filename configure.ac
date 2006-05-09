@@ -28,7 +28,19 @@ if test "x$MCS" = "x" ; then
    AC_MSG_ERROR([Can not find "mcs" in your PATH])
 fi
 
-dnl gtk-sharp-2.0, gnome-sharp-2.0, glade-sharp-2.0, daap-sharp
+AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")
+AM_CONDITIONAL(ENABLE_MDNSD, test "x$enable_mdnsd" = "xyes")
+
+if test "x$enable_mdnsd" = "xyes"; then
+        MCS_FLAGS="-define:ENABLE_MDNSD"
+        AC_SUBST(MCS_FLAGS)
+else
+        PKG_CHECK_MODULES(AVAHI, avahi-sharp >= 0.6.10)
+        MCS_FLAGS=$AVAHI_LIBS
+        AC_SUBST(MCS_FLAGS)
+fi
+
+dnl gtk-sharp-2.0, gnome-sharp-2.0, glade-sharp-2.0
 PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0)
 AC_SUBST(GTK_SHARP_LIBS)
 
@@ -37,9 +49,6 @@ AC_SUBST(GNOME_SHARP_LIBS)
 
 PKG_CHECK_MODULES(GLADE_SHARP, glade-sharp-2.0)
 AC_SUBST(GLADE_SHARP_LIBS)
-
-PKG_CHECK_MODULES(DAAP_SHARP, daap-sharp)
-AC_SUBST(DAAP_SHARP_LIBS)
 
 AC_ARG_ENABLE(beagle, AC_HELP_STRING([--disable-beagle], [Do not build the beagle plugin]), enable_beagle="no", enable_beagle="yes")
 
@@ -68,17 +77,13 @@ if test "x$have_ipod" = "xyes"; then \
     AC_SUBST(IPOD_SHARP_ASSEMBLIES)
 fi
 
-PKG_CHECK_MODULES(TANGERINE, daap-sharp >= 0.2.0)
-
-DAAP_LIBRARY=`pkg-config --variable=Libraries daap-sharp`
-AC_SUBST(DAAP_LIBRARY)
-
 AM_CONDITIONAL(ENABLE_IPOD, test "x$have_ipod" = "xyes")
 AM_CONDITIONAL(ENABLE_BEAGLE, test "x$have_beagle" = "xyes")
 
 AC_OUTPUT([
 Makefile
 deps/Makefile
+deps/daap-sharp/Makefile
 src/Makefile
 plugins/Makefile
 plugins/file/Makefile
@@ -92,4 +97,11 @@ echo
 echo "tangerine prefix:    $prefix"
 echo "     iPod plugin:    $have_ipod"
 echo "   Beagle plugin:    $have_beagle"
+
+if test "x$enable_mdnsd" = "xyes"; then \
+    echo "        Zeroconf:    mDNSResponder"
+else
+    echo "        Zeroconf:    Avahi"
+fi
+
 echo

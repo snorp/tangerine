@@ -9,7 +9,7 @@ CLEANFILES = $(PLUGIN_ASSEMBLY)
 PLUGINSOURCES = $(srcdir)/FilePlugin.cs
 
 PLUGIN_DEPS = 						\
-	$(DAAP_SHARP_LIBS)				\
+	-r:$(top_srcdir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/entagged-sharp.dll	\
 	-r:$(srcdir)/db4o.dll				\

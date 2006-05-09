@@ -11,7 +11,7 @@ PLUGINSOURCES = $(srcdir)/IPodPlugin.cs
 
 PLUGIN_DEPS = 						\
 	$(IPOD_SHARP_LIBS)				\
-	$(DAAP_SHARP_LIBS)				\
+	-r:$(top_srcdir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\

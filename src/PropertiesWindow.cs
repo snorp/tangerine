@@ -168,6 +168,10 @@ namespace Tangerine {
 
             ReadPassword ();
 
+            Daemon.ConfigSource.Configs["Tangerine"].KeySet += delegate {
+                Console.WriteLine ("Key was set");
+            };
+
             enabledButton.Active = File.Exists (autostartPath);
         }
 
@@ -237,6 +241,7 @@ namespace Tangerine {
                 StopDaemon ();
             }
 
+            Console.WriteLine ("Config hash: " + Daemon.ConfigSource.Configs["Tangerine"].GetHashCode ());
             Daemon.SaveConfig ();
         }
 

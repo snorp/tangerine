@@ -8,8 +8,7 @@ asm_DATA =			\
 	$(TANG_ASSEMBLY)	\
 	$(TANG_DAEMON)		\
 	$(TANG_PROPS_ASSEMBLY)	\
-	$(TANG_PLUGINS)		\
-	$(DAAP_LIBRARY)
+	$(TANG_PLUGINS)
 
 gluelibdir = $(pkglibdir)
 gluelib_LTLIBRARIES = libtangglue.la
@@ -32,7 +31,7 @@ TANGSOURCES =				\
 	$(srcdir)/UnixSignal.cs
 
 TANG_DEPS =						\
-	$(DAAP_SHARP_LIBS)				\
+	-r:$(top_srcdir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix
