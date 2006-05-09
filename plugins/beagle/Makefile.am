@@ -11,7 +11,7 @@ PLUGINSOURCES = $(srcdir)/BeaglePlugin.cs
 
 PLUGIN_DEPS = 						\
 	$(BEAGLE_LIBS)					\
-	-r:$(top_srcdir)/deps/daap-sharp/daap-sharp.dll	\
+	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/entagged-sharp.dll	\
 	-r:$(top_srcdir)/deps/log4net.dll		\

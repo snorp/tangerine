@@ -41,10 +41,7 @@ $(DAAP_ASSEMBLY): $(DAAPSOURCES)
 
 EXTRA_DIST =			\
 	$(DAAPSOURCES)		\
-	daap-sharp.snk		\
 	content-codes		\
-	daap-sharp-docs.source	\
-	$(srcdir)/en/*.xml	\
-	$(srcdir)/en/*/*.xml
+	daap-sharp.dll.config
 
 CLEANFILES = $(ASSEMBLIES) *.mdb
