@@ -40,7 +40,7 @@ namespace Tangerine {
             try {
                 Daemon.ParseConfig (configFile);
             } catch (Exception e) {
-                Console.Error.WriteLine ("Failed to parse configuration: " + e.Message);
+                Console.Error.WriteLine ("Failed to parse configuration: " + e);
                 return 1;
             }
             

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using log4net;
 using log4net.Core;
 using log4net.Repository;
@@ -28,6 +29,7 @@ namespace Tangerine {
         private static ILog log = LogManager.GetLogger (typeof (Daemon));
         private static IConfigSource cfgSource;
         private static IntPtr loop;
+        private static Regex nameRegex = new Regex (@"(.*?).\[([0-9]*)\]$");
         
         public static string Name;
         public static string PasswordFile;
@@ -260,8 +262,18 @@ namespace Tangerine {
             }
         }
 
+        private static string GetNextServiceName (string name) {
+            Match match = nameRegex.Match (name);
+            if (!match.Success) {
+                return name + " [1]";
+            } else {
+                return String.Format ("{0} [{1}]", match.Groups[1].Value,
+                                      Int32.Parse (match.Groups[2].Value) + 1);
+            }
+        }
+
         private static void OnCollision (object o, EventArgs args) {
-            string name = server.Name + " [1]";
+            string name = GetNextServiceName (server.Name);
             log.WarnFormat ("The name '{0}' collided with another on the network, trying '{1}'",
                             server.Name, name);
             server.Name = name;
