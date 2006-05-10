@@ -37,6 +37,7 @@ namespace Tangerine {
         public static int MaxUsers;
         public static string LogFile;
         public static ushort Port;
+        public static bool IsPublished;
         public static string[] PluginNames;
 
         public static ILog Log {
@@ -82,6 +83,7 @@ namespace Tangerine {
             MaxUsers = cfg.GetInt ("max_users", 0);
             LogFile = cfg.Get ("log_file");
             Port = (ushort) cfg.GetInt ("port", 0);
+            IsPublished = (bool) cfg.GetBoolean ("publish", true);
             string names = cfg.Get ("plugins");
 
             if (names != null)
@@ -120,6 +122,7 @@ namespace Tangerine {
             cfg.Set ("max_users", MaxUsers);
             cfg.Set ("log_file", LogFile);
             cfg.Set ("port", Port);
+            cfg.Set ("publish", IsPublished);
 
             StringBuilder plugins = new StringBuilder ();
             foreach (string plugin in PluginNames) {
@@ -147,6 +150,7 @@ namespace Tangerine {
             
             server = new Server (Name);
             server.Port = Port;
+            server.IsPublished = IsPublished;
             server.Collision += OnCollision;
             db = new Database (Name);
             server.AddDatabase (db);
