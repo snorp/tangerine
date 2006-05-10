@@ -166,7 +166,7 @@ namespace Tangerine {
                 directoryButton.SetFilename (defaultDir);
             }
 
-            ReadPassword ();
+            passwordEntry.Text = ReadPassword ();
 
             enabledButton.Active = File.Exists (autostartPath);
         }
@@ -186,12 +186,12 @@ namespace Tangerine {
             }
         }
 
-        private void ReadPassword () {
+        private string ReadPassword () {
             if (!File.Exists (passwdPath))
-                return;
+                return String.Empty;
 
             using (StreamReader reader = new StreamReader (File.Open (passwdPath, FileMode.Open))) {
-                passwordEntry.Text = reader.ReadLine ();
+                return reader.ReadLine ();
             }
         }
 
@@ -226,18 +226,29 @@ namespace Tangerine {
 
             cfg.Set ("directories", directoryButton.Filename);
 
-            WritePassword ();
+            if (Daemon.IsSaveNeeded () ||
+                passwordEntry.Text != ReadPassword ()) {
+                WritePassword ();
+                Daemon.SaveConfig ();
 
-            // FIXME: should only restart if there were changes
-            if (enabledButton.Active) {
-                WriteAutostart ();
-                RestartDaemon ();
+                if (enabledButton.Active) {
+                    WriteAutostart ();
+                    RestartDaemon ();
+                }
             } else {
+                if (enabledButton.Active) {
+                    WriteAutostart ();
+
+                    if (!IsRunning ()) {
+                        StartDaemon ();
+                    }
+                }
+            }
+
+            if (!enabledButton.Active) {
                 File.Delete (autostartPath);
                 StopDaemon ();
             }
-
-            Daemon.SaveConfig ();
         }
 
         private void RestartDaemon () {
@@ -245,6 +256,11 @@ namespace Tangerine {
             StartDaemon ();
         }
 
+        private bool IsRunning () {
+            Process[] procs = Process.GetProcessesByName ("tangerine-daemon");
+            return procs != null && procs.Length > 0;
+        }
+        
         private void StopDaemon () {
             Process[] procs = Process.GetProcessesByName ("tangerine-daemon");
             if (procs != null && procs.Length > 0) {

@@ -27,7 +27,7 @@ namespace Tangerine {
         private static Server server;
         private static Database db;
         private static ILog log = LogManager.GetLogger (typeof (Daemon));
-        private static IConfigSource cfgSource;
+        private static IniConfigSource cfgSource;
         private static IntPtr loop;
         private static Regex nameRegex = new Regex (@"(.*?).\[([0-9]*)\]$");
         
@@ -88,7 +88,31 @@ namespace Tangerine {
                 PluginNames = names.Split(',');
         }
 
-        public static void SaveConfig () {
+        public static bool IsSaveNeeded () {
+            CommitConfig ();
+            
+            IniConfigSource old = new IniConfigSource (cfgSource.SavePath);
+
+            foreach (IConfig config in cfgSource.Configs) {
+                IConfig oldConfig = old.Configs[config.Name];
+                if (oldConfig == null)
+                    return true;
+
+                string[] keys = config.GetKeys ();
+                if (keys.Length != oldConfig.GetKeys ().Length)
+                    return true;
+                
+                foreach (string key in keys) {
+                    if (config.Get (key) != oldConfig.Get (key)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static void CommitConfig () {
             IConfig cfg = cfgSource.Configs["Tangerine"];
             cfg.Set ("name", Name);
             cfg.Set ("password_file", PasswordFile);
@@ -106,6 +130,10 @@ namespace Tangerine {
             }
 
             cfg.Set ("plugins", plugins.ToString ());
+        }
+
+        public static void SaveConfig () {
+            CommitConfig ();
             cfgSource.Save ();
         }
 
