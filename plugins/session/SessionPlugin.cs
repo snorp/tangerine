@@ -4,7 +4,6 @@ using System.IO;
 using System.Collections;
 using System.Threading;
 using System.Runtime.InteropServices;
-using Gnome;
 
 namespace Tangerine.Plugins {
 
