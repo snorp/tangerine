@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Threading;
+using System.Runtime.InteropServices;
 using Gnome;
 
 namespace Tangerine.Plugins {
@@ -10,18 +11,20 @@ namespace Tangerine.Plugins {
     [Plugin ("session")]
     public class SessionPlugin : IDisposable {
 
-        public SessionPlugin () {
-            Program program = new Program ("tangerine", "1.0", Gnome.Modules.UI, new string[0]);
-        
-            Client client = new Client ();
+        [DllImport ("libsessionglue")]
+        private static extern void run_session ();
 
-            client.Die += delegate {
-                Console.WriteLine ("Die!");
-                Daemon.Stop ();
-            };
+        [DllImport ("libsessionglue")]
+        private static extern void close_session ();
+        
+        public SessionPlugin () {
+            Thread thread = new Thread (run_session);
+            thread.IsBackground = true;
+            thread.Start ();
         }
 
         public void Dispose () {
+            close_session ();
         }
     }
 }

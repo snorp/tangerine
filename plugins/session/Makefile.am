@@ -20,4 +20,11 @@ tangerine-session.dll: $(PLUGINSOURCES)
 	$(MCS) $(MCS_FLAGS) -target:library -out:$@ $(PLUGINSOURCES) \
 	$(PLUGIN_DEPS)
 
+gluelibdir = $(pkglibdir)
+gluelib_LTLIBRARIES = libsessionglue.la
+
+libsessionglue_la_SOURCES = session-glue.c
+libsessionglue_la_LDFLAGS = -L/usr/X11R6/lib
+libsessionglue_la_LIBADD = -lSM
+
 EXTRA_DIST = $(PLUGINSOURCES)
