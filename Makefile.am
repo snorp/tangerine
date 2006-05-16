@@ -1,4 +1,4 @@
-SUBDIRS = deps src plugins
+SUBDIRS = icons deps src plugins
 
 docdir = $(datadir)/doc/tangerine
 doc_DATA_DIST = README sample.conf

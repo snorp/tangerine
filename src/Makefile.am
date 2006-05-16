@@ -4,10 +4,11 @@ TANG_DAEMON = tangerine-daemon.exe
 TANG_PROPS_ASSEMBLY = tangerine-properties.exe
 
 asmdir = $(prefix)/lib/tangerine
-asm_DATA =			\
-	$(TANG_ASSEMBLY)	\
-	$(TANG_DAEMON)		\
-	$(TANG_PROPS_ASSEMBLY)	\
+asm_DATA =				\
+	$(TANG_ASSEMBLY)		\
+	$(TANG_DAEMON)			\
+	tangerine-properties.exe.config	\
+	$(TANG_PROPS_ASSEMBLY)		\
 	$(TANG_PLUGINS)
 
 gluelibdir = $(pkglibdir)
@@ -19,9 +20,6 @@ bin_SCRIPTS = tangerine tangerine-properties
 
 appdir = $(prefix)/share/applications
 app_DATA = tangerine-properties.desktop
-
-icondir = $(prefix)/share/icons/hicolor/48x48/apps
-icon_DATA = tangerine.png
 
 TANGSOURCES =				\
 	$(srcdir)/AssemblyInfo.cs	\
@@ -46,13 +44,12 @@ $(TANG_DAEMON): $(TANG_DAEMONSOURCES)
 	$(MCS) $(MCS_FLAGS) -out:$@ $(TANG_DAEMONSOURCES) -r:tangerine.dll \
 	$(TANG_DEPS)
 
-TANG_PROPSOURCES = $(srcdir)/PropertiesWindow.cs
+TANG_PROPSOURCES = $(srcdir)/PropertiesWindow.cs $(srcdir)/IconThemeUtils.cs
 
 $(TANG_PROPS_ASSEMBLY): $(TANG_PROPSOURCES)
 	$(MCS) $(MCS_FLAGS) -out:$@ $(TANG_PROPSOURCES) -r:tangerine.dll \
 	$(TANG_DEPS) $(GNOME_SHARP_LIBS) $(GLADE_SHARP_LIBS) \
-	-resource:$(srcdir)/tangerine-properties.glade,tangerine-properties.glade \
-	-resource:$(srcdir)/tangerine.png,tangerine.png
+	-resource:$(srcdir)/tangerine-properties.glade,tangerine-properties.glade
 
 tangerine: tangerine.in
 	sed -e 's,@libdir\@,$(libdir),g' \
@@ -72,6 +69,7 @@ EXTRA_DIST =				\
 	$(icon_DATA)			\
 	tangerine-properties.glade	\
 	tangerine-properties.in		\
+	tangerine-properties.exe.config	\
 	tangerine.in
 
 CLEANFILES =			\

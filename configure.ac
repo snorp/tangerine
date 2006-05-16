@@ -2,7 +2,7 @@ AC_INIT(README)
 
 MAJOR_VERSION=0
 MINOR_VERSION=2
-MICRO_VERSION=4
+MICRO_VERSION=5
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
                                                                                 
 AM_INIT_AUTOMAKE(tangerine, $VERSION)
@@ -81,6 +81,7 @@ AC_OUTPUT([
 Makefile
 deps/Makefile
 deps/daap-sharp/Makefile
+icons/Makefile
 src/Makefile
 plugins/Makefile
 plugins/file/Makefile

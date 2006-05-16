@@ -71,7 +71,7 @@ namespace Tangerine {
 
         public PropertiesWindow () : base ("Tangerine Music Sharing", null, DialogFlags.NoSeparator) {
             Resizable = false;
-            DefaultIcon = new Gdk.Pixbuf (null, "tangerine.png");
+            IconThemeUtils.SetWindowIcon (this);
             AddButton (Stock.Close, ResponseType.Close);
             Response += delegate {
                 Hide ();
