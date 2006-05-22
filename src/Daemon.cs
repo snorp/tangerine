@@ -39,6 +39,7 @@ namespace Tangerine {
         public static ushort Port;
         public static bool IsPublished;
         public static string[] PluginNames;
+        public static string ConfigPath;
 
         public static ILog Log {
             get { return log; }
@@ -64,8 +65,12 @@ namespace Tangerine {
             get { return db; }
         }
 
-        public static void ParseConfig (string file) {
-            cfgSource = new IniConfigSource (file);
+        public static void ParseConfig () {
+            cfgSource = new IniConfigSource ();
+
+            if (File.Exists (ConfigPath)) {
+                cfgSource.Load (ConfigPath);
+            }
 
             IConfig cfg = cfgSource.Configs["Tangerine"];
             if (cfg == null) {
@@ -84,7 +89,7 @@ namespace Tangerine {
             LogFile = cfg.Get ("log_file");
             Port = (ushort) cfg.GetInt ("port", 0);
             IsPublished = (bool) cfg.GetBoolean ("publish", true);
-            string names = cfg.Get ("plugins");
+            string names = cfg.Get ("plugins", "file,session");
 
             if (names != null)
                 PluginNames = names.Split(',');
@@ -92,8 +97,11 @@ namespace Tangerine {
 
         public static bool IsSaveNeeded () {
             CommitConfig ();
+
+            if (!File.Exists (ConfigPath))
+                return true;
             
-            IniConfigSource old = new IniConfigSource (cfgSource.SavePath);
+            IniConfigSource old = new IniConfigSource (ConfigPath);
 
             foreach (IConfig config in cfgSource.Configs) {
                 IConfig oldConfig = old.Configs[config.Name];
@@ -137,12 +145,16 @@ namespace Tangerine {
 
         public static void SaveConfig () {
             CommitConfig ();
-            cfgSource.Save ();
+            cfgSource.Save (ConfigPath);
         }
 
         public static void Run () {
             InitializeLogging ();
 
+            if (!File.Exists (ConfigPath)) {
+                log.WarnFormat ("Config file '{0}' was not found, using defaults", ConfigPath);
+            }
+            
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             UnixSignal.RegisterHandler (Signum.SIGTERM, OnSignal);
             UnixSignal.RegisterHandler (Signum.SIGINT, OnSignal);

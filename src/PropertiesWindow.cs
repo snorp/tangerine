@@ -138,8 +138,9 @@ namespace Tangerine {
         private void LoadPrefs () {
             if (!File.Exists (configPath))
                 File.Create (configPath).Close ();
-            
-            Daemon.ParseConfig (configPath);
+
+            Daemon.ConfigPath = configPath;
+            Daemon.ParseConfig ();
 
             nameEntry.Text = Daemon.Name;
             if ((Daemon.PluginNames == null ||

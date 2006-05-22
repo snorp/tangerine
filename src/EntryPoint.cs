@@ -38,7 +38,8 @@ namespace Tangerine {
             }
 
             try {
-                Daemon.ParseConfig (configFile);
+                Daemon.ConfigPath = configFile;
+                Daemon.ParseConfig ();
             } catch (Exception e) {
                 Console.Error.WriteLine ("Failed to parse configuration: " + e);
                 return 1;
