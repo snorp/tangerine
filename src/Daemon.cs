@@ -168,6 +168,8 @@ namespace Tangerine {
             server.AddDatabase (db);
             server.MaxUsers = MaxUsers;
 
+            server.SongRequested += OnSongRequested;
+            
             log.Info ("Server name: " + Name);
 
             PluginManager.LoadPlugins (PluginNames);
@@ -191,6 +193,14 @@ namespace Tangerine {
             
             UnixSignal.Stop ();
             server.Stop ();
+        }
+
+        private static void OnSongRequested (object o, SongRequestedArgs args) {
+            if (args.UserName == null) {
+                log.DebugFormat ("Host '{0}' requested song '{1}'", args.Host, args.Song.Title);
+            } else {
+                log.DebugFormat ("Host '{0}' ({1}) requested song '{2}'", args.Host, args.UserName, args.Song.Title);
+            }
         }
 
         public static void Stop () {
