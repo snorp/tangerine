@@ -30,8 +30,11 @@ namespace Tangerine.Plugins {
         
         public FilePlugin () {
 
+#if !WINDOWS
             string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "Music");
-            
+#else
+            string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "My Music");
+#endif
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 directories = new string[] { defaultDir };
             } else {
@@ -42,11 +45,13 @@ namespace Tangerine.Plugins {
             db = Daemon.DefaultDatabase;
             log = Daemon.Log;
 
+#if !WINDOWS
             if (Inotify.Enabled) {
                 log.Info ("Using inotify to watch for changes");
             } else {
                 log.Warn ("inotify is not available, filesystem changes will not be observed");
             }
+#endif
 
             LoadFromDatabase ();
             ScanDirectories ();
@@ -142,9 +147,11 @@ namespace Tangerine.Plugins {
                 return;
             }
 
+#if !WINDOWS
             Inotify.Subscribe (dir, OnDirectoryEvent,
                                Inotify.EventType.CloseWrite | Inotify.EventType.MovedFrom |
                                Inotify.EventType.MovedTo | Inotify.EventType.Delete | Inotify.EventType.Unmount);
+#endif
 
             foreach (string file in Directory.GetFiles (dir)) {
                 if (Path.GetExtension (file) == ".m3u") {
@@ -259,6 +266,7 @@ namespace Tangerine.Plugins {
             }
         }
 
+#if !WINDOWS
         private void OnDirectoryEvent (Inotify.Watch watch, string path, string subitem,
                                        string srcpath, Inotify.EventType type) {
 
@@ -290,6 +298,6 @@ namespace Tangerine.Plugins {
                 Monitor.Pulse (commitLock);
             }
         }
-
+#endif
     }
 }

@@ -15,9 +15,12 @@ using log4net.Repository.Hierarchy;
 using log4net.Layout;
 using log4net.Appender;
 using Nini.Config;
+using DAAP;
+
+#if !WINDOWS
 using Mono.Unix;
 using Mono.Unix.Native;
-using DAAP;
+#endif
 
 namespace Tangerine {
 
@@ -30,6 +33,8 @@ namespace Tangerine {
         private static IniConfigSource cfgSource;
         private static IntPtr loop;
         private static Regex nameRegex = new Regex (@"(.*?).\[([0-9]*)\]$");
+
+        private static object loopLock = new object ();
         
         public static string Name;
         public static string PasswordFile;
@@ -156,9 +161,12 @@ namespace Tangerine {
             }
             
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+
+#if !WINDOWS
             UnixSignal.RegisterHandler (Signum.SIGTERM, OnSignal);
             UnixSignal.RegisterHandler (Signum.SIGINT, OnSignal);
             UnixSignal.Start ();
+#endif
             
             server = new Server (Name);
             server.Port = Port;
@@ -174,9 +182,11 @@ namespace Tangerine {
 
             PluginManager.LoadPlugins (PluginNames);
 
+#if !WINDOWS
             if (Inotify.Enabled) {
                 Inotify.Start ();
             }
+#endif
             
             AddUsers ();
 
@@ -194,18 +204,22 @@ namespace Tangerine {
         private static void Shutdown () {
             log.Warn ("Shutting down");
 
+#if !WINDOWS
             if (Inotify.Enabled) {
                 Inotify.Stop ();
             }
+#endif
                 
             PluginManager.UnloadPlugins ();
             
+#if !WINDOWS
             UnixSignal.Stop ();
 
             // blah, this doesn't work very well with avahi-sharp currently
             // server.Stop ();
 
             Syscall.exit (0);
+#endif
         }
 
         private static void OnSongRequested (object o, SongRequestedArgs args) {
@@ -222,17 +236,25 @@ namespace Tangerine {
             } else {
                 // haven't finished starting up yet
                 // might be hung or something, so just die.
-                Syscall.exit (0);
+
+                Environment.Exit (0);
             }
         }
 
+#if !WINDOWS
         private static void OnSignal (Signum sig) {
             if (sig == Signum.SIGTERM || sig == Signum.SIGINT) {
                 Stop ();
             }
         }
+#endif
 
         private static IAppender GetConsoleAppender (ILayout layout) {
+#if WINDOWS
+            ConsoleAppender appender = new ConsoleAppender ();
+            appender.Layout = layout;
+            return appender;
+#else
             AnsiColorTerminalAppender appender = new AnsiColorTerminalAppender ();
             appender.Layout = layout;
 
@@ -251,6 +273,7 @@ namespace Tangerine {
             
             appender.ActivateOptions ();
             return appender;
+#endif
         }
 
         private static IAppender GetFileAppender (ILayout layout) {
@@ -346,6 +369,7 @@ namespace Tangerine {
             server.Name = name;
         }
 
+#if !WINDOWS
         [DllImport ("glib-2.0")]
         private static extern IntPtr g_main_loop_new (IntPtr context, bool running);
 
@@ -363,5 +387,19 @@ namespace Tangerine {
         private static void QuitLoop () {
             g_main_loop_quit (loop);
         }
+#else
+
+        private static void RunLoop () {
+            lock (loopLock) {
+                Monitor.Wait (loopLock);
+            }
+        }
+
+        private static void QuitLoop() {
+            lock (loopLock) {
+                Monitor.Pulse (loopLock);
+            }
+        }
+#endif
     }
 }
