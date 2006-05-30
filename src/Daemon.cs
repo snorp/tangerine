@@ -185,7 +185,6 @@ namespace Tangerine {
             } catch (Exception e) {
                 LogError ("Failed to start server", e);
                 Shutdown ();
-                return;
             }
 
             RunLoop ();
@@ -205,6 +204,8 @@ namespace Tangerine {
 
             // blah, this doesn't work very well with avahi-sharp currently
             // server.Stop ();
+
+            Syscall.exit (0);
         }
 
         private static void OnSongRequested (object o, SongRequestedArgs args) {
