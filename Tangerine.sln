@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C# Express 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangerine", "Tangerine.csproj", "{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A288B06B-21F8-4CE4-B579-BDAD4B003738} = {A288B06B-21F8-4CE4-B579-BDAD4B003738}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilePlugin", "FilePlugin.csproj", "{3569B2C8-750A-491B-A702-445A4F03636A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F} = {A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}
+		{A288B06B-21F8-4CE4-B579-BDAD4B003738} = {A288B06B-21F8-4CE4-B579-BDAD4B003738}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAAP", "DAAP.csproj", "{A288B06B-21F8-4CE4-B579-BDAD4B003738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangerineDaemon", "TangerineDaemon.csproj", "{947F3CB3-10AD-460E-B573-FE173D4C4B5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F} = {A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3569B2C8-750A-491B-A702-445A4F03636A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3569B2C8-750A-491B-A702-445A4F03636A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3569B2C8-750A-491B-A702-445A4F03636A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3569B2C8-750A-491B-A702-445A4F03636A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A288B06B-21F8-4CE4-B579-BDAD4B003738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A288B06B-21F8-4CE4-B579-BDAD4B003738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A288B06B-21F8-4CE4-B579-BDAD4B003738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A288B06B-21F8-4CE4-B579-BDAD4B003738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A288B06B-21F8-4CE4-B579-BDAD4B003738}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAAP</RootNamespace>
+    <AssemblyName>daap-sharp</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;ENABLE_MDNSD</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;ENABLE_MDNSD</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Compile Include="deps\daap-sharp\AuthenticationException.cs" />
+    <Compile Include="deps\daap-sharp\BrokenMD5.cs" />
+    <Compile Include="deps\daap-sharp\Client.cs" />
+    <Compile Include="deps\daap-sharp\ContentCodeBag.cs" />
+    <Compile Include="deps\daap-sharp\ContentFetcher.cs" />
+    <Compile Include="deps\daap-sharp\ContentParser.cs" />
+    <Compile Include="deps\daap-sharp\ContentWriter.cs" />
+    <Compile Include="deps\daap-sharp\Database.cs" />
+    <Compile Include="deps\daap-sharp\Hasher.cs" />
+    <Compile Include="deps\daap-sharp\LoginException.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\BrowseService.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\Native.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\RegisterService.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\Service.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceBrowser.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceClass.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceError.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceErrorException.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceFlags.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceRef.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\ServiceType.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\TxtRecord.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\TxtRecordEnumerator.cs" />
+    <Compile Include="deps\daap-sharp\Mono.Zeroconf\TxtRecordItem.cs" />
+    <Compile Include="deps\daap-sharp\Playlist.cs" />
+    <Compile Include="deps\daap-sharp\Server.cs" />
+    <Compile Include="deps\daap-sharp\ServerInfo.cs" />
+    <Compile Include="deps\daap-sharp\ServiceLocator.cs" />
+    <Compile Include="deps\daap-sharp\Song.cs" />
+    <Compile Include="deps\daap-sharp\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>deps\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="deps\daap-sharp\content-codes" />
+  </ItemGroup>
+</Project>
