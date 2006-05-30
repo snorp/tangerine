@@ -180,9 +180,19 @@ namespace Tangerine {
             
             AddUsers ();
 
-            server.Start ();
+            try {
+                server.Start ();
+            } catch (Exception e) {
+                LogError ("Failed to start server", e);
+                Shutdown ();
+                return;
+            }
 
             RunLoop ();
+            Shutdown ();
+        }
+
+        private static void Shutdown () {
             log.Warn ("Shutting down");
 
             if (Inotify.Enabled) {
@@ -192,7 +202,9 @@ namespace Tangerine {
             PluginManager.UnloadPlugins ();
             
             UnixSignal.Stop ();
-            server.Stop ();
+
+            // blah, this doesn't work very well with avahi-sharp currently
+            // server.Stop ();
         }
 
         private static void OnSongRequested (object o, SongRequestedArgs args) {
