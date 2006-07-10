@@ -49,7 +49,7 @@ namespace DAAP {
     internal class ContentCodeBag {
 
         private const int ChunkLength = 8192;
-
+        
         private static ContentCodeBag defaultBag;
         private Hashtable codes = new Hashtable ();
 
@@ -57,21 +57,17 @@ namespace DAAP {
             get {
                 if (defaultBag == null) {
 
-                    // visual studio assigns some kind of crazy name here (DAAP.deps.daap_sharp.content-codes) which I refuse to use
-                    foreach (string name in Assembly.GetExecutingAssembly ().GetManifestResourceNames ()) {
-                        if (name.EndsWith ("codes")) {
-                            using (BinaryReader reader = new BinaryReader (Assembly.GetExecutingAssembly ().GetManifestResourceStream (name))) {
-                                MemoryStream buf = new MemoryStream ();
-                                byte[] bytes = null;
+                    
+                    using (BinaryReader reader = new BinaryReader (Assembly.GetExecutingAssembly ().GetManifestResourceStream ("content-codes"))) {
+                        MemoryStream buf = new MemoryStream ();
+                        byte[] bytes = null;
+                        
+                        do {
+                            bytes = reader.ReadBytes (ChunkLength);
+                            buf.Write (bytes, 0, bytes.Length);
+                        } while (bytes.Length == ChunkLength);
 
-                                do {
-                                    bytes = reader.ReadBytes (ChunkLength);
-                                    buf.Write (bytes, 0, bytes.Length);
-                                } while (bytes.Length == ChunkLength);
-
-                                defaultBag = ContentCodeBag.ParseCodes (buf.GetBuffer ());
-                            }
-                        }
+                        defaultBag = ContentCodeBag.ParseCodes (buf.GetBuffer ());
                     }
                 }
 
@@ -113,7 +109,7 @@ namespace DAAP {
 
         internal ContentNode ToNode () {
             ArrayList nodes = new ArrayList ();
-
+            
             foreach (int number in codes.Keys) {
                 ContentCode code = (ContentCode) codes[number];
 
@@ -147,9 +143,9 @@ namespace DAAP {
                 if (dictNode.Name != "dmap.dictionary") {
                     continue;
                 }
-
+                
                 ContentCode code = new ContentCode ();
-
+                
                 foreach (ContentNode item in (dictNode.Value as ContentNode[])) {
                     switch (item.Name) {
                     case "dmap.contentcodesnumber":
@@ -166,7 +162,7 @@ namespace DAAP {
 
                 bag.codes[code.Number] = code;
             }
-
+            
             return bag;
         }
     }

@@ -23,9 +23,9 @@ if test "x$MONO" = "x" ; then
 fi
 
 dnl mcs	   
-AC_PATH_PROG(MCS, mcs)
+AC_PATH_PROG(MCS, gmcs)
 if test "x$MCS" = "x" ; then
-   AC_MSG_ERROR([Can not find "mcs" in your PATH])
+   AC_MSG_ERROR([Can not find "gmcs" in your PATH])
 fi
 
 AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")

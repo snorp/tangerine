@@ -215,8 +215,7 @@ namespace Tangerine {
 #if !WINDOWS
             UnixSignal.Stop ();
 
-            // blah, this doesn't work very well with avahi-sharp currently
-            // server.Stop ();
+            server.Stop ();
 
             Syscall.exit (0);
 #endif

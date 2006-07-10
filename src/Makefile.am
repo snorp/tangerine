@@ -8,6 +8,7 @@ asm_DATA =				\
 	$(TANG_ASSEMBLY)		\
 	$(TANG_DAEMON)			\
 	tangerine-properties.exe.config	\
+	tangerine-daemon.exe.config	\
 	$(TANG_PROPS_ASSEMBLY)		\
 	$(TANG_PLUGINS)
 
@@ -70,6 +71,7 @@ EXTRA_DIST =				\
 	tangerine-properties.glade	\
 	tangerine-properties.in		\
 	tangerine-properties.exe.config	\
+	tangerine-daemon.exe.config	\
 	tangerine.in
 
 CLEANFILES =			\

@@ -50,17 +50,17 @@ namespace Tangerine.Plugins {
             ArrayList songs = new ArrayList ();
             ArrayList playlists = new ArrayList ();
             
-            foreach (IPod.Song isong in device.SongDatabase.Songs) {
-                Song song = AddSong (isong);
+            foreach (IPod.Track itrack in device.TrackDatabase.Tracks) {
+                Song song = AddSong (itrack);
                 if (song != null)
                     songs.Add (song);
             }
 
-            foreach (IPod.Playlist ipl in device.SongDatabase.Playlists) {
+            foreach (IPod.Playlist ipl in device.TrackDatabase.Playlists) {
                 playlists.Add (AddPlaylist (ipl));
             }
 
-            foreach (IPod.Playlist ipl in device.SongDatabase.OnTheGoPlaylists) {
+            foreach (IPod.Playlist ipl in device.TrackDatabase.OnTheGoPlaylists) {
                 playlists.Add (AddPlaylist (ipl));
             }
 
@@ -91,9 +91,9 @@ namespace Tangerine.Plugins {
         }
 
         // pretty lame, but it should avoid most duplicates
-        private Song LookupSong (IPod.Song isong) {
+        private Song LookupSong (IPod.Track track) {
             foreach (Song song in db.Songs) {
-                if (song.Title == isong.Title && song.Size == isong.Size) {
+                if (song.Title == track.Title && song.Size == track.Size) {
                     return song;
                 }
             }
@@ -101,27 +101,27 @@ namespace Tangerine.Plugins {
             return null;
         }
 
-        private Song AddSong (IPod.Song isong) {
-            if (LookupSong (isong) != null)
+        private Song AddSong (IPod.Track track) {
+            if (LookupSong (track) != null)
                 return null;
             
             Song song = new Song ();
             db.AddSong (song);
 
-            song.Artist = isong.Artist;
-            song.Album = isong.Album;
-            song.Title = isong.Title;
-            song.Duration = isong.Duration;
-            song.FileName = isong.FileName;
+            song.Artist = track.Artist;
+            song.Album = track.Album;
+            song.Title = track.Title;
+            song.Duration = track.Duration;
+            song.FileName = track.FileName;
             song.Format = Path.GetExtension (song.FileName).Substring (1);
-            song.Genre = isong.Genre;
+            song.Genre = track.Genre;
 
             FileInfo info = new FileInfo (song.FileName);
             song.Size = (int) info.Length;
-            song.TrackCount = isong.TotalTracks;
-            song.TrackNumber = isong.TrackNumber;
-            song.Year = isong.Year;
-            song.BitRate = (short) isong.BitRate;
+            song.TrackCount = track.TotalTracks;
+            song.TrackNumber = track.TrackNumber;
+            song.Year = track.Year;
+            song.BitRate = (short) track.BitRate;
 
             return song;
         }
@@ -129,8 +129,8 @@ namespace Tangerine.Plugins {
         private Playlist AddPlaylist (IPod.Playlist ipl) {
             Playlist pl = new Playlist (ipl.Name);
 
-            foreach (IPod.Song isong in ipl.Songs) {
-                Song song = LookupSong (isong);
+            foreach (IPod.Track itrack in ipl.Tracks) {
+                Song song = LookupSong (itrack);
                 if (song != null)
                     pl.AddSong (song);
             }
