@@ -112,17 +112,17 @@ namespace Tangerine.Plugins {
                 odb = Db4o.OpenFile (Path.Combine (Daemon.ConfigDirectory, "songs.db"));
             }
 
-            ObjectSet result = odb.Get (typeof (Song));
+            ObjectSet result = odb.Get (typeof (Track));
             log.DebugFormat ("{0} songs in database", result.Count);
             
-            foreach (Song song in result) {
+            foreach (Track song in result) {
                 if (!File.Exists (song.FileName) || !IsInDirectories (song.FileName)) {
                     log.Debug ("Ignoring song from db: " + song);
                     odb.Delete (song);
                     continue;
                 }
                 
-                db.AddSong (song);
+                db.AddTrack (song);
                 songHash[song.FileName] = song;
             }
         }
@@ -157,7 +157,7 @@ namespace Tangerine.Plugins {
                 if (Path.GetExtension (file) == ".m3u") {
                     playlistFiles.Add (file);
                 } else {
-                    AddSong (file);
+                    AddTrack (file);
                 }
             }
 
@@ -176,12 +176,12 @@ namespace Tangerine.Plugins {
             
             foreach (string file in keyArray) {
                 if (file.StartsWith (dir)) {
-                    RemoveSong (file);
+                    RemoveTrack (file);
                 }
             }
         }
 
-        private void AddSong (string file) {
+        private void AddTrack (string file) {
             if (songHash[file] != null)
                 return;
             
@@ -193,10 +193,10 @@ namespace Tangerine.Plugins {
                 return;
             }
 
-            Song song = (Song) songHash[file];
+            Track song = (Track) songHash[file];
             if (song == null) {
-                song = new Song ();
-                db.AddSong (song);
+                song = new Track ();
+                db.AddTrack (song);
             }
 
             song.Artist = af.Artist;
@@ -219,10 +219,10 @@ namespace Tangerine.Plugins {
             odb.Set (song);
         }
 
-        private void RemoveSong (string file) {
-            Song song = (Song) songHash[file];
+        private void RemoveTrack (string file) {
+            Track song = (Track) songHash[file];
             if (song != null) {
-                db.RemoveSong (song);
+                db.RemoveTrack (song);
                 songHash.Remove (file);
                 odb.Delete (song);
             }
@@ -242,9 +242,9 @@ namespace Tangerine.Plugins {
 
                     string songFile = Path.Combine (dir, line);
                     
-                    Song song = (Song) songHash[songFile];
+                    Track song = (Track) songHash[songFile];
                     if (song != null) {
-                        pl.AddSong (song);
+                        pl.AddTrack (song);
                     } else {
                         log.WarnFormat ("Failed to find song {0} for playlist {1}", line, pl.Name);
                     }
@@ -286,10 +286,10 @@ namespace Tangerine.Plugins {
                 
             } else {
                 if ((type & Inotify.EventType.Delete) > 0 || (type & Inotify.EventType.MovedFrom) > 0) {
-                    RemoveSong (file);
+                    RemoveTrack (file);
                 } else if ((type & Inotify.EventType.CloseWrite) > 0 ||
                            (type & Inotify.EventType.MovedTo) > 0) {
-                    AddSong (file);
+                    AddTrack (file);
                 }
             }
 

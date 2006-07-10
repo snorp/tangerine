@@ -176,7 +176,7 @@ namespace Tangerine {
             server.AddDatabase (db);
             server.MaxUsers = MaxUsers;
 
-            server.SongRequested += OnSongRequested;
+            server.TrackRequested += OnTrackRequested;
             
             log.Info ("Server name: " + Name);
 
@@ -221,11 +221,11 @@ namespace Tangerine {
 #endif
         }
 
-        private static void OnSongRequested (object o, SongRequestedArgs args) {
+        private static void OnTrackRequested (object o, TrackRequestedArgs args) {
             if (args.UserName == null) {
-                log.DebugFormat ("Host '{0}' requested song '{1}'", args.Host, args.Song.Title);
+                log.DebugFormat ("Host '{0}' requested song '{1}'", args.Host, args.Track.Title);
             } else {
-                log.DebugFormat ("Host '{0}' ({1}) requested song '{2}'", args.Host, args.UserName, args.Song.Title);
+                log.DebugFormat ("Host '{0}' ({1}) requested song '{2}'", args.Host, args.UserName, args.Track.Title);
             }
         }
 

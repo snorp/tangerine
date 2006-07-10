@@ -22,7 +22,7 @@ using System.Collections;
 
 namespace DAAP {
 
-    public class Song : ICloneable {
+    public class Track : ICloneable {
 
         private string artist;
         private string album;
@@ -156,24 +156,24 @@ namespace DAAP {
         }
 
         public object Clone () {
-            Song song = new Song ();
-            song.artist = artist;
-            song.album = album;
-            song.title = title;
-            song.year = year;
-            song.format = format;
-            song.duration = duration;
-            song.id = id;
-            song.size = size;
-            song.genre = genre;
-            song.trackNumber = trackNumber;
-            song.trackCount = trackCount;
-            song.fileName = fileName;
-            song.dateAdded = dateAdded;
-            song.dateModified = dateModified;
-            song.bitrate = bitrate;
+            Track track = new Track ();
+            track.artist = artist;
+            track.album = album;
+            track.title = title;
+            track.year = year;
+            track.format = format;
+            track.duration = duration;
+            track.id = id;
+            track.size = size;
+            track.genre = genre;
+            track.trackNumber = trackNumber;
+            track.trackCount = trackCount;
+            track.fileName = fileName;
+            track.dateAdded = dateAdded;
+            track.dateModified = dateModified;
+            track.bitrate = bitrate;
 
-            return song;
+            return track;
         }
 
         public override string ToString () {
@@ -307,75 +307,75 @@ namespace DAAP {
             return new ContentNode ("dmap.listingitem", nodes);
         }
 
-        internal static Song FromNode (ContentNode node) {
-            Song song = new Song ();
+        internal static Track FromNode (ContentNode node) {
+            Track track = new Track ();
             
             foreach (ContentNode field in (ContentNode[]) node.Value) {
                 switch (field.Name) {
                 case "dmap.itemid":
-                    song.id = (int) field.Value;
+                    track.id = (int) field.Value;
                     break;
                 case "daap.songartist":
-                    song.artist = (string) field.Value;
+                    track.artist = (string) field.Value;
                     break;
                 case "dmap.itemname":
-                    song.title = (string) field.Value;
+                    track.title = (string) field.Value;
                     break;
                 case "daap.songalbum":
-                    song.album = (string) field.Value;
+                    track.album = (string) field.Value;
                     break;
                 case "daap.songtime":
-                    song.duration = TimeSpan.FromMilliseconds ((int) field.Value);
+                    track.duration = TimeSpan.FromMilliseconds ((int) field.Value);
                     break;
                 case "daap.songformat":
-                    song.format = (string) field.Value;
+                    track.format = (string) field.Value;
                     break;
                 case "daap.songgenre":
-                    song.genre = (string) field.Value;
+                    track.genre = (string) field.Value;
                     break;
                 case "daap.songsize":
-                    song.size = (int) field.Value;
+                    track.size = (int) field.Value;
                     break;
                 case "daap.songtrackcount":
-                    song.trackCount = (short) field.Value;
+                    track.trackCount = (short) field.Value;
                     break;
                 case "daap.songtracknumber":
-                    song.trackNumber = (short) field.Value;
+                    track.trackNumber = (short) field.Value;
                     break;
                 case "daap.bitrate":
-                    song.bitrate = (short) field.Value;
+                    track.bitrate = (short) field.Value;
                     break;
                 case "daap.songdateadded":
-                    song.dateAdded = (DateTime) field.Value;
+                    track.dateAdded = (DateTime) field.Value;
                     break;
                 case "daap.songdatemodified":
-                    song.dateModified = (DateTime) field.Value;
+                    track.dateModified = (DateTime) field.Value;
                     break;
                 default:
                     break;
                 }
             }
 
-            return song;
+            return track;
         }
 
         internal ContentNode ToPlaylistNode (int containerId) {
             return new ContentNode ("dmap.listingitem",
                                     new ContentNode ("dmap.itemkind", (byte) 2),
-                                    new ContentNode ("daap.songdatakind", (byte) 0),
+                                    new ContentNode ("daap.trackdatakind", (byte) 0),
                                     new ContentNode ("dmap.itemid", Id),
                                     new ContentNode ("dmap.containeritemid", containerId),
                                     new ContentNode ("dmap.itemname", Title == null ? String.Empty : Title));
         }
 
-        internal static void FromPlaylistNode (Database db, ContentNode node, out Song song, out int containerId) {
-            song = null;
+        internal static void FromPlaylistNode (Database db, ContentNode node, out Track track, out int containerId) {
+            track = null;
             containerId = 0;
             
             foreach (ContentNode field in (ContentNode[]) node.Value) {
                 switch (field.Name) {
                 case "dmap.itemid":
-                    song = db.LookupSongById ((int) field.Value);
+                    track = db.LookupTrackById ((int) field.Value);
                     break;
                 case "dmap.containeritemid":
                     containerId = (int) field.Value;
@@ -386,39 +386,39 @@ namespace DAAP {
             }
         }
 
-        private bool Equals (Song song) {
-            return artist == song.Artist &&
-                album == song.Album &&
-                title == song.Title &&
-                year == song.Year &&
-                format == song.Format &&
-                duration == song.Duration &&
-                size == song.Size &&
-                genre == song.Genre &&
-                trackNumber == song.TrackNumber &&
-                trackCount == song.TrackCount &&
-                dateAdded == song.DateAdded &&
-                dateModified == song.DateModified &&
-                bitrate == song.BitRate;
+        private bool Equals (Track track) {
+            return artist == track.Artist &&
+                album == track.Album &&
+                title == track.Title &&
+                year == track.Year &&
+                format == track.Format &&
+                duration == track.Duration &&
+                size == track.Size &&
+                genre == track.Genre &&
+                trackNumber == track.TrackNumber &&
+                trackCount == track.TrackCount &&
+                dateAdded == track.DateAdded &&
+                dateModified == track.DateModified &&
+                bitrate == track.BitRate;
         }
 
-        internal void Update (Song song) {
-            if (Equals (song))
+        internal void Update (Track track) {
+            if (Equals (track))
                 return;
 
-            artist = song.Artist;
-            album = song.Album;
-            title = song.Title;
-            year = song.Year;
-            format = song.Format;
-            duration = song.Duration;
-            size = song.Size;
-            genre = song.Genre;
-            trackNumber = song.TrackNumber;
-            trackCount = song.TrackCount;
-            dateAdded = song.DateAdded;
-            dateModified = song.DateModified;
-            bitrate = song.BitRate;
+            artist = track.Artist;
+            album = track.Album;
+            title = track.Title;
+            year = track.Year;
+            format = track.Format;
+            duration = track.Duration;
+            size = track.Size;
+            genre = track.Genre;
+            trackNumber = track.TrackNumber;
+            trackCount = track.TrackCount;
+            dateAdded = track.DateAdded;
+            dateModified = track.DateModified;
+            bitrate = track.BitRate;
 
             EmitUpdated ();
         }

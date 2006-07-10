@@ -15,7 +15,7 @@ namespace Tangerine.Plugins {
         private Database db;
         private ILog log;
         private IPod.DeviceEventListener listener;
-        private Hashtable songHash = new Hashtable ();
+        private Hashtable trackHash = new Hashtable ();
         private Hashtable playlistHash = new Hashtable ();
         private ArrayList devices = new ArrayList ();
         
@@ -39,7 +39,7 @@ namespace Tangerine.Plugins {
                 try {
                     AddDevice (dev);
                 } catch (Exception e) {
-                    Daemon.LogError (String.Format ("Failed to add songs from device '{0}'", dev.Name), e);
+                    Daemon.LogError (String.Format ("Failed to add tracks from device '{0}'", dev.Name), e);
                 }
             }
 
@@ -47,13 +47,13 @@ namespace Tangerine.Plugins {
         }
 
         private void AddDevice (IPod.Device device) {
-            ArrayList songs = new ArrayList ();
+            ArrayList tracks = new ArrayList ();
             ArrayList playlists = new ArrayList ();
             
             foreach (IPod.Track itrack in device.TrackDatabase.Tracks) {
-                Song song = AddSong (itrack);
-                if (song != null)
-                    songs.Add (song);
+                Track track = AddTrack (itrack);
+                if (track != null)
+                    tracks.Add (track);
             }
 
             foreach (IPod.Playlist ipl in device.TrackDatabase.Playlists) {
@@ -64,7 +64,7 @@ namespace Tangerine.Plugins {
                 playlists.Add (AddPlaylist (ipl));
             }
 
-            songHash[device.VolumeId] = songs;
+            trackHash[device.VolumeId] = tracks;
             playlistHash[device.VolumeId] = playlists;
             devices.Add (device);
 
@@ -72,18 +72,18 @@ namespace Tangerine.Plugins {
         }
 
         private void RemoveDevice (IPod.Device device) {
-            ArrayList songs = songHash[device.VolumeId] as ArrayList;
+            ArrayList tracks = trackHash[device.VolumeId] as ArrayList;
             ArrayList playlists = playlistHash[device.VolumeId] as ArrayList;
 
-            foreach (Song song in songs) {
-                db.RemoveSong (song);
+            foreach (Track track in tracks) {
+                db.RemoveTrack (track);
             }
 
             foreach (Playlist pl in playlists) {
                 db.RemovePlaylist (pl);
             }
 
-            songHash.Remove (device.VolumeId);
+            trackHash.Remove (device.VolumeId);
             playlistHash.Remove (device.VolumeId);
             devices.Remove (device);
             
@@ -91,48 +91,48 @@ namespace Tangerine.Plugins {
         }
 
         // pretty lame, but it should avoid most duplicates
-        private Song LookupSong (IPod.Track track) {
-            foreach (Song song in db.Songs) {
-                if (song.Title == track.Title && song.Size == track.Size) {
-                    return song;
+        private Track LookupTrack (IPod.Track itrack) {
+            foreach (Track track in db.Tracks) {
+                if (track.Title == itrack.Title && track.Size == itrack.Size) {
+                    return track;
                 }
             }
 
             return null;
         }
 
-        private Song AddSong (IPod.Track track) {
-            if (LookupSong (track) != null)
+        private Track AddTrack (IPod.Track itrack) {
+            if (LookupTrack (itrack) != null)
                 return null;
             
-            Song song = new Song ();
-            db.AddSong (song);
+            Track track = new Track ();
+            db.AddTrack (track);
 
-            song.Artist = track.Artist;
-            song.Album = track.Album;
-            song.Title = track.Title;
-            song.Duration = track.Duration;
-            song.FileName = track.FileName;
-            song.Format = Path.GetExtension (song.FileName).Substring (1);
-            song.Genre = track.Genre;
+            track.Artist = itrack.Artist;
+            track.Album = itrack.Album;
+            track.Title = itrack.Title;
+            track.Duration = itrack.Duration;
+            track.FileName = itrack.FileName;
+            track.Format = Path.GetExtension (itrack.FileName).Substring (1);
+            track.Genre = itrack.Genre;
 
-            FileInfo info = new FileInfo (song.FileName);
-            song.Size = (int) info.Length;
-            song.TrackCount = track.TotalTracks;
-            song.TrackNumber = track.TrackNumber;
-            song.Year = track.Year;
-            song.BitRate = (short) track.BitRate;
+            FileInfo info = new FileInfo (itrack.FileName);
+            track.Size = (int) info.Length;
+            track.TrackCount = itrack.TotalTracks;
+            track.TrackNumber = itrack.TrackNumber;
+            track.Year = itrack.Year;
+            track.BitRate = (short) itrack.BitRate;
 
-            return song;
+            return track;
         }
 
         private Playlist AddPlaylist (IPod.Playlist ipl) {
             Playlist pl = new Playlist (ipl.Name);
 
             foreach (IPod.Track itrack in ipl.Tracks) {
-                Song song = LookupSong (itrack);
-                if (song != null)
-                    pl.AddSong (song);
+                Track track = LookupTrack (itrack);
+                if (track != null)
+                    pl.AddTrack (track);
             }
 
             db.AddPlaylist (pl);

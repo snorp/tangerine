@@ -19,7 +19,7 @@ namespace Tangerine.Plugins {
         private ILog log;
 
         private Query query;
-        private Hashtable songHash = new Hashtable ();
+        private Hashtable trackHash = new Hashtable ();
         
         private static string[] supportedMimeTypes = new string [] {
             "audio/mpeg",
@@ -85,7 +85,7 @@ namespace Tangerine.Plugins {
             }
         }
 
-        private Song GetSongFromFile (string file) {
+        private Track GetTrackFromFile (string file) {
             AudioFile af;
 
             try {
@@ -94,23 +94,23 @@ namespace Tangerine.Plugins {
                 return null;
             }
 
-            Song song = new Song ();
-            song.Artist = af.Artist;
-            song.Album = af.Album;
-            song.Title = af.Title;
-            song.Duration = af.Duration;
-            song.FileName = file;
-            song.Format = Path.GetExtension (file).Substring (1);
-            song.Genre = af.Genre;
+            Track track = new Track ();
+            track.Artist = af.Artist;
+            track.Album = af.Album;
+            track.Title = af.Title;
+            track.Duration = af.Duration;
+            track.FileName = file;
+            track.Format = Path.GetExtension (file).Substring (1);
+            track.Genre = af.Genre;
 
             FileInfo info = new FileInfo (file);
-            song.Size = (int) info.Length;
-            song.TrackCount = af.TrackCount;
-            song.TrackNumber = af.TrackNumber;
-            song.Year = af.Year;
-            song.BitRate = (short) af.Bitrate;
+            track.Size = (int) info.Length;
+            track.TrackCount = af.TrackCount;
+            track.TrackNumber = af.TrackNumber;
+            track.Year = af.Year;
+            track.BitRate = (short) af.Bitrate;
 
-            return song;
+            return track;
         }
 
         private void OnHitsAdded (HitsAddedResponse response) {
@@ -118,25 +118,25 @@ namespace Tangerine.Plugins {
                 if (hit.Uri.Scheme != Uri.UriSchemeFile)
                     continue;
 
-                Song song;
+                Track track;
                 
                 if (hit.GetFirstProperty ("fixme:title") != null) {
-                    song = new Song ();
-                    song.TrackNumber = GetHitInteger (hit, "fixme:tracknumber");
-                    song.TrackCount = GetHitInteger (hit, "fixme:trackcount");
-                    song.Year = GetHitInteger (hit, "fixme:year");
-                    song.Album = hit.GetFirstProperty ("fixme:album");
-                    song.Artist = hit.GetFirstProperty ("fixme:artist");
-                    song.Title = hit.GetFirstProperty ("fixme:title");
-                    song.Genre = hit.GetFirstProperty ("fixme:genre");
-                    song.FileName = hit.Uri.LocalPath;
+                    track = new Track ();
+                    track.TrackNumber = GetHitInteger (hit, "fixme:tracknumber");
+                    track.TrackCount = GetHitInteger (hit, "fixme:trackcount");
+                    track.Year = GetHitInteger (hit, "fixme:year");
+                    track.Album = hit.GetFirstProperty ("fixme:album");
+                    track.Artist = hit.GetFirstProperty ("fixme:artist");
+                    track.Title = hit.GetFirstProperty ("fixme:title");
+                    track.Genre = hit.GetFirstProperty ("fixme:genre");
+                    track.FileName = hit.Uri.LocalPath;
                 } else {
-                    song = GetSongFromFile (hit.Uri.LocalPath);
+                    track = GetTrackFromFile (hit.Uri.LocalPath);
                 }
 
-                if (song != null && song.Title != null && song.Title != String.Empty) {
-                    db.AddSong (song);
-                    songHash[song.FileName] = song;
+                if (track != null && track.Title != null && track.Title != String.Empty) {
+                    db.AddTrack (track);
+                    trackHash[track.FileName] = track;
                 }
             }
         }
@@ -147,10 +147,10 @@ namespace Tangerine.Plugins {
                     continue;
 
                 string path = uri.LocalPath;
-                Song song = songHash[path] as Song;
-                if (song != null) {
-                    songHash.Remove (path);
-                    db.RemoveSong (song);
+                Track track = trackHash[path] as Track;
+                if (track != null) {
+                    trackHash.Remove (path);
+                    db.RemoveTrack (track);
                 }
             }
         }
@@ -167,8 +167,8 @@ namespace Tangerine.Plugins {
                 query = null;
             }
 
-            foreach (Song song in songHash.Values) {
-                db.RemoveSong (song);
+            foreach (Track track in trackHash.Values) {
+                db.RemoveTrack (track);
             }
         }
     }
