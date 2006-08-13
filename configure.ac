@@ -74,6 +74,9 @@ if test "x$have_ipod" = "xyes"; then \
     AC_SUBST(IPOD_SHARP_ASSEMBLIES)
 fi
 
+dnl glib-sharp
+PKG_CHECK_MODULES(GLIB_SHARP, glib-sharp-2.0)
+
 AM_CONDITIONAL(ENABLE_IPOD, test "x$have_ipod" = "xyes")
 AM_CONDITIONAL(ENABLE_BEAGLE, test "x$have_beagle" = "xyes")
 

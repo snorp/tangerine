@@ -33,7 +33,8 @@ TANG_DEPS =						\
 	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
-	-r:Mono.Posix
+	-r:Mono.Posix					\
+	$(GLIB_SHARP_LIBS)
 
 $(TANG_ASSEMBLY): $(TANGSOURCES)
 	$(MCS) $(MCS_FLAGS) -unsafe -target:library -out:$@ $(TANGSOURCES) \

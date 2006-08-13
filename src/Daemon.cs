@@ -31,11 +31,8 @@ namespace Tangerine {
         private static Database db;
         private static ILog log = LogManager.GetLogger (typeof (Daemon));
         private static IniConfigSource cfgSource;
-        private static IntPtr loop;
         private static Regex nameRegex = new Regex (@"(.*?).\[([0-9]*)\]$");
 
-        private static object loopLock = new object ();
-        
         public static string Name;
         public static string PasswordFile;
         public static bool Debug;
@@ -230,7 +227,7 @@ namespace Tangerine {
         }
 
         public static void Stop () {
-            if (loop != IntPtr.Zero) {
+            if (loop != null && loop.IsRunning) {
                 QuitLoop ();
             } else {
                 // haven't finished starting up yet
@@ -369,24 +366,19 @@ namespace Tangerine {
         }
 
 #if !WINDOWS
-        [DllImport ("glib-2.0")]
-        private static extern IntPtr g_main_loop_new (IntPtr context, bool running);
 
-        [DllImport ("glib-2.0")]
-        private static extern void g_main_loop_run (IntPtr loop);
-
-        [DllImport ("glib-2.0")]
-        private static extern void g_main_loop_quit (IntPtr loop);
+        private static GLib.MainLoop loop = new GLib.MainLoop ();
 
         private static void RunLoop () {
-            loop = g_main_loop_new (IntPtr.Zero, false);
-            g_main_loop_run (loop);
+            loop.Run ();
         }
 
         private static void QuitLoop () {
-            g_main_loop_quit (loop);
+            loop.Quit ();
         }
 #else
+
+        private static object loopLock = new object ();
 
         private static void RunLoop () {
             lock (loopLock) {
