@@ -41,6 +41,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
+      <Private>False</Private>
     </COMReference>
     <COMReference Include="GoogleDesktopQueryAPILib">
       <Guid>{0265F4FC-85A3-4EA6-BD9A-74BC24F8682D}</Guid>
@@ -49,6 +50,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
+      <Private>False</Private>
     </COMReference>
   </ItemGroup>
   <ItemGroup>

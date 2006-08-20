@@ -1,8 +1,9 @@
 [Setup]
 AppName=Tangerine
-AppVerName=Tangerine 0.3.0
+AppVerName=Tangerine 0.2.6
 DefaultDirName={pf}\Tangerine
 DefaultGroupName=Tangerine
+OutputBaseFilename=TangerineSetup
 InfoBeforeFile=
 
 [Dirs]
