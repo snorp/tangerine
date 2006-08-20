@@ -28,7 +28,6 @@ namespace Tangerine {
 
         public static void LoadPlugins (string[] names) {
             LoadPlugins (names, Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "plugins"));
-            LoadPlugins (names, Path.Combine (Daemon.ConfigDirectory, "plugins"));
 
 #if DEBUG
             LoadPlugins (names, AppDomain.CurrentDomain.BaseDirectory);

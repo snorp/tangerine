@@ -41,8 +41,12 @@ namespace Tangerine {
         public static ushort Port;
         public static bool IsPublished;
         public static string[] PluginNames;
-        public static string ConfigPath = Path.Combine (Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData),
-                                                        "tangerine"), "config");
+
+#if !WINDOWS
+        public static string ConfigPath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"), ".tangerine");
+#else        
+        public static string ConfigPath = Path.Combine (Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "tangerine"), "config");
+#endif
 
         public static ILog Log {
             get { return log; }
@@ -51,13 +55,6 @@ namespace Tangerine {
 
         public static IConfigSource ConfigSource {
             get { return cfgSource; }
-        }
-
-        public static string ConfigDirectory {
-            get {
-                string datadir = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData);
-                return Path.Combine (datadir, "tangerine");
-            }
         }
 
         public static Server Server {
@@ -158,9 +155,9 @@ namespace Tangerine {
         public static void SaveConfig () {
             CommitConfig ();
 
-            string dir = Path.GetDirectoryName(ConfigPath);
-            if (!Directory.Exists(dir)) {
-                Directory.CreateDirectory(dir);
+            string dir = Path.GetDirectoryName (ConfigPath);
+            if (!Directory.Exists (dir)) {
+                Directory.CreateDirectory (dir);
             }
 
             cfgSource.Save (ConfigPath);
@@ -385,10 +382,12 @@ namespace Tangerine {
         }
 
         private static bool QuitLoop () {
-            if (loop == null || !loop.IsRunning)
+            if (loop == null || !loop.IsRunning) {
                 return false;
-            else
+            } else {
                 loop.Quit ();
+                return true;
+            }
         }
 #else
 
