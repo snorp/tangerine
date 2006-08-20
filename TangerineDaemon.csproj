@@ -37,7 +37,11 @@
     <ProjectReference Include="Tangerine.csproj">
       <Project>{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}</Project>
       <Name>Tangerine</Name>
+      <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tangerine.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

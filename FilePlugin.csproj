@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Release\plugins\</OutputPath>
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,24 +45,29 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>deps\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=200a2bd1219e83a8">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>deps\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>deps\Nini.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DAAP.csproj">
       <Project>{A288B06B-21F8-4CE4-B579-BDAD4B003738}</Project>
       <Name>DAAP</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="Tangerine.csproj">
       <Project>{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}</Project>
       <Name>Tangerine</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

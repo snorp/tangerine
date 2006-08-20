@@ -20,7 +20,7 @@ namespace Tangerine {
         }
 
         public static int Main (string[] args) {
-            string configFile;
+            string configFile = null;
 
             SetProcessName ("tangerine");
             
@@ -32,13 +32,13 @@ namespace Tangerine {
                 } else {
                     configFile = args[0];
                 }
-            } else {
-                configFile = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
-                                           ".tangerine");
             }
 
             try {
-                Daemon.ConfigPath = configFile;
+                if (configFile != null) {
+                    Daemon.ConfigPath = configFile;
+                }
+
                 Daemon.ParseConfig ();
             } catch (Exception e) {
                 Console.Error.WriteLine ("Failed to parse configuration: " + e);

@@ -8,8 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tangerine", "Tangerine.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilePlugin", "FilePlugin.csproj", "{3569B2C8-750A-491B-A702-445A4F03636A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F} = {A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}
 		{A288B06B-21F8-4CE4-B579-BDAD4B003738} = {A288B06B-21F8-4CE4-B579-BDAD4B003738}
+		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F} = {A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAAP", "DAAP.csproj", "{A288B06B-21F8-4CE4-B579-BDAD4B003738}"
@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangerineDaemon", "Tangerin
 	ProjectSection(ProjectDependencies) = postProject
 		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F} = {A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangerineProperties", "TangerineProperties.csproj", "{8E464FB0-3520-4A95-A470-4DE18E74618B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlugin", "GooglePlugin.csproj", "{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,14 @@ Global
 		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{947F3CB3-10AD-460E-B573-FE173D4C4B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E464FB0-3520-4A95-A470-4DE18E74618B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E464FB0-3520-4A95-A470-4DE18E74618B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E464FB0-3520-4A95-A470-4DE18E74618B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E464FB0-3520-4A95-A470-4DE18E74618B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

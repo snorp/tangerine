@@ -41,7 +41,8 @@ namespace Tangerine {
         public static ushort Port;
         public static bool IsPublished;
         public static string[] PluginNames;
-        public static string ConfigPath;
+        public static string ConfigPath = Path.Combine (Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData),
+                                                        "tangerine"), "config");
 
         public static ILog Log {
             get { return log; }
@@ -88,7 +89,16 @@ namespace Tangerine {
             PasswordFile = cfg.Get ("password_file");
             Debug = cfg.GetBoolean ("debug", false);
             MaxUsers = cfg.GetInt ("max_users", 0);
-            LogFile = cfg.Get ("log_file");
+
+            string defaultLogFile = null;
+
+#if WINDOWS
+            // the stdout stuff doesn't go to the terminal, so we'll keep a default log file
+            defaultLogFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine-log.txt");
+#endif
+
+            LogFile = cfg.Get ("log_file", defaultLogFile);
+
             Port = (ushort) cfg.GetInt ("port", 0);
             IsPublished = (bool) cfg.GetBoolean ("publish", true);
             string names = cfg.Get ("plugins", "file,session");
@@ -127,7 +137,7 @@ namespace Tangerine {
         private static void CommitConfig () {
             IConfig cfg = cfgSource.Configs["Tangerine"];
             cfg.Set ("name", Name);
-            cfg.Set ("password_file", PasswordFile);
+            cfg.Set ("password_file", PasswordFile == null ? String.Empty : PasswordFile);
             cfg.Set ("debug", Debug);
             cfg.Set ("max_users", MaxUsers);
             cfg.Set ("log_file", LogFile);
@@ -147,6 +157,12 @@ namespace Tangerine {
 
         public static void SaveConfig () {
             CommitConfig ();
+
+            string dir = Path.GetDirectoryName(ConfigPath);
+            if (!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
+
             cfgSource.Save (ConfigPath);
         }
 
@@ -188,6 +204,7 @@ namespace Tangerine {
             AddUsers ();
 
             try {
+                server.Commit ();
                 server.Start ();
             } catch (Exception e) {
                 LogError ("Failed to start server", e);
@@ -227,14 +244,8 @@ namespace Tangerine {
         }
 
         public static void Stop () {
-            if (loop != null && loop.IsRunning) {
-                QuitLoop ();
-            } else {
-                // haven't finished starting up yet
-                // might be hung or something, so just die.
-
-                Environment.Exit (0);
-            }
+            if (!QuitLoop())    
+                Environment.Exit(0);
         }
 
 #if !WINDOWS
@@ -373,8 +384,11 @@ namespace Tangerine {
             loop.Run ();
         }
 
-        private static void QuitLoop () {
-            loop.Quit ();
+        private static bool QuitLoop () {
+            if (loop == null || !loop.IsRunning)
+                return false;
+            else
+                loop.Quit ();
         }
 #else
 
@@ -386,10 +400,12 @@ namespace Tangerine {
             }
         }
 
-        private static void QuitLoop() {
+        private static bool QuitLoop() {
             lock (loopLock) {
                 Monitor.Pulse (loopLock);
             }
+
+            return true;
         }
 #endif
     }

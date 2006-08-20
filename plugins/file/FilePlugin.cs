@@ -33,7 +33,7 @@ namespace Tangerine.Plugins {
 #if !WINDOWS
             string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "Music");
 #else
-            string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "My Music");
+            string defaultDir = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic);
 #endif
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 directories = new string[] { defaultDir };
