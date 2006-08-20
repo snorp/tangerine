@@ -47,6 +47,13 @@ namespace Tangerine {
 #else        
         public static string ConfigPath = Path.Combine (Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "tangerine"), "config");
 #endif
+        
+        public static string ConfigDirectory {
+            get {
+                return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData),
+                                     "tangerine");
+            }
+        }
 
         public static ILog Log {
             get { return log; }
