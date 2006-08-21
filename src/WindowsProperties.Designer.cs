@@ -208,7 +208,7 @@ namespace TangerineProperties.src {
             // 
             this.passwordBox.Location = new System.Drawing.Point (79, 19);
             this.passwordBox.Name = "passwordBox";
-            this.passwordBox.Size = new System.Drawing.Size (169, 20);
+            this.passwordBox.Size = new System.Drawing.Size (122, 20);
             this.passwordBox.TabIndex = 15;
             this.toolTip1.SetToolTip (this.passwordBox, "Password used to access the share, leave blank for none");
             this.passwordBox.UseSystemPasswordChar = true;
