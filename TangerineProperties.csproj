@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tangerine</RootNamespace>
     <AssemblyName>tangerine-preferences</AssemblyName>
-    <ApplicationIcon>tangerine.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,9 +74,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tangerine.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="tangerine.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

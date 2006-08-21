@@ -33,7 +33,6 @@ namespace Tangerine.Plugins {
                 cookie = qreg.RegisterPlugin (guid, true);
                 reg.FinishComponentRegistration ();
 
-                Console.WriteLine ("Got cookie: " + cookie);
                 key.SetValue ("cookie", cookie);
             } else {
                 cookie = (int) val;
@@ -41,7 +40,7 @@ namespace Tangerine.Plugins {
 
             GoogleDesktopQueryAPIClass query = new GoogleDesktopQueryAPIClass ();
             IGoogleDesktopQueryResultSet results = query.Query (cookie, "mp3", "file", 1);
-
+           
             IGoogleDesktopQueryResultItem item;
             while ((item = results.Next ()) != null) {
                 if (item.schema == "Google.Desktop.MediaFile") {

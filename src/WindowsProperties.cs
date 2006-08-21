@@ -16,13 +16,11 @@ using File = System.IO.File;
 namespace TangerineProperties.src {
 
     public partial class WindowsProperties : Form {
+        private string passwdPath;
+
         public WindowsProperties () {
             InitializeComponent ();
-            Load ();
-        }
-
-        private void WindowsProperties_Load (object sender, EventArgs e) {
-
+            LoadPrefs ();
         }
 
         private void button1_Click (object sender, EventArgs e) {
@@ -37,34 +35,61 @@ namespace TangerineProperties.src {
         }
 
         private void okButton_Click (object sender, EventArgs e) {
-            Save ();
+            SavePrefs ();
             this.Close ();
         }
 
         private void checkBox1_CheckedChanged (object sender, EventArgs e) {
-            SetEnabled (enabledCheck.Checked);
+            SetEnabled ();
         }
 
         private bool GetEnabled () {
             return File.Exists (GetStartupPath ());
         }
 
-        private void SetEnabled (bool val) {
-            contentPanel.Enabled = val;
+        private void SetEnabled () {
+            generalOptionsPanel.Enabled = enabledCheck.Checked;
+            accessControlPanel.Enabled = enabledCheck.Checked;
+
+            if (googleRadioButton.Checked) {
+                musicDirBox.Enabled = false;
+                musicDirButton.Enabled = false;
+            } else {
+                musicDirBox.Enabled = true;
+                musicDirButton.Enabled = true;
+            }
         }
 
-        private void Load () {
+        private void LoadPrefs () {
+            passwdPath = Path.Combine (Daemon.ConfigDirectory, "password");
+
             Daemon.ParseConfig ();
             enabledCheck.Checked = GetEnabled ();
             shareNameBox.Text = Daemon.Name;
 
             if (Daemon.ConfigSource.Configs["FilePlugin"] != null) {
-                musicDirBox.Text = Daemon.ConfigSource.Configs["FilePlugin"].GetString ("directories").Split (':')[0];
+                musicDirBox.Text = Daemon.ConfigSource.Configs["FilePlugin"].GetString ("directories").Split (';')[0];
             } else {
                 musicDirBox.Text = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic);
             }
 
-            SetEnabled (GetEnabled ());
+            if (Daemon.PluginNames == null || Daemon.PluginNames[0] == "google") {
+                googleRadioButton.Checked = true;
+            } else {
+                dirRadioButton.Checked = true;
+            }
+
+            passwordBox.Text = ReadPassword ();
+
+            maxUsersButton.Value = Daemon.MaxUsers;
+
+            Process[] crawlers = Process.GetProcessesByName("GoogleDesktopCrawl");
+            if (crawlers == null || crawlers.Length == 0) {
+                googleRadioButton.Enabled = false;
+                dirRadioButton.Checked = true;
+            }
+
+            SetEnabled ();
         }
 
         private string GetStartupPath () {
@@ -90,9 +115,44 @@ namespace TangerineProperties.src {
                 File.Delete (path);
         }
 
-        private void Save () {
+        private string ReadPassword () {
+            if (!File.Exists (passwdPath))
+                return String.Empty;
+
+            using (StreamReader reader = new StreamReader (File.Open (passwdPath, FileMode.Open))) {
+                return reader.ReadLine ();
+            }
+        }
+
+        private void WritePassword () {
+            if (passwordBox.Text == String.Empty || passwordBox.Text == null) {
+                File.Delete (passwdPath);
+            } else {
+                using (StreamWriter writer = new StreamWriter (File.Open (passwdPath, FileMode.Create))) {
+                    writer.WriteLine (passwordBox.Text);
+                }
+            }
+        }
+
+        private void SavePrefs () {
             Daemon.Name = shareNameBox.Text;
-            Daemon.PluginNames = new string[] { "file" };
+
+            if (googleRadioButton.Checked) {
+                Daemon.PluginNames = new string[] { "google" };
+            } else {
+                Daemon.PluginNames = new string[] { "file" };
+            }
+
+            if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
+                Daemon.ConfigSource.AddConfig ("FilePlugin");
+            }
+
+            Daemon.ConfigSource.Configs["FilePlugin"].Set ("directories", musicDirBox.Text);
+            Daemon.MaxUsers = (int) maxUsersButton.Value;
+
+            Daemon.PasswordFile = passwdPath;
+            WritePassword ();
+
             Daemon.SaveConfig ();
 
             if (enabledCheck.Checked) {
@@ -126,6 +186,14 @@ namespace TangerineProperties.src {
         private void StartDaemon () {
             Process.Start (Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine-daemon"));
         }
+
+        private void googleRadioButton_CheckedChanged (object sender, EventArgs e) {
+            SetEnabled ();
+        }
+
+        private void dirRadioButton_CheckedChanged (object sender, EventArgs e) {
+            SetEnabled ();
+        }
     }
 
     public class EntryPoint {
@@ -144,5 +212,5 @@ namespace TangerineProperties.src {
         }
     }
 
-    
+
 }

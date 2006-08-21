@@ -96,11 +96,6 @@ namespace Tangerine {
 
             string defaultLogFile = null;
 
-#if WINDOWS
-            // the stdout stuff doesn't go to the terminal, so we'll keep a default log file
-            defaultLogFile = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine-log.txt");
-#endif
-
             LogFile = cfg.Get ("log_file", defaultLogFile);
 
             Port = (ushort) cfg.GetInt ("port", 0);
