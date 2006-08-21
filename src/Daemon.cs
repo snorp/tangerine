@@ -136,10 +136,22 @@ namespace Tangerine {
         private static void CommitConfig () {
             IConfig cfg = cfgSource.Configs["Tangerine"];
             cfg.Set ("name", Name);
-            cfg.Set ("password_file", PasswordFile == null ? String.Empty : PasswordFile);
+
+            if (PasswordFile == null || PasswordFile == String.Empty) {
+                cfg.Remove ("password_file");
+            } else {
+                cfg.Set ("password_file", PasswordFile == null ? String.Empty : PasswordFile);
+            }
+
             cfg.Set ("debug", Debug);
             cfg.Set ("max_users", MaxUsers);
-            cfg.Set ("log_file", LogFile);
+
+            if (LogFile == null || LogFile == String.Empty) {
+                cfg.Remove ("log_file");
+            } else {
+                cfg.Set ("log_file", LogFile);
+            }
+
             cfg.Set ("port", Port);
             cfg.Set ("publish", IsPublished);
 

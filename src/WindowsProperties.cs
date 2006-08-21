@@ -125,9 +125,14 @@ namespace TangerineProperties.src {
         }
 
         private void WritePassword () {
-            if (passwordBox.Text == String.Empty || passwordBox.Text == null) {
+            if (File.Exists (passwdPath) && (passwordBox.Text == String.Empty || passwordBox.Text == null)) {
                 File.Delete (passwdPath);
             } else {
+                string dir = Path.GetDirectoryName (passwdPath);
+                if (!Directory.Exists (dir)) {
+                    Directory.CreateDirectory (dir);
+                }
+
                 using (StreamWriter writer = new StreamWriter (File.Open (passwdPath, FileMode.Create))) {
                     writer.WriteLine (passwordBox.Text);
                 }
