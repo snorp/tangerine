@@ -45,10 +45,11 @@ begin
   Result := True
 end;
 
-function InitilizeUninstall(): Boolean;
+function InitializeUninstall(): Boolean;
 var
   ResultCode: Integer;
 begin
-  Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/IM tangerine-daemon', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
-  Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/IM tangerine-preferences', '', SW_SHOW, ewWaitUntilTerminated, ResultCode)
+  Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/F /IM tangerine-daemon.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/F /IM tangerine-preferences.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+  Result := True
 end;

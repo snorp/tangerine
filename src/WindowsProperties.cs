@@ -155,8 +155,12 @@ namespace TangerineProperties.src {
             Daemon.ConfigSource.Configs["FilePlugin"].Set ("directories", musicDirBox.Text);
             Daemon.MaxUsers = (int) maxUsersButton.Value;
 
-            Daemon.PasswordFile = passwdPath;
             WritePassword ();
+            if (passwordBox.Text != null && passwordBox.Text != String.Empty) {
+                Daemon.PasswordFile = passwdPath;
+            } else {
+                Daemon.PasswordFile = null;
+            }
 
             Daemon.SaveConfig ();
 

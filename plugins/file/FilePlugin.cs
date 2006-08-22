@@ -38,7 +38,7 @@ namespace Tangerine.Plugins {
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 directories = new string[] { defaultDir };
             } else {
-                directories = Daemon.ConfigSource.Configs["FilePlugin"].Get ("directories", defaultDir).Split (':');
+                directories = Daemon.ConfigSource.Configs["FilePlugin"].Get ("directories", defaultDir).Split (';');
             }
 
             server = Daemon.Server;
