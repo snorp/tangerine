@@ -39,7 +39,7 @@ namespace Tangerine.Plugins {
             }
 
             GoogleDesktopQueryAPIClass query = new GoogleDesktopQueryAPIClass ();
-            IGoogleDesktopQueryResultSet results = query.Query (cookie, "mp3", "file", 1);
+            IGoogleDesktopQueryResultSet results = query.Query (cookie, "|filetype:mp3 |filetype:aac |filetype:m4a |filetype:m4b |filetype:wma", "file", 1);
            
             IGoogleDesktopQueryResultItem item;
             while ((item = results.Next ()) != null) {
@@ -47,22 +47,45 @@ namespace Tangerine.Plugins {
                     try {
                         AddTrack (item);
                     } catch (Exception e) {
-                        Console.WriteLine ("Busted: " + e.Message);
                     }
                 }
+            }
+        }
+
+        private object GetResultProperty (IGoogleDesktopQueryResultItem item, string name) {
+            try {
+                return item.GetProperty (name);
+            } catch (Exception e) {
+                return null;
             }
         }
 
         private void AddTrack (IGoogleDesktopQueryResultItem item) {
             Uri uri = new Uri ((string) item.GetProperty ("uri"));
 
-            string artist = (string) item.GetProperty ("artist");
-            string title = (string) item.GetProperty ("title");
-            string album = (string) item.GetProperty ("album_title");
-            ulong duration = (ulong) item.GetProperty ("length");
-            uint bitrate = (uint) item.GetProperty ("bit_rate");
-            string genre = (string) item.GetProperty ("genre");
-            uint trackNum = (uint) item.GetProperty ("track_number");
+            string artist = (string) GetResultProperty (item, "artist");
+            string title = (string) GetResultProperty (item, "title");
+            string album = (string) GetResultProperty (item, "album_title");
+
+            ulong duration = 0;
+            object o = GetResultProperty (item, "length");
+            if (o != null)
+                duration = (ulong) o;
+
+            uint bitrate = 0;
+            o = GetResultProperty (item, "bit_rate");
+            if (o != null)
+                bitrate = (uint) o;
+
+            string genre = (string) GetResultProperty (item, "genre");
+
+            uint trackNum = 0;
+            o = GetResultProperty (item, "track_number");
+            if (o != null)
+                trackNum = (uint) o;
+
+            if (artist == null || title == null)
+                return;
 
             Track track = new Track ();
             track.Artist = artist;
