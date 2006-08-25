@@ -5,6 +5,7 @@ DefaultDirName={pf}\Tangerine
 DefaultGroupName=Tangerine
 OutputBaseFilename=TangerineSetup
 InfoBeforeFile=
+UninstallDisplayIcon={app}\tangerine.ico
 
 [Dirs]
 Name: "{app}\plugins"
