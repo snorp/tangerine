@@ -65,7 +65,7 @@ else
 fi
 
 dnl ipod-sharp
-IPOD_SHARP_REQUIRED=0.5.16
+IPOD_SHARP_REQUIRED=0.6.0
 PKG_CHECK_MODULES(IPOD_SHARP, ipod-sharp >= $IPOD_SHARP_REQUIRED,
                   have_ipod=yes, have_ipod=no)
 if test "x$have_ipod" = "xyes"; then \
