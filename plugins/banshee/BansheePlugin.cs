@@ -16,12 +16,14 @@ namespace Tangerine.Plugins {
 
         private IDbConnection conn;
         private Dictionary<int, Track> tracks;
+        private Dictionary<int, Playlist> playlists;
         private string dbpath;
         private object refreshLock = new object ();
         private DateTime lastChange = DateTime.MinValue;
         
         public BansheePlugin () {
             tracks = new Dictionary<int, Track> ();
+            playlists = new Dictionary<int, Playlist> ();
             
             dbpath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"),
                                    ".gnome2/banshee/banshee.db");
@@ -29,6 +31,7 @@ namespace Tangerine.Plugins {
             conn.Open ();
 
             RefreshTracks ();
+            RefreshPlaylists ();
             
             if (Inotify.Enabled) {
                 Inotify.Subscribe (Path.GetDirectoryName (dbpath), OnBansheeChanged, Inotify.EventType.Modify);
@@ -91,6 +94,57 @@ namespace Tangerine.Plugins {
             Daemon.Log.DebugFormat ("Removed {0} tracks", count);
         }
 
+        private void RefreshPlaylists () {
+            IDbCommand cmd = conn.CreateCommand ();
+            cmd.CommandText = "SELECT PlaylistID, Name FROM Playlists";
+
+            List<int> ids = new List<int> ();
+            
+            IDataReader reader = cmd.ExecuteReader ();
+            while (reader.Read ()) {
+                int id = (int) reader[0];
+                ids.Add (id);
+
+                if (playlists.ContainsKey (id))
+                    continue;
+                
+                Playlist pl = new Playlist ((string) reader[1]);
+                
+                Daemon.DefaultDatabase.AddPlaylist (pl);
+                playlists[id] = pl;
+            }
+
+            reader.Close ();
+
+            // remove the deleted playlists, if any
+            foreach (int id in new List<int> (playlists.Keys)) {
+                if (!ids.Contains (id)) {
+                    Daemon.DefaultDatabase.RemovePlaylist (playlists[id]);
+                    playlists.Remove (id);
+                }
+            }
+
+            // clear all the playlists
+            foreach (Playlist pl in playlists.Values) {
+                pl.Clear ();
+            }
+
+            cmd = conn.CreateCommand ();
+            cmd.CommandText = "SELECT PlaylistID, TrackID FROM PlaylistEntries";
+            reader = cmd.ExecuteReader ();
+
+            while (reader.Read ()) {
+                try {
+                    Playlist pl = playlists[(int) reader[0]];
+                    pl.AddTrack (tracks[(int) reader[1]]);
+                } catch (KeyNotFoundException e) {
+                    // something is not consistent, but nothing we can do about it
+                }
+            }
+
+            reader.Close ();
+        }
+
         public void Dispose () {
             lock (refreshLock) {
                 lastChange = DateTime.MaxValue;
@@ -112,6 +166,7 @@ namespace Tangerine.Plugins {
                         DateTime.Now - lastChange >= threshold) {
                         try {
                             RefreshTracks ();
+                            RefreshPlaylists ();
                             Daemon.Server.Commit ();
                         } catch (Exception e) {
                             Daemon.LogError ("Failed to refresh tracks", e);
