@@ -31,7 +31,7 @@
 	<widget class="GtkCheckButton" id="enabledButton">
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
-	  <property name="label" translatable="yes">Enable Music Sharing</property>
+	  <property name="label" translatable="yes">Enable music sharing</property>
 	  <property name="use_underline">True</property>
 	  <property name="relief">GTK_RELIEF_NORMAL</property>
 	  <property name="focus_on_click">True</property>
@@ -73,7 +73,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label13">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;b&gt;_Share Name&lt;/b&gt;</property>
+		  <property name="label" translatable="yes">&lt;b&gt;_Share name&lt;/b&gt;</property>
 		  <property name="use_underline">True</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -126,7 +126,7 @@
 	    <widget class="GtkRadioButton" id="beagleRadio">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">Find Music Automatically</property>
+	      <property name="label" translatable="yes">Find music automatically</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -145,7 +145,7 @@
 	    <widget class="GtkRadioButton" id="bansheeRadio">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label" translatable="yes">Find Music In Banshee Music Player</property>
+	      <property name="label" translatable="yes">Find music in Banshee Music Player</property>
 	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
@@ -171,7 +171,7 @@
 		<widget class="GtkRadioButton" id="specifyRadio">
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
-		  <property name="label" translatable="yes">Select Folder</property>
+		  <property name="label" translatable="yes">Select folder</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
@@ -261,7 +261,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label16">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">&lt;b&gt;_User Limit&lt;/b&gt;</property>
+		  <property name="label" translatable="yes">&lt;b&gt;_User limit&lt;/b&gt;</property>
 		  <property name="use_underline">True</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
