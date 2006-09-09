@@ -58,6 +58,9 @@ namespace Tangerine {
         private RadioButton beagleRadio;
 
         [Glade.Widget]
+        private RadioButton bansheeRadio;
+
+        [Glade.Widget]
         private RadioButton specifyRadio;
 
         [Glade.Widget]
@@ -114,12 +117,20 @@ namespace Tangerine {
             return File.Exists (Combine (AppDomain.CurrentDomain.BaseDirectory, "plugins", "tangerine-beagle.dll"));
         }
 
+        private bool HaveBansheePlugin () {
+            return File.Exists (Combine (Environment.GetEnvironmentVariable ("HOME"), ".gnome2/banshee/banshee.db"));
+        }
+
         private void SetSensitive () {
             prefsControls.Sensitive = enabledButton.Active;
             directoryButton.Sensitive = specifyRadio.Active;
 
             if (!HaveBeaglePlugin ()) {
                 beagleRadio.Sensitive = false;
+            }
+
+            if (!HaveBansheePlugin ()) {
+                bansheeRadio.Sensitive = false;
             }
         }
 
@@ -147,6 +158,9 @@ namespace Tangerine {
                  Daemon.PluginNames.Length == 0 ||
                  Daemon.PluginNames[0] == "beagle") && HaveBeaglePlugin ()) {
                 beagleRadio.Active = true;
+            } else if (Daemon.PluginNames != null && Daemon.PluginNames.Length > 0 &&
+                       Daemon.PluginNames[0] == "banshee") {
+                bansheeRadio.Active = true;
             } else {
                 specifyRadio.Active = true;
             }
@@ -216,9 +230,11 @@ namespace Tangerine {
             Daemon.Name = nameEntry.Text;
 
             if (beagleRadio.Active) {
-                Daemon.PluginNames = new string[] { "beagle,session" };
+                Daemon.PluginNames = new string[] { "beagle", "session" };
+            } else if (bansheeRadio.Active) {
+                Daemon.PluginNames = new string[] { "banshee", "session" };
             } else {
-                Daemon.PluginNames = new string[] { "file,session" };
+                Daemon.PluginNames = new string[] { "file", "session" };
             }
 
             IConfig cfg = Daemon.ConfigSource.Configs["FilePlugin"];
