@@ -168,11 +168,10 @@ namespace Tangerine.Plugins {
                             RefreshTracks ();
                             RefreshPlaylists ();
                             Daemon.Server.Commit ();
+                            lastChange = DateTime.MinValue;
                         } catch (Exception e) {
                             Daemon.LogError ("Failed to refresh tracks", e);
                         }
-
-                        lastChange = DateTime.MinValue;
                     } else if (lastChange == DateTime.MaxValue) {
                         break;
                     }
