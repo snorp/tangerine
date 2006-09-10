@@ -1,2 +1,2 @@
 
-SUBDIRS = file ipod beagle session banshee rhythmbox
+SUBDIRS = file ipod beagle session banshee rhythmbox amarok

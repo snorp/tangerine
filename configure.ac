@@ -93,6 +93,7 @@ plugins/beagle/Makefile
 plugins/session/Makefile
 plugins/banshee/Makefile
 plugins/rhythmbox/Makefile
+plugins/amarok/Makefile
 tangerine.pc
 ])
 

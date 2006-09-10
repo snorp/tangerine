@@ -24,6 +24,7 @@ app_DATA = tangerine-properties.desktop
 
 TANGSOURCES =				\
 	$(srcdir)/AssemblyInfo.cs	\
+	$(srcdir)/CreationWatcher.cs	\
 	$(srcdir)/Daemon.cs		\
 	$(srcdir)/Inotify.cs		\
 	$(srcdir)/PluginManager.cs	\
