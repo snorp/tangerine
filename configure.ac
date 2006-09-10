@@ -92,6 +92,7 @@ plugins/ipod/Makefile
 plugins/beagle/Makefile
 plugins/session/Makefile
 plugins/banshee/Makefile
+plugins/rhythmbox/Makefile
 tangerine.pc
 ])
 
