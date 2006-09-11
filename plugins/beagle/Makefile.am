@@ -24,4 +24,4 @@ tangerine-beagle.dll: $(PLUGINSOURCES)
 
 endif
 
-EXTRA_DIST = $(PLUGINSOURCES)
+EXTRA_DIST = $(PLUGINSOURCES) beagle.provider

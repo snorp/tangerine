@@ -22,4 +22,4 @@ tangerine-banshee.dll: $(PLUGINSOURCES)
 	$(MCS) $(MCS_FLAGS) -target:library -out:$@ $(PLUGINSOURCES) \
 	$(PLUGIN_DEPS)
 
-EXTRA_DIST = $(PLUGINSOURCES)
+EXTRA_DIST = $(PLUGINSOURCES) banshee.provider
