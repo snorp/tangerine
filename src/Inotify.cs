@@ -476,16 +476,12 @@ namespace Tangerine {
 
                 ArrayList new_events = new ArrayList ();
 
-                bool saw_overflow = false;
                 while (nr > 0) {
 
                     // Read the low-level event struct from the buffer.
                     inotify_event raw_event;
                     raw_event = (inotify_event) Marshal.PtrToStructure (buffer, typeof (inotify_event));
                     buffer = (IntPtr) ((long) buffer + event_size);
-
-                    if ((raw_event.mask & EventType.QueueOverflow) != 0)
-                        saw_overflow = true;
 
                     // Now we convert our low-level event struct into a nicer object.
                     QueuedEvent qe = new QueuedEvent ();
@@ -571,10 +567,6 @@ namespace Tangerine {
             // Does the watch care about this event?
             if ((watched.Mask & mask) == 0)
                 return;
-
-            bool isDirectory = false;
-            if ((mask & EventType.IsDirectory) != 0)
-                isDirectory = true;
 
             if (watched.Subscribers == null)
                 return;

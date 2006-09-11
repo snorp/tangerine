@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using log4net;
 
@@ -23,11 +24,17 @@ namespace Tangerine {
 
     public class PluginManager {
 
+        private static List<Assembly> pluginAssemblies = new List<Assembly> ();
         private static ArrayList plugins = new ArrayList ();
-        private static ILog log = LogManager.GetLogger (typeof (Daemon));
+
+        public static string PluginDirectory {
+            get {
+                return Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "plugins");
+            }
+        }
 
         public static void LoadPlugins (string[] names) {
-            LoadPlugins (names, Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "plugins"));
+            LoadPlugins (names, PluginDirectory);
 
 #if DEBUG
             LoadPlugins (names, AppDomain.CurrentDomain.BaseDirectory);
@@ -37,27 +44,38 @@ namespace Tangerine {
                 Daemon.Log.Warn ("No plugins were loaded");
         }
 
-        public static void LoadPlugins (string[] names, string dir) {
+        private static void LoadPluginAssemblies (string dir) {
             if (!Directory.Exists (dir)) {
                 return;
             }
             
             foreach (string file in Directory.GetFiles (dir, "*.dll")) {
                 try {
-                    Assembly asm = Assembly.LoadFrom (file);
-                    foreach (Type type in asm.GetTypes ()) {
-                        PluginAttribute attr = Attribute.GetCustomAttribute (type, typeof (PluginAttribute)) as PluginAttribute;
-                        
-                        if (attr == null)
-                            continue;
+                    pluginAssemblies.Add (Assembly.LoadFrom (file));
+                } catch (Exception e) {
+                    Daemon.LogError (String.Format ("Failed to load plugin assembly '{0}'", file), e);
+                }
+            }
+        }
 
-                        if (names == null || names.Length == 0 || Array.IndexOf (names, attr.Name) >= 0) {
+        public static void LoadPlugins (string[] names, string dir) {
+            LoadPluginAssemblies (dir);
+
+            foreach (Assembly asm in pluginAssemblies) {
+                foreach (Type type in asm.GetTypes ()) {
+                    PluginAttribute attr = Attribute.GetCustomAttribute (type, typeof (PluginAttribute)) as PluginAttribute;
+
+                    if (attr == null)
+                        continue;
+                    
+                    if (names == null || names.Length == 0 || Array.IndexOf (names, attr.Name) >= 0) {
+                        try {
                             plugins.Add (Activator.CreateInstance (type));
                             Daemon.Log.InfoFormat ("Loaded plugin '{0}'", attr.Name);
+                        } catch (Exception e) {
+                            Daemon.LogError (String.Format ("Failed to load '{0}'", attr.Name), e);
                         }
                     }
-                } catch (Exception e) {
-                    Daemon.LogError (String.Format ("Failed to load '{0}'", file), e);
                 }
             }
         }

@@ -3,7 +3,7 @@ if ENABLE_BEAGLE
 PLUGIN_ASSEMBLY = tangerine-beagle.dll
 
 plugindir = $(prefix)/lib/tangerine/plugins
-plugin_DATA = $(PLUGIN_ASSEMBLY) $(BEAGLE_ASSEMBLIES)
+plugin_DATA = $(PLUGIN_ASSEMBLY) $(BEAGLE_ASSEMBLIES) beagle.provider
 
 CLEANFILES = $(PLUGIN_ASSEMBLY)
 

@@ -2,7 +2,7 @@
 PLUGIN_ASSEMBLY = tangerine-banshee.dll
 
 plugindir = $(prefix)/lib/tangerine/plugins
-plugin_DATA = $(PLUGIN_ASSEMBLY)
+plugin_DATA = $(PLUGIN_ASSEMBLY) banshee.provider
 
 CLEANFILES = $(PLUGIN_ASSEMBLY)
 

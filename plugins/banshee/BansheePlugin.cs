@@ -18,8 +18,10 @@ namespace Tangerine.Plugins {
         private Dictionary<int, Track> tracks;
         private Dictionary<int, Playlist> playlists;
         private string dbpath;
+        private string bansheeDir;
         private object refreshLock = new object ();
         private DateTime lastChange = DateTime.MinValue;
+        private CreationWatcher watcher;
         
         public BansheePlugin () {
             tracks = new Dictionary<int, Track> ();
@@ -27,9 +29,21 @@ namespace Tangerine.Plugins {
             
             dbpath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"),
                                    ".gnome2/banshee/banshee.db");
-            conn = new SqliteConnection("Version=3,URI=file://" + dbpath);
-            conn.Open ();
+            bansheeDir = Path.GetDirectoryName (dbpath);
+            
+            if (Directory.Exists (bansheeDir)) {
+                Init ();
+            } else {
+                watcher = new CreationWatcher (bansheeDir);
+                watcher.Created += delegate {
+                    watcher.Dispose ();
+                    watcher = null;
+                    Init ();
+                };
+            }
+        }
 
+        private void Init () {
             RefreshTracks ();
             RefreshPlaylists ();
             
@@ -41,7 +55,26 @@ namespace Tangerine.Plugins {
             }
         }
 
+        private bool OpenConnection () {
+            if (conn != null)
+                return true;
+
+            if (!File.Exists (dbpath))
+                return false;
+
+            try {
+                conn = new SqliteConnection("Version=3,URI=file://" + dbpath);
+                conn.Open ();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
         private void RefreshTracks () {
+            if (!OpenConnection ())
+                return;
+            
             IDbCommand cmd = conn.CreateCommand ();
             cmd.CommandText = "SELECT TrackID, Uri, Artist, AlbumTitle, ReleaseDate, Title, Genre, Year, " +
                 "TrackNumber, TrackCount, Duration FROM Tracks";
@@ -95,6 +128,9 @@ namespace Tangerine.Plugins {
         }
 
         private void RefreshPlaylists () {
+            if (!OpenConnection ())
+                return;
+            
             IDbCommand cmd = conn.CreateCommand ();
             cmd.CommandText = "SELECT PlaylistID, Name FROM Playlists";
 
@@ -155,6 +191,11 @@ namespace Tangerine.Plugins {
                 conn.Close ();
                 conn = null;
             }
+
+            if (watcher != null) {
+                watcher.Dispose ();
+                watcher = null;
+            }
         }
 
         private void RefreshLoop () {
@@ -170,7 +211,7 @@ namespace Tangerine.Plugins {
                             Daemon.Server.Commit ();
                             lastChange = DateTime.MinValue;
                         } catch (Exception e) {
-                            Daemon.LogError ("Failed to refresh tracks", e);
+                            // ignore errors here, they are usually due to the database being locked or whatever
                         }
                     } else if (lastChange == DateTime.MaxValue) {
                         break;

@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -41,6 +42,9 @@ namespace Tangerine {
         private string configPath;
         private string passwdPath;
         private string autostartPath;
+        private List<Provider> providers;
+
+        private ListStore providerStore;
 
         [Glade.Widget]
         private VBox prefsContent;
@@ -58,7 +62,10 @@ namespace Tangerine {
         private RadioButton beagleRadio;
 
         [Glade.Widget]
-        private RadioButton bansheeRadio;
+        private RadioButton providerRadio;
+
+        [Glade.Widget]
+        private ComboBox providerCombo;
 
         [Glade.Widget]
         private RadioButton specifyRadio;
@@ -88,10 +95,11 @@ namespace Tangerine {
                 Destroy ();
                 Application.Quit ();
             };
-            
-            
+
             Glade.XML xml = new Glade.XML ("tangerine-properties.glade", "prefsContent");
             xml.Autoconnect (this);
+
+            SetupProviders ();
 
             specifyRadio.Toggled += delegate {
                 SetSensitive ();
@@ -113,25 +121,49 @@ namespace Tangerine {
             SetSensitive ();
         }
 
-        private bool HaveBeaglePlugin () {
-            return File.Exists (Combine (AppDomain.CurrentDomain.BaseDirectory, "plugins", "tangerine-beagle.dll"));
+        private void SetupProviders () {
+            providers = Daemon.GetProviders ();
+            
+            providerStore = new ListStore (typeof (string), typeof (string));
+            providerCombo.Model = providerStore;
+
+            CellRendererText renderer = new CellRendererText ();
+            providerCombo.PackStart (renderer, false);
+            providerCombo.AddAttribute (renderer, "text", 0);
+
+            foreach (Provider p in providers) {
+                if (p.Plugin != "beagle") {
+                    providerStore.AppendValues (p.Name, p.Plugin);
+                }
+            }
+
+            if (providerStore.IterNChildren () == 0) {
+                providerRadio.Sensitive = false;
+                providerCombo.Sensitive = false;
+                specifyRadio.Active = true;
+
+                providerStore.AppendValues ("None", "None");
+                providerCombo.Active = 0;
+            } else {
+                providerCombo.Active = 0;
+            }
+
+            beagleRadio.Sensitive = FindProvider ("beagle") != null;
         }
 
-        private bool HaveBansheePlugin () {
-            return File.Exists (Combine (Environment.GetEnvironmentVariable ("HOME"), ".gnome2/banshee/banshee.db"));
+        private Provider FindProvider (string plugin) {
+            foreach (Provider p in providers) {
+                if (p.Plugin == plugin)
+                    return p;
+            }
+
+            return null;
         }
 
         private void SetSensitive () {
             prefsControls.Sensitive = enabledButton.Active;
             directoryButton.Sensitive = specifyRadio.Active;
-
-            if (!HaveBeaglePlugin ()) {
-                beagleRadio.Sensitive = false;
-            }
-
-            if (!HaveBansheePlugin ()) {
-                bansheeRadio.Sensitive = false;
-            }
+            providerCombo.Sensitive = providerRadio.Active;
         }
 
         private string Combine (params string[] paths) {
@@ -146,6 +178,34 @@ namespace Tangerine {
             return result;
         }
 
+        private void SetProvider (string plugin) {
+            if (plugin == "file" || (plugin == "beagle" && FindProvider (plugin) == null)) {
+                specifyRadio.Active = true;
+            } else if (plugin == "beagle") {
+                beagleRadio.Active = true;
+            } else {
+                bool found = false;
+                for (int i = 0; i < providerStore.IterNChildren (); i++) {
+                    TreeIter iter;
+
+                    providerStore.IterNthChild (out iter, i);
+                    string val = (string) providerStore.GetValue (iter, 1);
+                    if (val == plugin) {
+                        providerCombo.Active = i;
+                        found = true;
+                    }
+                }
+
+                if (found) {
+                    providerRadio.Active = true;
+                } else if (FindProvider ("beagle") != null) {
+                    beagleRadio.Active = true;
+                } else {
+                    specifyRadio.Active = true;
+                }
+            }
+        }
+
         private void LoadPrefs () {
             if (!File.Exists (configPath))
                 File.Create (configPath).Close ();
@@ -154,16 +214,8 @@ namespace Tangerine {
             Daemon.ParseConfig ();
 
             nameEntry.Text = Daemon.Name;
-            if ((Daemon.PluginNames == null ||
-                 Daemon.PluginNames.Length == 0 ||
-                 Daemon.PluginNames[0] == "beagle") && HaveBeaglePlugin ()) {
-                beagleRadio.Active = true;
-            } else if (Daemon.PluginNames != null && Daemon.PluginNames.Length > 0 &&
-                       Daemon.PluginNames[0] == "banshee") {
-                bansheeRadio.Active = true;
-            } else {
-                specifyRadio.Active = true;
-            }
+
+            SetProvider (Daemon.PluginNames[0]);
             
             limitSpinButton.Value = Daemon.MaxUsers;
 
@@ -229,13 +281,20 @@ namespace Tangerine {
             Daemon.MaxUsers = (int) limitSpinButton.Value;
             Daemon.Name = nameEntry.Text;
 
-            if (beagleRadio.Active) {
-                Daemon.PluginNames = new string[] { "beagle", "session" };
-            } else if (bansheeRadio.Active) {
-                Daemon.PluginNames = new string[] { "banshee", "session" };
+            string pluginName;
+            
+            if (specifyRadio.Active) {
+                pluginName = "file";
+            } else if (beagleRadio.Active) {
+                pluginName = "beagle";
             } else {
-                Daemon.PluginNames = new string[] { "file", "session" };
+                TreeIter iter;
+
+                providerStore.IterNthChild (out iter, providerCombo.Active);
+                pluginName = (string) providerStore.GetValue (iter, 1);
             }
+
+            Daemon.PluginNames = new string[] { pluginName, "session" };
 
             IConfig cfg = Daemon.ConfigSource.Configs["FilePlugin"];
             if (cfg == null) {

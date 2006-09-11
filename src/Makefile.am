@@ -28,6 +28,7 @@ TANGSOURCES =				\
 	$(srcdir)/Daemon.cs		\
 	$(srcdir)/Inotify.cs		\
 	$(srcdir)/PluginManager.cs	\
+	$(srcdir)/Provider.cs		\
 	$(srcdir)/UnixSignal.cs
 
 TANG_DEPS =						\

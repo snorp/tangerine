@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -224,6 +225,26 @@ namespace Tangerine {
 
             RunLoop ();
             Shutdown ();
+        }
+
+        public static List<Provider> GetProviders () {
+            List<Provider> list = new List<Provider> ();
+            
+            foreach (string file in Directory.GetFiles (PluginManager.PluginDirectory, "*.provider")) {
+                using (StreamReader reader = new StreamReader (File.OpenRead (file))) {
+                    string line;
+                    while ((line = reader.ReadLine ()) != null) {
+                        string[] splitLine = line.Split(';');
+                        if (splitLine.Length != 2)
+                            continue;
+
+                        Provider prov = new Provider (splitLine[0].Trim (), splitLine[1].Trim ());
+                        list.Add (prov);
+                    }
+                }
+            }
+
+            return list;
         }
 
         private static void Shutdown () {

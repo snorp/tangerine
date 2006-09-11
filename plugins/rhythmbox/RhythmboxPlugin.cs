@@ -21,7 +21,7 @@ namespace Tangerine.Plugins {
         public RhythmboxPlugin () {
             dbpath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"), ".gnome2/rhythmbox/rhythmdb.xml");
             plpath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"), ".gnome2/rhythmbox/playlists.xml");
-            
+                
             RefreshTracks ();
             RefreshPlaylists ();
         }

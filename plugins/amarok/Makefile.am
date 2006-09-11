@@ -2,7 +2,7 @@
 PLUGIN_ASSEMBLY = tangerine-amarok.dll
 
 plugindir = $(prefix)/lib/tangerine/plugins
-plugin_DATA = $(PLUGIN_ASSEMBLY)
+plugin_DATA = $(PLUGIN_ASSEMBLY) amarok.provider
 
 CLEANFILES = $(PLUGIN_ASSEMBLY)
 
