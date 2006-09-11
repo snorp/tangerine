@@ -17,13 +17,33 @@ namespace Tangerine.Plugins {
         private List<Playlist> playlists = new List<Playlist> ();
         private string dbpath;
         private string plpath;
+        private string rhythmboxDir;
+        private CreationWatcher watcher;
         
         public RhythmboxPlugin () {
             dbpath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"), ".gnome2/rhythmbox/rhythmdb.xml");
             plpath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"), ".gnome2/rhythmbox/playlists.xml");
-                
+            rhythmboxDir = Path.GetDirectoryName (dbpath);
+
+            if (Directory.Exists (rhythmboxDir)) {
+                Init ();
+            } else {
+                watcher = new CreationWatcher (rhythmboxDir);
+                watcher.Created += delegate {
+                    watcher.Dispose ();
+                    watcher = null;
+                    Init ();
+                };
+            }
+        }
+
+        private void Init () {
             RefreshTracks ();
             RefreshPlaylists ();
+
+            if (Inotify.Enabled) {
+                Inotify.Subscribe (rhythmboxDir, OnRhythmboxChanged, Inotify.EventType.MovedTo);
+            }
         }
 
         private void ClearTracks () {
@@ -56,13 +76,15 @@ namespace Tangerine.Plugins {
             
             XmlTextReader reader = new XmlTextReader (dbpath);
             Track track = null;
-            
+
+            int count = 0;
             while (reader.Read ()) {
                 switch (reader.LocalName) {
                 case "entry":
                     if (reader.NodeType == XmlNodeType.EndElement && track != null && track.FileName != null) {
                         Daemon.DefaultDatabase.AddTrack (track);
                         tracks[track.FileName] = track;
+                        count++;
                     } else if (reader.NodeType == XmlNodeType.Element) {
                         track = new Track ();
                     }
@@ -100,6 +122,8 @@ namespace Tangerine.Plugins {
             }
 
             reader.Close ();
+
+            Daemon.Log.DebugFormat ("Added {0} tracks", count);
         }
 
         private void RefreshPlaylists () {
@@ -111,13 +135,15 @@ namespace Tangerine.Plugins {
 
             XmlTextReader reader = new XmlTextReader (plpath);
             Playlist pl = null;
-            
+
+            int count = 0;
             while (reader.Read ()) {
                 switch (reader.LocalName) {
                 case "playlist":
                     if (reader.NodeType == XmlNodeType.EndElement && pl != null) {
                         Daemon.DefaultDatabase.AddPlaylist (pl);
                         playlists.Add (pl);
+                        count++;
                     } else if (reader.NodeType == XmlNodeType.Element &&
                                reader["type"] == "static") {
                         pl = new Playlist (reader["name"]);
@@ -137,10 +163,26 @@ namespace Tangerine.Plugins {
             }
 
             reader.Close ();
+
+            Daemon.Log.DebugFormat ("Added {0} playlists", count);
         }
 
         public void Dispose () {
+            if (watcher != null) {
+                watcher.Dispose ();
+                watcher = null;
+            }
+        }
 
+        private void OnRhythmboxChanged (Inotify.Watch watch, string path, string subitem,
+                                         string srcpath, Inotify.EventType type) {
+            string file = Path.Combine (path, subitem);
+
+            if (file == dbpath) {
+                RefreshTracks ();
+            } else if (file == plpath) {
+                RefreshPlaylists ();
+            }
         }
     }
 }

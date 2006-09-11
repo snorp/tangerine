@@ -101,6 +101,14 @@ namespace Tangerine {
 
             SetupProviders ();
 
+            beagleRadio.Toggled += delegate {
+                SetSensitive ();
+            };
+
+            providerRadio.Toggled += delegate {
+                SetSensitive ();
+            };
+            
             specifyRadio.Toggled += delegate {
                 SetSensitive ();
             };
