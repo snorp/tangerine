@@ -180,8 +180,10 @@ namespace Tangerine.Plugins {
 
             if (file == dbpath) {
                 RefreshTracks ();
+                Daemon.Server.Commit ();
             } else if (file == plpath) {
                 RefreshPlaylists ();
+                Daemon.Server.Commit ();
             }
         }
     }

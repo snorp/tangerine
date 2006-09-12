@@ -1,4 +1,8 @@
 #!/bin/bash
 
 export LD_LIBRARY_PATH=@libdir@/tangerine:$LD_LIBRARY_PATH
-exec -a tangerine mono $TANGERINE_MONO_ARGS @prefix@/lib/tangerine/tangerine-daemon.exe "$@"
+if test "x$TANGERINE_DEBUG" != "x"; then \
+    exec gdb --args mono $TANGERINE_MONO_ARGS @prefix@/lib/tangerine/tangerine-daemon.exe "$@"
+else
+    exec -a tangerine mono $TANGERINE_MONO_ARGS @prefix@/lib/tangerine/tangerine-daemon.exe "$@"
+fi

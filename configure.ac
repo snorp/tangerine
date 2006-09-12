@@ -77,6 +77,22 @@ fi
 dnl glib-sharp
 PKG_CHECK_MODULES(GLIB_SHARP, glib-sharp-2.0)
 
+dnl muine
+MUINE_BINARY=`which muine`
+LIBMUINE32=`dirname $MUINE_BINARY | sed -e "s/bin/lib\/muine\/libmuine.so/"`
+LIBMUINE64=`dirname $MUINE_BINARY | sed -e "s/bin/lib64\/muine\/libmuine.so/"`
+
+have_muine=no
+LIBMUINE=bogus
+if test -f $LIBMUINE32; then \
+    have_muine=yes
+    LIBMUINE=$LIBMUINE32
+elif test -f $LIBMUINE64; then \
+    have_muine=yes
+    LIBMUINE=$LIBMUINE64
+fi
+AC_SUBST(LIBMUINE)
+
 AM_CONDITIONAL(ENABLE_IPOD, test "x$have_ipod" = "xyes")
 AM_CONDITIONAL(ENABLE_BEAGLE, test "x$have_beagle" = "xyes")
 
@@ -94,6 +110,8 @@ plugins/session/Makefile
 plugins/banshee/Makefile
 plugins/rhythmbox/Makefile
 plugins/amarok/Makefile
+plugins/muine/Makefile
+plugins/muine/MuineDatabase.cs
 tangerine.pc
 ])
 
@@ -101,6 +119,7 @@ echo
 echo "tangerine prefix:    $prefix"
 echo "     iPod plugin:    $have_ipod"
 echo "   Beagle plugin:    $have_beagle"
+echo "    Muine plugin:    $have_muine"
 
 if test "x$enable_mdnsd" = "xyes"; then \
     echo "        Zeroconf:    mDNSResponder"
