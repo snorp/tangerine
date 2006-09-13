@@ -78,23 +78,29 @@ dnl glib-sharp
 PKG_CHECK_MODULES(GLIB_SHARP, glib-sharp-2.0)
 
 dnl muine
-MUINE_BINARY=`which muine`
-LIBMUINE32=`dirname $MUINE_BINARY | sed -e "s/bin/lib\/muine\/libmuine.so/"`
-LIBMUINE64=`dirname $MUINE_BINARY | sed -e "s/bin/lib64\/muine\/libmuine.so/"`
-
 have_muine=no
-LIBMUINE=bogus
-if test -f $LIBMUINE32; then \
-    have_muine=yes
-    LIBMUINE=$LIBMUINE32
-elif test -f $LIBMUINE64; then \
-    have_muine=yes
-    LIBMUINE=$LIBMUINE64
+
+AC_PATH_PROG(MUINE, muine)
+if test "x$MUINE" != "x" ; then
+    LIBMUINE32=`dirname $MUINE | sed -e "s/bin/lib\/muine\/libmuine.so/"`
+    LIBMUINE64=`dirname $MUINE | sed -e "s/bin/lib64\/muine\/libmuine.so/"`
+
+    LIBMUINE=bogus
+
+    if test -f $LIBMUINE32; then \
+        have_muine=yes
+        LIBMUINE=$LIBMUINE32
+    elif test -f $LIBMUINE64; then \
+        have_muine=yes
+        LIBMUINE=$LIBMUINE64
+    fi
+    
+    AC_SUBST(LIBMUINE)
 fi
-AC_SUBST(LIBMUINE)
 
 AM_CONDITIONAL(ENABLE_IPOD, test "x$have_ipod" = "xyes")
 AM_CONDITIONAL(ENABLE_BEAGLE, test "x$have_beagle" = "xyes")
+AM_CONDITIONAL(ENABLE_MUINE, test "x$have_muine" = "xyes")
 
 AC_OUTPUT([
 Makefile

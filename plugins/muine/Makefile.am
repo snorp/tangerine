@@ -1,4 +1,4 @@
-
+if ENABLE_MUINE
 PLUGIN_ASSEMBLY = tangerine-muine.dll
 
 plugindir = $(prefix)/lib/tangerine/plugins
@@ -19,5 +19,6 @@ PLUGIN_DEPS = 						\
 tangerine-muine.dll: $(PLUGINSOURCES)
 	$(MCS) -unsafe $(MCS_FLAGS) -target:library -out:$@ $(PLUGINSOURCES) \
 	$(PLUGIN_DEPS)
+endif
 
 EXTRA_DIST = $(PLUGINSOURCES) MuineDatabase.cs.in muine.provider
