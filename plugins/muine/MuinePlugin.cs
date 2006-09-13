@@ -79,7 +79,9 @@ namespace Tangerine.Plugins {
             track.Title = str;
 
             p = MuineDatabase.UnpackStringArray (p, out strs);
-            track.Artist = strs[0];
+            if (strs != null && strs.Length > 0) {
+                track.Artist = strs[0];
+            }
 
             p = MuineDatabase.UnpackStringArray (p, out strs);
 
