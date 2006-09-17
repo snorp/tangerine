@@ -76,6 +76,7 @@ fi
 
 dnl glib-sharp
 PKG_CHECK_MODULES(GLIB_SHARP, glib-sharp-2.0)
+AC_SUBST(GLIB_SHARP_LIBS)
 
 dnl muine
 have_muine=no
