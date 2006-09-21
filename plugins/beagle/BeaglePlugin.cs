@@ -7,7 +7,6 @@ using Nini;
 using DAAP;
 using log4net;
 using Beagle;
-using Entagged;
 
 namespace Tangerine.Plugins {
 
@@ -86,31 +85,13 @@ namespace Tangerine.Plugins {
         }
 
         private Track GetTrackFromFile (string file) {
-            AudioFile af;
-
             try {
-                af = new AudioFile (file);
-            } catch (Exception e) {
+                Track track = new Track ();
+                FilePlugin.UpdateTrack (track, file);
+                return track;
+            } catch {
                 return null;
             }
-
-            Track track = new Track ();
-            track.Artist = af.Artist;
-            track.Album = af.Album;
-            track.Title = af.Title;
-            track.Duration = af.Duration;
-            track.FileName = file;
-            track.Format = Path.GetExtension (file).Substring (1);
-            track.Genre = af.Genre;
-
-            FileInfo info = new FileInfo (file);
-            track.Size = (int) info.Length;
-            track.TrackCount = af.TrackCount;
-            track.TrackNumber = af.TrackNumber;
-            track.Year = af.Year;
-            track.BitRate = (short) af.Bitrate;
-
-            return track;
         }
 
         private void OnHitsAdded (HitsAddedResponse response) {

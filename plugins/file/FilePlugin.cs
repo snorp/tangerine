@@ -2,9 +2,8 @@
 using System;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
-using Entagged;
-using Entagged.Audioformats.Exceptions;
 using Nini;
 using DAAP;
 using log4net;
@@ -14,9 +13,9 @@ namespace Tangerine.Plugins {
 
     [Plugin ("file")]
     public class FilePlugin : IDisposable {
-        private Hashtable songHash = new Hashtable ();
-        private Hashtable playlistHash = new Hashtable ();
-        private ArrayList playlistFiles = new ArrayList ();
+        private Dictionary<string, Track> trackHash = new Dictionary<string, Track> ();
+        private Dictionary<string, Playlist> playlistHash = new Dictionary<string, Playlist> ();
+        private List<string> playlistFiles = new List<string> ();
         private object commitLock = new object ();
         private DateTime lastChange = DateTime.MinValue;
         private string[] directories;
@@ -123,7 +122,7 @@ namespace Tangerine.Plugins {
                 }
                 
                 db.AddTrack (song);
-                songHash[song.FileName] = song;
+                trackHash[song.FileName] = song;
             }
         }
 
@@ -170,62 +169,74 @@ namespace Tangerine.Plugins {
             if (dir == null)
                 return;
             
-            ICollection keys = songHash.Keys;
-            string[] keyArray = new string[keys.Count];
-            keys.CopyTo (keyArray, 0);
-            
-            foreach (string file in keyArray) {
+            foreach (string file in new List<string> (trackHash.Keys)) {
                 if (file.StartsWith (dir)) {
                     RemoveTrack (file);
                 }
             }
         }
 
-        private void AddTrack (string file) {
-            if (songHash[file] != null)
-                return;
-            
-            AudioFile af;
+        public static void UpdateTrack (Track track, string file) {
+            TagLib.File af;
 
             try {
-                af = new AudioFile (file);
+                af = TagLib.File.Create (file);
             } catch (Exception e) {
                 return;
             }
 
-            Track song = (Track) songHash[file];
-            if (song == null) {
-                song = new Track ();
-                db.AddTrack (song);
+            if (af.Tag.Artists != null && af.Tag.Genres.Length > 0) {
+                track.Artist = af.Tag.Artists[0];
+            } else {
+                track.Artist = String.Empty;
+            }
+            
+            track.Album = af.Tag.Album;
+            track.Title = af.Tag.Title;
+            track.Duration = af.AudioProperties.Duration;
+            track.FileName = file;
+            track.Format = Path.GetExtension (file).Substring (1);
+
+            if (af.Tag.Genres != null && af.Tag.Genres.Length > 0) {
+                track.Genre = af.Tag.Genres[0];
+            } else {
+                track.Genre = String.Empty;
+            }
+            
+            FileInfo info = new FileInfo (file);
+            track.Size = (int) info.Length;
+            track.TrackCount = (int) af.Tag.TrackCount;
+            track.TrackNumber = (int) af.Tag.Track;
+            track.Year = (int) af.Tag.Year;
+            track.BitRate = (short) af.AudioProperties.Bitrate;
+        }
+
+        private void AddTrack (string file) {
+            if (trackHash.ContainsKey (file))
+                return;
+            
+            Track track;
+
+            if (trackHash.ContainsKey (file)) {
+                track = trackHash[file];
+            } else {
+                track = new Track ();
+                db.AddTrack (track);
             }
 
-            song.Artist = af.Artist;
-            song.Album = af.Album;
-            song.Title = af.Title;
-            song.Duration = af.Duration;
-            song.FileName = file;
-            song.Format = Path.GetExtension (file).Substring (1);
-            song.Genre = af.Genre;
+            UpdateTrack (track, file);
 
-            FileInfo info = new FileInfo (file);
-            song.Size = (int) info.Length;
-            song.TrackCount = af.TrackCount;
-            song.TrackNumber = af.TrackNumber;
-            song.Year = af.Year;
-            song.BitRate = (short) af.Bitrate;
-
-            songHash[file] = song;
-
-            odb.Set (song);
+            trackHash[file] = track;
+            odb.Set (track);
         }
 
         private void RemoveTrack (string file) {
-            Track song = (Track) songHash[file];
-            if (song != null) {
-                db.RemoveTrack (song);
-                songHash.Remove (file);
-                odb.Delete (song);
-            }
+            if (!trackHash.ContainsKey (file))
+                return;
+
+            db.RemoveTrack (trackHash[file]);
+            odb.Delete (trackHash[file]);
+            trackHash.Remove (file);
         }
 
         private void AddPlaylist (string file) {
@@ -241,10 +252,9 @@ namespace Tangerine.Plugins {
                         continue;
 
                     string songFile = Path.Combine (dir, line);
-                    
-                    Track song = (Track) songHash[songFile];
-                    if (song != null) {
-                        pl.AddTrack (song);
+
+                    if (trackHash.ContainsKey (songFile)) {
+                        pl.AddTrack (trackHash[songFile]);
                     } else {
                         log.WarnFormat ("Failed to find song {0} for playlist {1}", line, pl.Name);
                     }
@@ -258,12 +268,11 @@ namespace Tangerine.Plugins {
         }
 
         private void RemovePlaylist (string file) {
-            Playlist pl = (Playlist) playlistHash[file];
+            if (!playlistHash.ContainsKey (file))
+                return;
 
-            if (pl != null) {
-                db.RemovePlaylist (pl);
-                playlistHash.Remove (file);
-            }
+            db.RemovePlaylist (playlistHash[file]);
+            playlistHash.Remove (file);
         }
 
 #if !WINDOWS

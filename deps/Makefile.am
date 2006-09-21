@@ -1,6 +1,6 @@
-SUBDIRS = daap-sharp
+SUBDIRS = daap-sharp taglib-sharp
 
 tangdir = $(prefix)/lib/tangerine
-tang_DATA = Nini.dll log4net.dll entagged-sharp.dll
+tang_DATA = Nini.dll log4net.dll
 
 EXTRA_DIST = $(tang_DATA)

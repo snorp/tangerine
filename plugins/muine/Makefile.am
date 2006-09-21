@@ -11,7 +11,6 @@ PLUGINSOURCES = $(srcdir)/MuinePlugin.cs $(srcdir)/MuineDatabase.cs
 PLUGIN_DEPS = 						\
 	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
-	-r:$(top_srcdir)/deps/entagged-sharp.dll	\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:$(top_builddir)/src/tangerine.dll		\
 	-r:Mono.Posix

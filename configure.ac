@@ -107,6 +107,7 @@ AC_OUTPUT([
 Makefile
 deps/Makefile
 deps/daap-sharp/Makefile
+deps/taglib-sharp/Makefile
 icons/Makefile
 src/Makefile
 plugins/Makefile
