@@ -11,7 +11,7 @@ PLUGINSOURCES = $(srcdir)/FilePlugin.cs
 PLUGIN_DEPS = 						\
 	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
-	-r:$(top_srcdir)/deps/taglib-sharp/taglib-sharp.dll	\
+	-r:$(top_builddir)/deps/taglib-sharp/taglib-sharp.dll	\
 	-r:$(srcdir)/db4o.dll				\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\
