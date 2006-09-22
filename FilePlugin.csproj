@@ -38,10 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>plugins\file\db4o.dll</HintPath>
     </Reference>
-    <Reference Include="entagged-sharp, Version=0.2.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>deps\entagged-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>deps\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -63,6 +59,10 @@
       <Project>{A288B06B-21F8-4CE4-B579-BDAD4B003738}</Project>
       <Name>DAAP</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="TagLib.csproj">
+      <Project>{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}</Project>
+      <Name>TagLib</Name>
     </ProjectReference>
     <ProjectReference Include="Tangerine.csproj">
       <Project>{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}</Project>

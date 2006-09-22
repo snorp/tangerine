@@ -42,12 +42,9 @@
     <Compile Include="src\AssemblyInfo.cs" />
     <Compile Include="src\Daemon.cs" />
     <Compile Include="src\PluginManager.cs" />
+    <Compile Include="src\Provider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="entagged-sharp, Version=0.2.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>deps\entagged-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>deps\ICSharpCode.SharpZipLib.dll</HintPath>

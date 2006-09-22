@@ -1,0 +1,139 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TagLib</RootNamespace>
+    <AssemblyName>TagLib</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="deps\taglib-sharp\TagLib\Ape\Footer.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ape\Item.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ape\Tag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\ContentDescriptionObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\ContentDescriptor.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\ExtendedContentDescriptionObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\FilePropertiesObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\Guid.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\HeaderObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\Object.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\PaddingObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\Properties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\StreamPropertiesObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\Tag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Asf\UnknownObject.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\AudioProperties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\ByteVector.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\ByteVectorList.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\CombinedTag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Debugger.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Flac\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Flac\Properties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v1\GenreList.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v1\StringHandler.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v1\Tag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\ExtendedHeader.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Footer.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\FrameFactory.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\FrameHeader.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\AttachedPictureFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\CommentsFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\PrivateFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\RelativeVolumeFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\TextIdentificationFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\UniqueFileIdentifierFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\UnknownFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Header.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\SynchData.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Tag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\IntList.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpc\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpc\Properties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\AppleTag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\AppleAdditionalInfoBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\AppleAnnotationBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\AppleDataBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\AppleElementaryStreamDescriptor.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\AppleItemListBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\Box.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\FileBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\FullBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoChunkLargeOffsetBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoChunkOffsetBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoFreeSpaceBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoHandlerBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoMediaBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoMediaInformationBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoMetaBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoMovieBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoMovieHeaderBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoSampleDescriptionBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoSampleEntry.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoSampleTableBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoTrackBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\IsoUserDataBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Boxes\UnknownBox.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\BoxHeader.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\Properties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg\Header.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg\Properties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Mpeg\XingHeader.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\Flac\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\Page.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\PageHeader.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\Vorbis\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\Vorbis\Properties.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Ogg\XiphComment.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Picture.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\ReadOnlyException.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\StringList.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\SupportedMimeType.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Tag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\UnsupportedFormatException.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\WavPack\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\WavPack\Properties.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

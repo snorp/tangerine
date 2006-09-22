@@ -9,6 +9,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilePlugin", "FilePlugin.csproj", "{3569B2C8-750A-491B-A702-445A4F03636A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A288B06B-21F8-4CE4-B579-BDAD4B003738} = {A288B06B-21F8-4CE4-B579-BDAD4B003738}
+		{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336} = {1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}
 		{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F} = {A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}
 	EndProjectSection
 EndProject
@@ -22,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangerineProperties", "TangerineProperties.csproj", "{8E464FB0-3520-4A95-A470-4DE18E74618B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlugin", "GooglePlugin.csproj", "{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagLib", "TagLib.csproj", "{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +56,10 @@ Global
 		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F15CA64C-DD2E-4819-9F7A-A1B15008D3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
