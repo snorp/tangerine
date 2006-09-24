@@ -229,6 +229,10 @@ namespace Tangerine {
 
         public static List<Provider> GetProviders () {
             List<Provider> list = new List<Provider> ();
+
+            if (!Directory.Exists (PluginManager.PluginDirectory)) {
+                return list;
+            }
             
             foreach (string file in Directory.GetFiles (PluginManager.PluginDirectory, "*.provider")) {
                 using (StreamReader reader = new StreamReader (File.OpenRead (file))) {

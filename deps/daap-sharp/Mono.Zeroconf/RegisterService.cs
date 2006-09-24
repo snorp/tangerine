@@ -113,7 +113,7 @@ namespace Mono.Zeroconf
             if(error != ServiceError.NoError) {
                 throw new ServiceErrorException(error);
             }
-            
+
             sd_ref.Process();
         }
         

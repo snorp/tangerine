@@ -19,5 +19,9 @@ namespace Tangerine {
             this.name = name;
             this.plugin = plugin;
         }
+
+        public override string ToString () {
+            return name;
+        }
     }
 }

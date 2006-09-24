@@ -40,6 +40,7 @@
   -->
   <ItemGroup>
     <Compile Include="src\AssemblyInfo.cs" />
+    <Compile Include="src\CreationWatcher.cs" />
     <Compile Include="src\Daemon.cs" />
     <Compile Include="src\PluginManager.cs" />
     <Compile Include="src\Provider.cs" />

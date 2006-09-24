@@ -17,10 +17,61 @@ namespace TangerineProperties.src {
 
     public partial class WindowsProperties : Form {
         private string passwdPath;
+        private IList<Provider> providers;
 
         public WindowsProperties () {
             InitializeComponent ();
+            LoadProviders ();
             LoadPrefs ();
+        }
+
+        private void LoadProviders () {
+            providers = Daemon.GetProviders ();
+
+            List<Provider> comboProviders = new List<Provider> ();
+            foreach (Provider p in providers) {
+                if (p.Plugin != "google") {
+                    Console.WriteLine ("Adding: *{0}*", p.Plugin);
+                    comboProviders.Add (p);
+                }
+            }
+
+            if (comboProviders.Count == 0) {
+                comboProviders.Add (new Provider ("None", "none"));
+                providerCombo.Enabled = false;
+                providerRadio.Enabled = false;
+            }
+
+            providerCombo.DataSource = comboProviders;
+            googleRadioButton.Enabled = FindProvider ("google") != null;
+        }
+
+        private Provider FindProvider (string plugin) {
+            foreach (Provider p in providers) {
+                if (p.Plugin == plugin)
+                    return p;
+            }
+
+            return null;
+        }
+
+        private void SetProvider (string plugin) {
+            Provider provider = FindProvider (plugin);
+
+            if (plugin == "file" || (plugin == "google" && provider == null)) {
+                dirRadioButton.Checked = true;
+            } else if (plugin == "google") {
+                googleRadioButton.Checked = true;
+            } else {
+                if (provider != null) {
+                    providerCombo.SelectedItem = provider;
+                    providerRadio.Checked = true;
+                } if (provider == null && FindProvider ("google") == null) {
+                    dirRadioButton.Select ();
+                } else if (provider == null) {
+                    googleRadioButton.Checked = true;
+                }
+            }
         }
 
         private void button1_Click (object sender, EventArgs e) {
@@ -73,11 +124,7 @@ namespace TangerineProperties.src {
                 musicDirBox.Text = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic);
             }
 
-            if (Daemon.PluginNames == null || Daemon.PluginNames[0] == "google") {
-                googleRadioButton.Checked = true;
-            } else {
-                dirRadioButton.Checked = true;
-            }
+            SetProvider (Daemon.PluginNames[0]);
 
             passwordBox.Text = ReadPassword ();
 
@@ -142,11 +189,17 @@ namespace TangerineProperties.src {
         private void SavePrefs () {
             Daemon.Name = shareNameBox.Text;
 
+            string plugin;
+
             if (googleRadioButton.Checked) {
-                Daemon.PluginNames = new string[] { "google" };
+                plugin = "google";
+            } else if (dirRadioButton.Checked) {
+                plugin = "file";
             } else {
-                Daemon.PluginNames = new string[] { "file" };
+                plugin = ((Provider) providerCombo.SelectedItem).Plugin;
             }
+
+            Daemon.PluginNames = new string[] { plugin };
 
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 Daemon.ConfigSource.AddConfig ("FilePlugin");
@@ -201,6 +254,16 @@ namespace TangerineProperties.src {
         }
 
         private void dirRadioButton_CheckedChanged (object sender, EventArgs e) {
+            SetEnabled ();
+        }
+
+        private void WindowsProperties_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void providerRadio_CheckedChanged(object sender, EventArgs e)
+        {
             SetEnabled ();
         }
     }

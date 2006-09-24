@@ -34,6 +34,8 @@ namespace TangerineProperties.src {
             this.okButton = new System.Windows.Forms.Button ();
             this.cancelButton = new System.Windows.Forms.Button ();
             this.generalOptionsPanel = new System.Windows.Forms.GroupBox ();
+            this.providerCombo = new System.Windows.Forms.ComboBox ();
+            this.providerRadio = new System.Windows.Forms.RadioButton ();
             this.dirRadioButton = new System.Windows.Forms.RadioButton ();
             this.googleRadioButton = new System.Windows.Forms.RadioButton ();
             this.accessControlPanel = new System.Windows.Forms.GroupBox ();
@@ -53,9 +55,9 @@ namespace TangerineProperties.src {
             this.enabledCheck.Font = new System.Drawing.Font ("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.enabledCheck.Location = new System.Drawing.Point (12, 12);
             this.enabledCheck.Name = "enabledCheck";
-            this.enabledCheck.Size = new System.Drawing.Size (149, 17);
+            this.enabledCheck.Size = new System.Drawing.Size (146, 17);
             this.enabledCheck.TabIndex = 0;
-            this.enabledCheck.Text = "Enable Music Sharing";
+            this.enabledCheck.Text = "Enable music sharing";
             this.toolTip1.SetToolTip (this.enabledCheck, "Whether music sharing is enabled or not");
             this.enabledCheck.UseVisualStyleBackColor = true;
             this.enabledCheck.CheckedChanged += new System.EventHandler (this.checkBox1_CheckedChanged);
@@ -66,9 +68,9 @@ namespace TangerineProperties.src {
             this.shareLabel.Font = new System.Drawing.Font ("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.shareLabel.Location = new System.Drawing.Point (12, 23);
             this.shareLabel.Name = "shareLabel";
-            this.shareLabel.Size = new System.Drawing.Size (76, 13);
+            this.shareLabel.Size = new System.Drawing.Size (74, 13);
             this.shareLabel.TabIndex = 1;
-            this.shareLabel.Text = "Share Name";
+            this.shareLabel.Text = "Share name";
             // 
             // shareNameBox
             // 
@@ -80,7 +82,7 @@ namespace TangerineProperties.src {
             // 
             // musicDirButton
             // 
-            this.musicDirButton.Location = new System.Drawing.Point (207, 90);
+            this.musicDirButton.Location = new System.Drawing.Point (207, 116);
             this.musicDirButton.Name = "musicDirButton";
             this.musicDirButton.Size = new System.Drawing.Size (75, 23);
             this.musicDirButton.TabIndex = 3;
@@ -91,7 +93,7 @@ namespace TangerineProperties.src {
             // 
             // musicDirBox
             // 
-            this.musicDirBox.Location = new System.Drawing.Point (15, 92);
+            this.musicDirBox.Location = new System.Drawing.Point (15, 118);
             this.musicDirBox.Name = "musicDirBox";
             this.musicDirBox.Size = new System.Drawing.Size (186, 20);
             this.musicDirBox.TabIndex = 5;
@@ -99,7 +101,7 @@ namespace TangerineProperties.src {
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point (232, 275);
+            this.okButton.Location = new System.Drawing.Point (232, 296);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size (75, 23);
             this.okButton.TabIndex = 10;
@@ -109,7 +111,7 @@ namespace TangerineProperties.src {
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point (151, 275);
+            this.cancelButton.Location = new System.Drawing.Point (151, 296);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size (75, 23);
             this.cancelButton.TabIndex = 11;
@@ -119,6 +121,8 @@ namespace TangerineProperties.src {
             // 
             // generalOptionsPanel
             // 
+            this.generalOptionsPanel.Controls.Add (this.providerCombo);
+            this.generalOptionsPanel.Controls.Add (this.providerRadio);
             this.generalOptionsPanel.Controls.Add (this.dirRadioButton);
             this.generalOptionsPanel.Controls.Add (this.googleRadioButton);
             this.generalOptionsPanel.Controls.Add (this.shareNameBox);
@@ -127,19 +131,39 @@ namespace TangerineProperties.src {
             this.generalOptionsPanel.Controls.Add (this.musicDirBox);
             this.generalOptionsPanel.Location = new System.Drawing.Point (12, 35);
             this.generalOptionsPanel.Name = "generalOptionsPanel";
-            this.generalOptionsPanel.Size = new System.Drawing.Size (295, 127);
+            this.generalOptionsPanel.Size = new System.Drawing.Size (295, 157);
             this.generalOptionsPanel.TabIndex = 13;
             this.generalOptionsPanel.TabStop = false;
             this.generalOptionsPanel.Text = "General Options";
             // 
+            // providerCombo
+            // 
+            this.providerCombo.FormattingEnabled = true;
+            this.providerCombo.Location = new System.Drawing.Point (127, 69);
+            this.providerCombo.Name = "providerCombo";
+            this.providerCombo.Size = new System.Drawing.Size (155, 21);
+            this.providerCombo.TabIndex = 17;
+            // 
+            // providerRadio
+            // 
+            this.providerRadio.AutoSize = true;
+            this.providerRadio.Location = new System.Drawing.Point (15, 69);
+            this.providerRadio.Name = "providerRadio";
+            this.providerRadio.Size = new System.Drawing.Size (106, 17);
+            this.providerRadio.TabIndex = 16;
+            this.providerRadio.TabStop = true;
+            this.providerRadio.Text = "Find music using:";
+            this.providerRadio.UseVisualStyleBackColor = true;
+            this.providerRadio.CheckedChanged += new System.EventHandler (this.providerRadio_CheckedChanged);
+            // 
             // dirRadioButton
             // 
             this.dirRadioButton.AutoSize = true;
-            this.dirRadioButton.Location = new System.Drawing.Point (15, 69);
+            this.dirRadioButton.Location = new System.Drawing.Point (15, 95);
             this.dirRadioButton.Name = "dirRadioButton";
-            this.dirRadioButton.Size = new System.Drawing.Size (92, 17);
+            this.dirRadioButton.Size = new System.Drawing.Size (89, 17);
             this.dirRadioButton.TabIndex = 15;
-            this.dirRadioButton.Text = "Specify Folder";
+            this.dirRadioButton.Text = "Specify folder";
             this.toolTip1.SetToolTip (this.dirRadioButton, "Manually specify a folder of music to share");
             this.dirRadioButton.UseVisualStyleBackColor = true;
             this.dirRadioButton.CheckedChanged += new System.EventHandler (this.dirRadioButton_CheckedChanged);
@@ -150,10 +174,10 @@ namespace TangerineProperties.src {
             this.googleRadioButton.Checked = true;
             this.googleRadioButton.Location = new System.Drawing.Point (15, 46);
             this.googleRadioButton.Name = "googleRadioButton";
-            this.googleRadioButton.Size = new System.Drawing.Size (141, 17);
+            this.googleRadioButton.Size = new System.Drawing.Size (137, 17);
             this.googleRadioButton.TabIndex = 15;
             this.googleRadioButton.TabStop = true;
-            this.googleRadioButton.Text = "Automatically Find Music";
+            this.googleRadioButton.Text = "Automatically find music";
             this.toolTip1.SetToolTip (this.googleRadioButton, "Use Google Desktop to automatically find and share your music");
             this.googleRadioButton.UseVisualStyleBackColor = true;
             this.googleRadioButton.CheckedChanged += new System.EventHandler (this.googleRadioButton_CheckedChanged);
@@ -164,7 +188,7 @@ namespace TangerineProperties.src {
             this.accessControlPanel.Controls.Add (this.label3);
             this.accessControlPanel.Controls.Add (this.label1);
             this.accessControlPanel.Controls.Add (this.passwordBox);
-            this.accessControlPanel.Location = new System.Drawing.Point (12, 177);
+            this.accessControlPanel.Location = new System.Drawing.Point (12, 198);
             this.accessControlPanel.Name = "accessControlPanel";
             this.accessControlPanel.Size = new System.Drawing.Size (295, 83);
             this.accessControlPanel.TabIndex = 14;
@@ -190,9 +214,9 @@ namespace TangerineProperties.src {
             this.label3.Font = new System.Drawing.Font ("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label3.Location = new System.Drawing.Point (10, 47);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size (63, 13);
+            this.label3.Size = new System.Drawing.Size (59, 13);
             this.label3.TabIndex = 17;
-            this.label3.Text = "User Limit";
+            this.label3.Text = "User limit";
             // 
             // label1
             // 
@@ -221,7 +245,7 @@ namespace TangerineProperties.src {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF (6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size (318, 308);
+            this.ClientSize = new System.Drawing.Size (318, 330);
             this.Controls.Add (this.accessControlPanel);
             this.Controls.Add (this.generalOptionsPanel);
             this.Controls.Add (this.cancelButton);
@@ -230,6 +254,7 @@ namespace TangerineProperties.src {
             this.Icon = ((System.Drawing.Icon) (resources.GetObject ("$this.Icon")));
             this.Name = "WindowsProperties";
             this.Text = "Tangerine Preferences";
+            this.Load += new System.EventHandler (this.WindowsProperties_Load);
             this.generalOptionsPanel.ResumeLayout (false);
             this.generalOptionsPanel.PerformLayout ();
             this.accessControlPanel.ResumeLayout (false);
@@ -259,5 +284,7 @@ namespace TangerineProperties.src {
         private System.Windows.Forms.RadioButton dirRadioButton;
         private System.Windows.Forms.RadioButton googleRadioButton;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ComboBox providerCombo;
+        private System.Windows.Forms.RadioButton providerRadio;
     }
 }
