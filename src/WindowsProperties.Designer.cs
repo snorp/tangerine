@@ -35,7 +35,7 @@ namespace TangerineProperties.src {
             this.cancelButton = new System.Windows.Forms.Button ();
             this.generalOptionsPanel = new System.Windows.Forms.GroupBox ();
             this.providerCombo = new System.Windows.Forms.ComboBox ();
-            this.providerRadio = new System.Windows.Forms.RadioButton ();
+            this.providerRadioButton = new System.Windows.Forms.RadioButton ();
             this.dirRadioButton = new System.Windows.Forms.RadioButton ();
             this.googleRadioButton = new System.Windows.Forms.RadioButton ();
             this.accessControlPanel = new System.Windows.Forms.GroupBox ();
@@ -122,7 +122,7 @@ namespace TangerineProperties.src {
             // generalOptionsPanel
             // 
             this.generalOptionsPanel.Controls.Add (this.providerCombo);
-            this.generalOptionsPanel.Controls.Add (this.providerRadio);
+            this.generalOptionsPanel.Controls.Add (this.providerRadioButton);
             this.generalOptionsPanel.Controls.Add (this.dirRadioButton);
             this.generalOptionsPanel.Controls.Add (this.googleRadioButton);
             this.generalOptionsPanel.Controls.Add (this.shareNameBox);
@@ -138,23 +138,24 @@ namespace TangerineProperties.src {
             // 
             // providerCombo
             // 
+            this.providerCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.providerCombo.FormattingEnabled = true;
             this.providerCombo.Location = new System.Drawing.Point (127, 69);
             this.providerCombo.Name = "providerCombo";
             this.providerCombo.Size = new System.Drawing.Size (155, 21);
             this.providerCombo.TabIndex = 17;
             // 
-            // providerRadio
+            // providerRadioButton
             // 
-            this.providerRadio.AutoSize = true;
-            this.providerRadio.Location = new System.Drawing.Point (15, 69);
-            this.providerRadio.Name = "providerRadio";
-            this.providerRadio.Size = new System.Drawing.Size (106, 17);
-            this.providerRadio.TabIndex = 16;
-            this.providerRadio.TabStop = true;
-            this.providerRadio.Text = "Find music using:";
-            this.providerRadio.UseVisualStyleBackColor = true;
-            this.providerRadio.CheckedChanged += new System.EventHandler (this.providerRadio_CheckedChanged);
+            this.providerRadioButton.AutoSize = true;
+            this.providerRadioButton.Location = new System.Drawing.Point (15, 69);
+            this.providerRadioButton.Name = "providerRadioButton";
+            this.providerRadioButton.Size = new System.Drawing.Size (106, 17);
+            this.providerRadioButton.TabIndex = 16;
+            this.providerRadioButton.TabStop = true;
+            this.providerRadioButton.Text = "Find music using:";
+            this.providerRadioButton.UseVisualStyleBackColor = true;
+            this.providerRadioButton.CheckedChanged += new System.EventHandler (this.providerRadio_CheckedChanged);
             // 
             // dirRadioButton
             // 
@@ -212,7 +213,7 @@ namespace TangerineProperties.src {
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font ("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label3.Location = new System.Drawing.Point (10, 47);
+            this.label3.Location = new System.Drawing.Point (14, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size (59, 13);
             this.label3.TabIndex = 17;
@@ -285,6 +286,6 @@ namespace TangerineProperties.src {
         private System.Windows.Forms.RadioButton googleRadioButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ComboBox providerCombo;
-        private System.Windows.Forms.RadioButton providerRadio;
+        private System.Windows.Forms.RadioButton providerRadioButton;
     }
 }

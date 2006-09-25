@@ -1,5 +1,6 @@
 
 using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -261,12 +262,9 @@ namespace Tangerine {
 #endif
                 
             PluginManager.UnloadPlugins ();
-            
+            server.Stop ();
 #if !WINDOWS
             UnixSignal.Stop ();
-
-            server.Stop ();
-
             Syscall.exit (0);
 #endif
         }
@@ -430,19 +428,17 @@ namespace Tangerine {
         }
 #else
 
-        private static object loopLock = new object ();
+        private static EventWaitHandle loopHandle;
 
         private static void RunLoop () {
-            lock (loopLock) {
-                Monitor.Wait (loopLock);
-            }
+            loopHandle = new EventWaitHandle (false, EventResetMode.AutoReset,
+                "tangerine-" + Process.GetCurrentProcess ().Id);
+
+            loopHandle.WaitOne ();
         }
 
         private static bool QuitLoop() {
-            lock (loopLock) {
-                Monitor.Pulse (loopLock);
-            }
-
+            loopHandle.Set ();
             return true;
         }
 #endif

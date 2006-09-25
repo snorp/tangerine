@@ -17,6 +17,9 @@ namespace Tangerine.Plugins {
         private string dbpath;
         private string itunesDir;
         private CreationWatcher watcher;
+        private FileSystemWatcher fsw;
+        private DateTime lastChange = DateTime.MinValue;
+        private object refreshLock = new object ();
         
         public iTunesPlugin () {
             dbpath = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic) + @"\iTunes\iTunes Music Library.xml";
@@ -37,40 +40,21 @@ namespace Tangerine.Plugins {
 
         private void Init () {
             RefreshTracks ();
-        }
 
-        private void SetTrackProperty (Track track, string key, string value) {
-            switch (key) {
-            case "Name":
-                track.Title = value;
-                break;
-            case "Artist":
-                track.Artist = value;
-                break;
-            case "Album":
-                track.Album = value;
-                break;
-            case "Genre":
-                track.Genre = value;
-                break;
-            case "Total Time":
-                track.Duration = TimeSpan.FromMilliseconds (Int32.Parse (value));
-                break;
-            case "Bit Rate":
-                track.BitRate = Int16.Parse (value);
-                break;
-            case "Location":
-                Uri uri = new Uri (value);
-                if (uri.IsFile) {
-                    track.FileName = uri.LocalPath;
-                    if (track.FileName.StartsWith(@"\\localhost\")) {
-                        track.FileName = track.FileName.Substring(12);
-                    }
+            Thread refreshThread = new Thread (RefreshLoop);
+            refreshThread.Start ();
+
+            fsw = new FileSystemWatcher (itunesDir);
+            fsw.Changed += delegate (object o, FileSystemEventArgs args) {
+                if (args.FullPath != dbpath)
+                    return;
+
+                lock (refreshLock) {
+                    lastChange = DateTime.Now;
+                    Monitor.Pulse (refreshLock);
                 }
-                break;
-            default:
-                break;
-            }
+            };
+            fsw.EnableRaisingEvents = true;
         }
 
         private void ClearTracks () {
@@ -142,14 +126,15 @@ namespace Tangerine.Plugins {
         }
 
         private void RefreshTracks () {
-            ClearTracks ();
-            
             if (!File.Exists (dbpath)) {
+                ClearTracks ();
                 return;
             }
 
             XmlDocument doc = new XmlDocument ();
             doc.Load (dbpath);
+
+            Dictionary<long, Track> newTracks = new Dictionary<long, Track> ();
 
             // parse the tracks
             foreach (XmlNode node in doc.SelectNodes("/plist/dict/key[text()='Tracks']/following-sibling::*[1]//dict")) {
@@ -159,7 +144,18 @@ namespace Tangerine.Plugins {
                 if (!uri.IsFile)
                     continue;
 
-                Track track = new Track ();
+                long trackId = (long) dict["Track ID"];
+
+                Track track;
+                if (tracks.ContainsKey (trackId)) {
+                    track = tracks[trackId];
+                } else {
+                    track = new Track ();
+                    Daemon.DefaultDatabase.AddTrack (track);
+                }
+
+                newTracks[trackId] = track;
+
                 track.FileName = uri.LocalPath;
                 if (track.FileName.StartsWith (@"\\localhost\")) {
                     track.FileName = track.FileName.Substring (12);
@@ -171,16 +167,21 @@ namespace Tangerine.Plugins {
                 track.Genre = GetDictValue<string> (dict, "Genre");
 
                 if (dict.ContainsKey ("Total Time")) {
-                    track.Duration = TimeSpan.FromSeconds ((long) dict["Total Time"]);
+                    track.Duration = TimeSpan.FromMilliseconds ((long) dict["Total Time"]);
                 }
 
                 if (dict.ContainsKey ("Bit Rate")) {
                     track.BitRate = Convert.ToInt16 ((long) dict["Bit Rate"]);
                 }
-
-                tracks[(long) dict["Track ID"]] = track;
-                Daemon.DefaultDatabase.AddTrack (track);
             }
+
+            foreach (long id in tracks.Keys) {
+                if (!newTracks.ContainsKey (id)) {
+                    Daemon.DefaultDatabase.RemoveTrack (tracks[id]);
+                }
+            }
+
+            tracks = newTracks;
 
             // parse the playlists
             XmlNode arrayNode = doc.SelectNodes ("/plist/dict/key[text()='Playlists']/following-sibling::*[1]")[0];
@@ -193,8 +194,18 @@ namespace Tangerine.Plugins {
                         continue;
                 }
 
-                Playlist pl = new Playlist ((string) dict["Name"]);
                 long plid = (long) dict["Playlist ID"];
+
+                Playlist pl;
+                if (playlists.ContainsKey (plid)) {
+                    pl = playlists[plid];
+                } else {
+                    pl = new Playlist ((string) dict["Name"]);
+                    Daemon.DefaultDatabase.AddPlaylist (pl);
+                    playlists[plid] = pl;
+                }
+
+                pl.Clear ();
 
                 if (dict.ContainsKey ("Playlist Items")) {
                     List<Dictionary<string, object>> items = (List<Dictionary<string, object>>) dict["Playlist Items"];
@@ -210,6 +221,29 @@ namespace Tangerine.Plugins {
                 playlists[plid] = pl;
                 Daemon.DefaultDatabase.AddPlaylist (pl);
             }
+
+            Daemon.Log.DebugFormat ("Added {0} tracks and {1} playlists", tracks.Count, playlists.Count);
+        }
+
+        private void RefreshLoop () {
+            TimeSpan threshold = TimeSpan.FromSeconds (5);
+
+            while (true) {
+                lock (refreshLock) {
+                    if (!Monitor.Wait (refreshLock, threshold) && lastChange != DateTime.MinValue &&
+                        DateTime.Now - lastChange >= threshold) {
+                        try {
+                            RefreshTracks ();
+                            Daemon.Server.Commit ();
+                            lastChange = DateTime.MinValue;
+                        } catch (Exception e) {
+                            // ignore errors here, they are usually due to a crappy race or something
+                        }
+                    } else if (lastChange == DateTime.MaxValue) {
+                        break;
+                    }
+                }
+            }
         }
 
         public void Dispose () {
@@ -217,6 +251,13 @@ namespace Tangerine.Plugins {
                 watcher.Dispose ();
                 watcher = null;
             }
+
+            lock (refreshLock) {
+                lastChange = DateTime.MaxValue;
+                Monitor.Pulse (refreshLock);
+            }
+
+            ClearTracks ();
         }
     }
 }

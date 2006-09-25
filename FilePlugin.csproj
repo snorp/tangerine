@@ -41,7 +41,7 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>deps\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=200a2bd1219e83a8">
       <SpecificVersion>False</SpecificVersion>
@@ -63,6 +63,7 @@
     <ProjectReference Include="TagLib.csproj">
       <Project>{1A9CC6B2-4A61-4D2E-A33F-C0710AC83336}</Project>
       <Name>TagLib</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="Tangerine.csproj">
       <Project>{A7F02EB8-6EE6-4E99-8D9F-54B565CC870F}</Project>

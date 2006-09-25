@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -31,7 +32,6 @@ namespace TangerineProperties.src {
             List<Provider> comboProviders = new List<Provider> ();
             foreach (Provider p in providers) {
                 if (p.Plugin != "google") {
-                    Console.WriteLine ("Adding: *{0}*", p.Plugin);
                     comboProviders.Add (p);
                 }
             }
@@ -39,7 +39,7 @@ namespace TangerineProperties.src {
             if (comboProviders.Count == 0) {
                 comboProviders.Add (new Provider ("None", "none"));
                 providerCombo.Enabled = false;
-                providerRadio.Enabled = false;
+                providerRadioButton.Enabled = false;
             }
 
             providerCombo.DataSource = comboProviders;
@@ -58,14 +58,17 @@ namespace TangerineProperties.src {
         private void SetProvider (string plugin) {
             Provider provider = FindProvider (plugin);
 
-            if (plugin == "file" || (plugin == "google" && provider == null)) {
+            Process[] crawlers = Process.GetProcessesByName ("GoogleDesktopCrawl");
+
+            if (plugin == "file" || (plugin == "google" && (provider == null ||
+                crawlers == null || crawlers.Length == 0))) {
                 dirRadioButton.Checked = true;
             } else if (plugin == "google") {
                 googleRadioButton.Checked = true;
             } else {
                 if (provider != null) {
                     providerCombo.SelectedItem = provider;
-                    providerRadio.Checked = true;
+                    providerRadioButton.Checked = true;
                 } if (provider == null && FindProvider ("google") == null) {
                     dirRadioButton.Select ();
                 } else if (provider == null) {
@@ -133,7 +136,6 @@ namespace TangerineProperties.src {
             Process[] crawlers = Process.GetProcessesByName("GoogleDesktopCrawl");
             if (crawlers == null || crawlers.Length == 0) {
                 googleRadioButton.Enabled = false;
-                dirRadioButton.Checked = true;
             }
 
             SetEnabled ();
@@ -240,7 +242,11 @@ namespace TangerineProperties.src {
             Process[] procs = Process.GetProcessesByName ("tangerine-daemon");
             if (procs != null && procs.Length > 0) {
                 foreach (Process proc in procs) {
-                    proc.Kill ();
+                    EventWaitHandle handle = new EventWaitHandle (false, EventResetMode.AutoReset,
+                        "tangerine-" + proc.Id);
+
+                    handle.Set ();
+                    proc.WaitForExit ();
                 }
             }
         }

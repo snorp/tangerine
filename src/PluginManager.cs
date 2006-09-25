@@ -24,7 +24,7 @@ namespace Tangerine {
 
     public class PluginManager {
 
-        private static List<Assembly> pluginAssemblies = new List<Assembly> ();
+        private static Dictionary<string, Assembly> pluginAssemblies = new Dictionary<string, Assembly> ();
         private static ArrayList plugins = new ArrayList ();
 
         public static string PluginDirectory {
@@ -34,11 +34,12 @@ namespace Tangerine {
         }
 
         public static void LoadPlugins (string[] names) {
-            LoadPlugins (names, PluginDirectory);
-
+            LoadPluginAssemblies (PluginDirectory);
 #if DEBUG
-            LoadPlugins (names, AppDomain.CurrentDomain.BaseDirectory);
+            LoadPluginAssemblies (AppDomain.CurrentDomain.BaseDirectory);
 #endif
+
+            LoadPluginObjects (names);
 
             if (plugins.Count == 0)
                 Daemon.Log.Warn ("No plugins were loaded");
@@ -50,18 +51,19 @@ namespace Tangerine {
             }
             
             foreach (string file in Directory.GetFiles (dir, "*.dll")) {
+                if (pluginAssemblies.ContainsKey (file))
+                    continue;
+
                 try {
-                    pluginAssemblies.Add (Assembly.LoadFrom (file));
+                    pluginAssemblies[file] = Assembly.LoadFrom (file);
                 } catch (Exception e) {
                     Daemon.LogError (String.Format ("Failed to load plugin assembly '{0}'", file), e);
                 }
             }
         }
 
-        public static void LoadPlugins (string[] names, string dir) {
-            LoadPluginAssemblies (dir);
-
-            foreach (Assembly asm in pluginAssemblies) {
+        private static void LoadPluginObjects (string[] names) {
+            foreach (Assembly asm in pluginAssemblies.Values) {
                 foreach (Type type in asm.GetTypes ()) {
                     PluginAttribute attr = Attribute.GetCustomAttribute (type, typeof (PluginAttribute)) as PluginAttribute;
 
@@ -71,7 +73,6 @@ namespace Tangerine {
                     if (names == null || names.Length == 0 || Array.IndexOf (names, attr.Name) >= 0) {
                         try {
                             plugins.Add (Activator.CreateInstance (type));
-                            Daemon.Log.InfoFormat ("Loaded plugin '{0}'", attr.Name);
                         } catch (Exception e) {
                             Daemon.LogError (String.Format ("Failed to load '{0}'", attr.Name), e);
                         }
