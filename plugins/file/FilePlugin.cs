@@ -108,7 +108,7 @@ namespace Tangerine.Plugins {
                     Directory.CreateDirectory (Daemon.ConfigDirectory);
                 }
                 
-                odb = Db4o.OpenFile (Path.Combine (Daemon.ConfigDirectory, "songs.db"));
+                odb = Db4o.OpenFile (Path.Combine (Daemon.ConfigDirectory, "tracks.db"));
             }
 
             ObjectSet result = odb.Get (typeof (Track));
