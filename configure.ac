@@ -1,8 +1,8 @@
 AC_INIT(README)
 
 MAJOR_VERSION=0
-MINOR_VERSION=2
-MICRO_VERSION=8
+MINOR_VERSION=3
+MICRO_VERSION=0
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
                                                                                 
 AM_INIT_AUTOMAKE(tangerine, $VERSION)
