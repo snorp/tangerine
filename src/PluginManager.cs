@@ -73,6 +73,7 @@ namespace Tangerine {
                     if (names == null || names.Length == 0 || Array.IndexOf (names, attr.Name) >= 0) {
                         try {
                             plugins.Add (Activator.CreateInstance (type));
+                            Daemon.Log.InfoFormat ("Loaded plugin '{0}'", attr.Name);
                         } catch (Exception e) {
                             Daemon.LogError (String.Format ("Failed to load '{0}'", attr.Name), e);
                         }

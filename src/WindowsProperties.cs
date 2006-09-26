@@ -89,6 +89,7 @@ namespace TangerineProperties.src {
         }
 
         private void okButton_Click (object sender, EventArgs e) {
+            this.Hide ();
             SavePrefs ();
             this.Close ();
         }
@@ -201,7 +202,7 @@ namespace TangerineProperties.src {
                 plugin = ((Provider) providerCombo.SelectedItem).Plugin;
             }
 
-            Daemon.PluginNames = new string[] { plugin };
+            Daemon.PluginNames = new string[] { plugin, "system-tray" };
 
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 Daemon.ConfigSource.AddConfig ("FilePlugin");

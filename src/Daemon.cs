@@ -10,6 +10,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using log4net;
 using log4net.Core;
 using log4net.Repository;
@@ -192,6 +193,9 @@ namespace Tangerine {
             UnixSignal.RegisterHandler (Signum.SIGTERM, OnSignal);
             UnixSignal.RegisterHandler (Signum.SIGINT, OnSignal);
             UnixSignal.Start ();
+#else
+            Application.EnableVisualStyles ();
+            Application.SetCompatibleTextRenderingDefault (false);
 #endif
             
             server = new Server (Name);
@@ -432,13 +436,20 @@ namespace Tangerine {
 
         private static void RunLoop () {
             loopHandle = new EventWaitHandle (false, EventResetMode.AutoReset,
-                "tangerine-" + Process.GetCurrentProcess ().Id);
+                    "tangerine-" + Process.GetCurrentProcess ().Id);
 
-            loopHandle.WaitOne ();
+            Thread thread = new Thread (delegate (object o) {
+                loopHandle.WaitOne ();
+                Stop ();
+            });
+
+            thread.Start ();
+            
+            Application.Run ();
         }
 
         private static bool QuitLoop() {
-            loopHandle.Set ();
+            Application.Exit ();
             return true;
         }
 #endif
