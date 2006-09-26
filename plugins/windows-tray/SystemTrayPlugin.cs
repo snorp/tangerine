@@ -28,8 +28,24 @@ namespace Tangerine.Plugins {
             });
 
             icon.ContextMenu = new ContextMenu (new MenuItem[] { prefsItem, quitItem });
-            icon.Text = Daemon.Server.Name;
             icon.Visible = true;
+
+            UpdateIconText ();
+
+            Daemon.Server.UserLogin += delegate {
+                UpdateIconText ();
+            };
+
+            Daemon.Server.UserLogout += delegate {
+                UpdateIconText ();
+            };
+        }
+
+        private void UpdateIconText () {
+            if (icon != null) {
+                icon.Text = String.Format ("{0}: {1} users", Daemon.Server.Name,
+                                           Daemon.Server.Users.Count);
+            }
         }
 
         public void Dispose () {

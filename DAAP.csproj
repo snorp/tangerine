@@ -68,6 +68,7 @@
     <Compile Include="deps\daap-sharp\ServerInfo.cs" />
     <Compile Include="deps\daap-sharp\ServiceLocator.cs" />
     <Compile Include="deps\daap-sharp\Track.cs" />
+    <Compile Include="deps\daap-sharp\User.cs" />
     <Compile Include="deps\daap-sharp\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
