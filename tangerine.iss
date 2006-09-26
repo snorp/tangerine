@@ -25,6 +25,9 @@ Source: "C:\mDNSResponder-binary\Output\mDNSResponderSetup.exe"; DestDir: "{app}
 Name: "{group}\Tangerine Preferences"; IconFilename: "{app}\tangerine.ico"; Filename: "{app}\tangerine-preferences.exe"; WorkingDir: "{app}"
 Name: "{group}\Uninstall Tangerine"; Filename: "{uninstallexe}"
 
+[Run]
+Filename: "{app}\tangerine-preferences.exe"; Description: "Configure Tangerine"; Flags: postinstall nowait
+
 [UninstallDelete]
 Type: files; Name: "{userstartup}\tangerine.lnk"
 
