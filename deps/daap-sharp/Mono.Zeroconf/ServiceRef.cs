@@ -56,7 +56,7 @@ namespace Mono.Zeroconf
         
         public void Process()
         {
-            while (ProcessSingle () == ServiceError.NoError) ;
+            while(ProcessSingle() == ServiceError.NoError);
         }
 
         public int SocketFD {

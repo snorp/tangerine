@@ -200,6 +200,8 @@ namespace Tangerine {
 #endif
             
             server = new Server (Name);
+            server.UserLogin += OnUserLogin;
+            server.UserLogout += OnUserLogout;
             server.Port = Port;
             server.IsPublished = IsPublished;
             server.Collision += OnCollision;
@@ -255,6 +257,24 @@ namespace Tangerine {
             }
 
             return list;
+        }
+
+        private static void OnUserLogin (object o, UserArgs args) {
+            if (args.User.UserName != null && args.User.UserName != String.Empty
+                && args.User.UserName != "none") {
+                log.InfoFormat ("User '{0}' logged in from {1}", args.User.UserName, args.User.Address);
+            } else {
+                log.InfoFormat ("Anonymous user logged in from {0}", args.User.Address);
+            }
+        }
+
+        private static void OnUserLogout (object o, UserArgs args) {
+            if (args.User.UserName != null && args.User.UserName != String.Empty
+                && args.User.UserName != "none") {
+                log.InfoFormat ("User '{0}' logged out from {1}", args.User.UserName, args.User.Address);
+            } else {
+                log.InfoFormat ("Anonymous user logged out from {0}", args.User.Address);
+            }
         }
 
         private static void Shutdown () {

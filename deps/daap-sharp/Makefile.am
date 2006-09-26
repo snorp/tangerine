@@ -22,6 +22,7 @@ DAAPSOURCES =				\
 	$(srcdir)/ServerInfo.cs		\
 	$(srcdir)/ServiceLocator.cs	\
 	$(srcdir)/Track.cs \
+	$(srcdir)/User.cs \
 	$(srcdir)/Utility.cs \
 	$(srcdir)/Mono.Zeroconf/*.cs
 
