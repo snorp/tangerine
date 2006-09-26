@@ -10,7 +10,6 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using log4net;
 using log4net.Core;
 using log4net.Repository;
@@ -23,6 +22,8 @@ using DAAP;
 #if !WINDOWS
 using Mono.Unix;
 using Mono.Unix.Native;
+#else
+using System.Windows.Forms;
 #endif
 
 namespace Tangerine {
