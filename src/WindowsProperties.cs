@@ -106,13 +106,9 @@ namespace TangerineProperties.src {
             generalOptionsPanel.Enabled = enabledCheck.Checked;
             accessControlPanel.Enabled = enabledCheck.Checked;
 
-            if (googleRadioButton.Checked) {
-                musicDirBox.Enabled = false;
-                musicDirButton.Enabled = false;
-            } else {
-                musicDirBox.Enabled = true;
-                musicDirButton.Enabled = true;
-            }
+            providerCombo.Enabled = providerRadioButton.Checked;
+            musicDirBox.Enabled = dirRadioButton.Checked;
+            musicDirButton.Enabled = dirRadioButton.Checked;
         }
 
         private void LoadPrefs () {
