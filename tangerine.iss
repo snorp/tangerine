@@ -1,7 +1,7 @@
 [Setup]
 AppId=Tangerine
 AppName=Tangerine
-AppVerName=Tangerine 0.2.9
+AppVerName=Tangerine 0.3.0
 DefaultDirName={pf}\Tangerine
 DefaultGroupName=Tangerine
 OutputBaseFilename=TangerineSetup
@@ -32,12 +32,16 @@ Filename: "{app}\tangerine-preferences.exe"; Description: "Configure Tangerine";
 Type: files; Name: "{userstartup}\tangerine.lnk"
 
 [Code]
+var
+  NeedStart: Boolean;
+  
 function InitializeSetup(): Boolean;
 var
   ResultCode: Integer;
 begin
   Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/F /IM tangerine-daemon.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-
+  NeedStart := ResultCode = 0
+  
   Result := RegValueExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\.NETFramework\policy\v2.0', '50727')
   if not Result then begin
     ExtractTemporaryFile('PSetup.exe')
@@ -60,4 +64,11 @@ begin
   Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/F /IM tangerine-daemon.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
   Exec(ExpandConstant('{win}\system32\TaskKill.exe'), '/F /IM tangerine-preferences.exe', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
   Result := True
+end;
+
+function DeinitializeSetup():
+var
+  ResultCode: Integer;
+begin
+  Exec(ExpandConstant('{app}\tangerine-daemon.exe'), '', '', SW_HIDE, ewNoWait, ResultCode)
 end;
