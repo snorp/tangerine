@@ -477,16 +477,21 @@ namespace Tangerine {
         }
 #endif
 
-        public static string GetStartupPath () {
-            return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Startup),
-                "tangerine.lnk");
-        }
-
+        
         public static string GetDaemonPath () {
             return Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine-daemon.exe");
         }
 
 #if WINDOWS
+        private static string GetAutostartPath () {
+            return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Startup),
+                "tangerine.lnk");
+        }
+        
+        public static bool IsAutostartEnabled {
+            get { return File.Exists (GetAutostartPath ()); }
+        }
+        
         public static void EnableAutostart () {
             WshShell shell = new WshShell ();
             IWshShortcut shortcut = (IWshShortcut) shell.CreateShortcut (GetStartupPath ());
@@ -501,6 +506,39 @@ namespace Tangerine {
                 File.Delete (path);
         }
 #else
+        private static string GetAutostartPath () {
+            return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
+                                 ".config/autostart/tangerine.desktop");
+        }
+
+        public static bool IsAutostartEnabled {
+            get { return File.Exists (GetAutostartPath ()); }
+        }
+        
+        public static void EnableAutostart () {
+            string path = GetAutostartPath ();
+            
+            if (File.Exists (path)) {
+                File.Delete (path);
+            }
+
+            if (!Directory.Exists (System.IO.Path.GetDirectoryName (path))) {
+                Directory.CreateDirectory (System.IO.Path.GetDirectoryName (path));
+            }
+
+            using (StreamWriter writer = new StreamWriter (File.Open (path, FileMode.Create))) {
+                writer.Write ("[Desktop Entry]\nName=No name\nEncoding=UTF-8\nVersion=1.0\nExec=tangerine\n" +
+                              "Type=Application\nX-GNOME-Autostart-enabled=true");
+            }
+        }
+
+        public static void DisableAutostart () {
+            string path = GetAutostartPath ();
+
+            if (File.Exists (path)) {
+                File.Delete (path);
+            }
+        }
 #endif
     }
 }

@@ -41,7 +41,6 @@ namespace Tangerine {
 
         private string configPath;
         private string passwdPath;
-        private string autostartPath;
         private List<Provider> providers;
 
         private ListStore providerStore;
@@ -123,8 +122,6 @@ namespace Tangerine {
                                   ".tangerine");
             passwdPath = Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
                                   ".tangerine-passwd");
-            autostartPath = Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
-                                     ".config", "autostart", "tangerine.desktop");
             LoadPrefs ();
             SetSensitive ();
         }
@@ -244,22 +241,7 @@ namespace Tangerine {
 
             passwordEntry.Text = ReadPassword ();
 
-            enabledButton.Active = File.Exists (autostartPath);
-        }
-
-        private void WriteAutostart () {
-            if (File.Exists (autostartPath)) {
-                File.Delete (autostartPath);
-            }
-
-            if (!Directory.Exists (System.IO.Path.GetDirectoryName (autostartPath))) {
-                Directory.CreateDirectory (System.IO.Path.GetDirectoryName (autostartPath));
-            }
-
-            using (StreamWriter writer = new StreamWriter (File.Open (autostartPath, FileMode.Create))) {
-                writer.Write ("[Desktop Entry]\nName=No name\nEncoding=UTF-8\nVersion=1.0\nExec=tangerine\n" +
-                              "Type=Application\nX-GNOME-Autostart-enabled=true");
-            }
+            enabledButton.Active = Daemon.IsAutostartEnabled;
         }
 
         private string ReadPassword () {
@@ -317,12 +299,12 @@ namespace Tangerine {
                 Daemon.SaveConfig ();
 
                 if (enabledButton.Active) {
-                    WriteAutostart ();
+                    Daemon.EnableAutostart ();
                     RestartDaemon ();
                 }
             } else {
                 if (enabledButton.Active) {
-                    WriteAutostart ();
+                    Daemon.EnableAutostart ();
 
                     if (!IsRunning ()) {
                         StartDaemon ();
@@ -331,7 +313,7 @@ namespace Tangerine {
             }
 
             if (!enabledButton.Active) {
-                File.Delete (autostartPath);
+                Daemon.DisableAutostart ();
                 StopDaemon ();
             }
         }
