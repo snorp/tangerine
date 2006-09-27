@@ -12,7 +12,7 @@ namespace Tangerine.Plugins {
 
     [Plugin ("system-tray")]
     public class SystemTrayPlugin : IDisposable {
-
+        private const string DontAskRegKey = @"Software\Tangerine";
         private NotifyIcon icon;
 
         public SystemTrayPlugin () {
@@ -23,9 +23,9 @@ namespace Tangerine.Plugins {
                 Process.Start ("tangerine-preferences.exe");
             });
 
-            MenuItem quitItem = new MenuItem ("Quit", delegate {
-                Daemon.Stop ();
-            });
+            MenuItem quitItem = new MenuItem ("Quit", OnQuit);
+
+                
 
             icon.ContextMenu = new ContextMenu (new MenuItem[] { prefsItem, quitItem });
             icon.Visible = true;
@@ -39,6 +39,30 @@ namespace Tangerine.Plugins {
             Daemon.Server.UserLogout += delegate {
                 UpdateIconText ();
             };
+        }
+
+        private void OnQuit (object o, EventArgs args) {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey (DontAskRegKey, true);
+            if (key == null) {
+                key = Registry.CurrentUser.CreateSubKey (DontAskRegKey);
+            }
+
+            if ((int) key.GetValue ("NoAskQuit", 0) == 1) {
+                Daemon.Stop ();
+                return;
+            }
+               
+            Tangerine.src.QuitDialog dialog = new Tangerine.src.QuitDialog ();
+            DialogResult result = dialog.ShowDialog ();
+            if (dialog.NoAsk) {
+                key.SetValue ("NoAskQuit", 1);
+            }
+
+            if (result == DialogResult.OK) {
+                Daemon.DisableAutostart ();
+            }
+
+            Daemon.Stop ();
         }
 
         private void UpdateIconText () {

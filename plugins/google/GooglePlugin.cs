@@ -10,18 +10,19 @@ namespace Tangerine.Plugins {
 
     [Plugin ("google")]
     public class GooglePlugin : IDisposable {
+        private const string RegkeyPath = @"Software\Tangerine";
         
         public GooglePlugin () {
             int cookie;
 
-            RegistryKey key = Registry.CurrentUser.OpenSubKey ("tangerine-google", true);
+            RegistryKey key = Registry.CurrentUser.OpenSubKey (RegkeyPath, true);
             if (key == null) {
-                key = Registry.CurrentUser.CreateSubKey ("tangerine-google");
+                key = Registry.CurrentUser.CreateSubKey (RegkeyPath);
             }
 
-            object val = key.GetValue ("cookie");
+            object val = key.GetValue ("google-cookie");
             if (val == null) {
-                string guid = "{8534E033-3D7C-4753-AC8C-35B289607165}";
+                string guid = "{" + Guid.NewGuid ().ToString () + "}";
                 GoogleDesktopRegistrar reg = new GoogleDesktopRegistrarClass ();
                 reg.StartComponentRegistration (guid, new object[] {
                     "Title", "Tangerine Google Plugin",
@@ -33,7 +34,7 @@ namespace Tangerine.Plugins {
                 cookie = qreg.RegisterPlugin (guid, true);
                 reg.FinishComponentRegistration ();
 
-                key.SetValue ("cookie", cookie);
+                key.SetValue ("google-cookie", cookie);
             } else {
                 cookie = (int) val;
             }

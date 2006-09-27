@@ -60,7 +60,7 @@ namespace TangerineProperties.src {
             this.enabledCheck.Text = "Enable music sharing";
             this.toolTip1.SetToolTip (this.enabledCheck, "Whether music sharing is enabled or not");
             this.enabledCheck.UseVisualStyleBackColor = true;
-            this.enabledCheck.CheckedChanged += new System.EventHandler (this.checkBox1_CheckedChanged);
+            this.enabledCheck.CheckedChanged += new System.EventHandler (this.OnEnableCheckedChanged);
             // 
             // shareLabel
             // 

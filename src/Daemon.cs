@@ -24,6 +24,8 @@ using Mono.Unix;
 using Mono.Unix.Native;
 #else
 using System.Windows.Forms;
+using IWshRuntimeLibrary;
+using File = System.IO.File;
 #endif
 
 namespace Tangerine {
@@ -473,6 +475,32 @@ namespace Tangerine {
             Application.Exit ();
             return true;
         }
+#endif
+
+        public static string GetStartupPath () {
+            return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Startup),
+                "tangerine.lnk");
+        }
+
+        public static string GetDaemonPath () {
+            return Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine-daemon.exe");
+        }
+
+#if WINDOWS
+        public static void EnableAutostart () {
+            WshShell shell = new WshShell ();
+            IWshShortcut shortcut = (IWshShortcut) shell.CreateShortcut (GetStartupPath ());
+            shortcut.TargetPath = GetDaemonPath ();
+            shortcut.IconLocation = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine.ico");
+            shortcut.Save ();
+        }
+
+        public static void DisableAutostart () {
+            string path = GetStartupPath ();
+            if (File.Exists (path))
+                File.Delete (path);
+        }
+#else
 #endif
     }
 }

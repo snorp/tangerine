@@ -10,7 +10,6 @@ using System.Text;
 using System.Windows.Forms;
 using Tangerine;
 using Nini;
-using IWshRuntimeLibrary;
 
 using File = System.IO.File;
 
@@ -94,12 +93,12 @@ namespace TangerineProperties.src {
             this.Close ();
         }
 
-        private void checkBox1_CheckedChanged (object sender, EventArgs e) {
+        private void OnEnableCheckedChanged (object sender, EventArgs e) {
             SetEnabled ();
         }
 
         private bool GetEnabled () {
-            return File.Exists (GetStartupPath ());
+            return File.Exists (Daemon.GetStartupPath ());
         }
 
         private void SetEnabled () {
@@ -138,27 +137,14 @@ namespace TangerineProperties.src {
             SetEnabled ();
         }
 
-        private string GetStartupPath () {
-            return Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Startup),
-                "tangerine.lnk");
-        }
-
-        private string GetDaemonPath () {
-            return Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine-daemon.exe");
-        }
+        
 
         private void InstallStartupProgram () {
-            WshShell shell = new WshShell ();
-            IWshShortcut shortcut = (IWshShortcut) shell.CreateShortcut (GetStartupPath ());
-            shortcut.TargetPath = GetDaemonPath ();
-            shortcut.IconLocation = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine.ico");
-            shortcut.Save ();
+            Daemon.EnableAutostart ();
         }
 
         private void RemoveStartupProgram () {
-            string path = GetStartupPath ();
-            if (File.Exists (path))
-                File.Delete (path);
+            Daemon.DisableAutostart ();
         }
 
         private string ReadPassword () {
