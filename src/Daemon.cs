@@ -494,14 +494,14 @@ namespace Tangerine {
         
         public static void EnableAutostart () {
             WshShell shell = new WshShell ();
-            IWshShortcut shortcut = (IWshShortcut) shell.CreateShortcut (GetStartupPath ());
+            IWshShortcut shortcut = (IWshShortcut) shell.CreateShortcut (GetAutostartPath ());
             shortcut.TargetPath = GetDaemonPath ();
             shortcut.IconLocation = Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "tangerine.ico");
             shortcut.Save ();
         }
 
         public static void DisableAutostart () {
-            string path = GetStartupPath ();
+            string path = GetAutostartPath ();
             if (File.Exists (path))
                 File.Delete (path);
         }

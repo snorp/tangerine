@@ -98,7 +98,7 @@ namespace TangerineProperties.src {
         }
 
         private bool GetEnabled () {
-            return File.Exists (Daemon.GetStartupPath ());
+            return Daemon.IsAutostartEnabled;
         }
 
         private void SetEnabled () {
