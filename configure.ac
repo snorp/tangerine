@@ -28,6 +28,13 @@ if test "x$MCS" = "x" ; then
    AC_MSG_ERROR([Can not find "gmcs" in your PATH])
 fi
 
+dnl gtk-sharp-2.0, gnome-sharp-2.0, glade-sharp-2.0
+PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0)
+AC_SUBST(GTK_SHARP_LIBS)
+
+PKG_CHECK_MODULES(GLADE_SHARP, glade-sharp-2.0)
+AC_SUBST(GLADE_SHARP_LIBS)
+
 AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")
 AM_CONDITIONAL(ENABLE_MDNSD, test "x$enable_mdnsd" = "xyes")
 
@@ -39,13 +46,6 @@ else
         MCS_FLAGS=$AVAHI_LIBS
         AC_SUBST(MCS_FLAGS)
 fi
-
-dnl gtk-sharp-2.0, gnome-sharp-2.0, glade-sharp-2.0
-PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0)
-AC_SUBST(GTK_SHARP_LIBS)
-
-PKG_CHECK_MODULES(GLADE_SHARP, glade-sharp-2.0)
-AC_SUBST(GLADE_SHARP_LIBS)
 
 AC_ARG_ENABLE(beagle, AC_HELP_STRING([--disable-beagle], [Do not build the beagle plugin]), enable_beagle="no", enable_beagle="yes")
 
