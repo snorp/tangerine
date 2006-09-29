@@ -2,7 +2,7 @@ MCS_FLAGS = -debug
 ASSEMBLY_NAME = taglib-sharp
 ASSEMBLY = $(top_builddir)/deps/taglib-sharp/$(ASSEMBLY_NAME).dll
 
-taglibdir = $(pkglibdir)
+taglibdir = $(prefix)/lib/tangerine
 taglib_SCRIPTS = $(ASSEMBLY) $(ASSEMBLY).mdb
 
 ASSEMBLY_SOURCES = \
