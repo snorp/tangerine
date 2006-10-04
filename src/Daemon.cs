@@ -19,7 +19,7 @@ using log4net.Appender;
 using Nini.Config;
 using DAAP;
 
-#if !WINDOWS
+#if LINUX || MACOSX
 using Mono.Unix;
 using Mono.Unix.Native;
 #else
@@ -48,7 +48,7 @@ namespace Tangerine {
         public static bool IsPublished;
         public static string[] PluginNames;
 
-#if !WINDOWS
+#if LINUX || MACOSX
         public static string ConfigPath = Path.Combine (Environment.GetEnvironmentVariable ("HOME"), ".tangerine");
 #else        
         public static string ConfigPath = Path.Combine (Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), "tangerine"), "config");
@@ -192,7 +192,7 @@ namespace Tangerine {
             
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
-#if !WINDOWS
+#if LINUX || MACOSX
             UnixSignal.RegisterHandler (Signum.SIGTERM, OnSignal);
             UnixSignal.RegisterHandler (Signum.SIGINT, OnSignal);
             UnixSignal.Start ();
@@ -217,7 +217,7 @@ namespace Tangerine {
 
             PluginManager.LoadPlugins (PluginNames);
 
-#if !WINDOWS
+#if LINUX
             if (Inotify.Enabled) {
                 Inotify.Start ();
             }
@@ -282,7 +282,7 @@ namespace Tangerine {
         private static void Shutdown () {
             log.Warn ("Shutting down");
 
-#if !WINDOWS
+#if LINUX
             if (Inotify.Enabled) {
                 Inotify.Stop ();
             }
@@ -290,7 +290,7 @@ namespace Tangerine {
                 
             PluginManager.UnloadPlugins ();
             server.Stop ();
-#if !WINDOWS
+#if LINUX || MACOSX
             UnixSignal.Stop ();
             Syscall.exit (0);
 #endif
@@ -309,7 +309,7 @@ namespace Tangerine {
                 Environment.Exit(0);
         }
 
-#if !WINDOWS
+#if LINUX || MACOSX
         private static void OnSignal (Signum sig) {
             if (sig == Signum.SIGTERM || sig == Signum.SIGINT) {
                 Stop ();
@@ -437,7 +437,7 @@ namespace Tangerine {
             server.Name = name;
         }
 
-#if !WINDOWS
+#if LINUX
 
         private static GLib.MainLoop loop = new GLib.MainLoop ();
 
@@ -452,6 +452,29 @@ namespace Tangerine {
                 loop.Quit ();
                 return true;
             }
+        }
+#elif MACOSX
+
+//FIXME: should run a cocoa main loop or whatever
+        private static object loopLock = new object ();
+        private static bool running = false;
+
+        private static void RunLoop () {
+            lock (loopLock) {
+                running = true;
+                Monitor.Wait (loopLock);
+            }
+        }
+
+        private static bool QuitLoop () {
+            lock (loopLock) {
+                if (!running)
+                    return false;
+
+                Monitor.Pulse (loopLock);
+            }
+
+            return true;
         }
 #else
 

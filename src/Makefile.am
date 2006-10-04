@@ -9,13 +9,18 @@ asm_DATA =				\
 	$(TANG_DAEMON)			\
 	tangerine-properties.exe.config	\
 	tangerine-daemon.exe.config	\
-	$(TANG_PROPS_ASSEMBLY)		\
 	$(TANG_PLUGINS)
 
+if BUILD_GUI
+asm_DATA += $(TANG_PROPS_ASSEMBLY)
+endif
+
+if HAVE_INOTIFY
 gluelibdir = $(pkglibdir)
 gluelib_LTLIBRARIES = libtangglue.la
 
 libtangglue_la_SOURCES = inotify-glue.c inotify.h inotify-syscalls.h
+endif
 
 bin_SCRIPTS = tangerine tangerine-properties
 

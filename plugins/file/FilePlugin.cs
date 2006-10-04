@@ -29,7 +29,7 @@ namespace Tangerine.Plugins {
         
         public FilePlugin () {
 
-#if !WINDOWS
+#if LINUX || MACOSX
             string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "Music");
 #else
             string defaultDir = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic);
@@ -44,7 +44,7 @@ namespace Tangerine.Plugins {
             db = Daemon.DefaultDatabase;
             log = Daemon.Log;
 
-#if !WINDOWS
+#if LINUX
             if (Inotify.Enabled) {
                 log.Info ("Using inotify to watch for changes");
             } else {
@@ -146,7 +146,7 @@ namespace Tangerine.Plugins {
                 return;
             }
 
-#if !WINDOWS
+#if LINUX
             Inotify.Subscribe (dir, OnDirectoryEvent,
                                Inotify.EventType.CloseWrite | Inotify.EventType.MovedFrom |
                                Inotify.EventType.MovedTo | Inotify.EventType.Delete | Inotify.EventType.Unmount);
@@ -275,7 +275,7 @@ namespace Tangerine.Plugins {
             playlistHash.Remove (file);
         }
 
-#if !WINDOWS
+#if LINUX
         private void OnDirectoryEvent (Inotify.Watch watch, string path, string subitem,
                                        string srcpath, Inotify.EventType type) {
 

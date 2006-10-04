@@ -28,12 +28,6 @@ if test "x$MCS" = "x" ; then
    AC_MSG_ERROR([Can not find "gmcs" in your PATH])
 fi
 
-dnl gtk-sharp-2.0, gnome-sharp-2.0, glade-sharp-2.0
-PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0)
-AC_SUBST(GTK_SHARP_LIBS)
-
-PKG_CHECK_MODULES(GLADE_SHARP, glade-sharp-2.0)
-AC_SUBST(GLADE_SHARP_LIBS)
 
 AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")
 AM_CONDITIONAL(ENABLE_MDNSD, test "x$enable_mdnsd" = "xyes")
@@ -74,9 +68,44 @@ if test "x$have_ipod" = "xyes"; then \
     AC_SUBST(IPOD_SHARP_ASSEMBLIES)
 fi
 
-dnl glib-sharp
-PKG_CHECK_MODULES(GLIB_SHARP, glib-sharp-2.0)
-AC_SUBST(GLIB_SHARP_LIBS)
+have_inotify="no"
+build_gui="no"
+build_session_plugin="no"
+platform="none"
+DNSSD_LIB="none"
+AC_MSG_CHECKING([host platform characteristics])
+case "$host" in
+    *-*-linux*)
+        PKG_CHECK_MODULES(GLIB_SHARP, glib-sharp-2.0)
+        AC_SUBST(GLIB_SHARP_LIBS)
+
+        PKG_CHECK_MODULES(GTK_SHARP, gtk-sharp-2.0)
+        AC_SUBST(GTK_SHARP_LIBS)
+
+        PKG_CHECK_MODULES(GLADE_SHARP, glade-sharp-2.0)
+        AC_SUBST(GLADE_SHARP_LIBS)
+
+        have_inotify="yes"
+        build_gui="yes"
+        build_session_plugin="yes"
+        platform="LINUX"
+        DNSSD_LIB="libnss_mdns-0.2.so"
+        ;;
+    *-*-darwin*)
+        have_inotify="no"
+        build_gui="no"
+        build_session_plugin="no"
+        platform="MACOSX"
+        DNSSD_LIB="libSystem.B.dylib"
+        ;;
+esac
+AC_MSG_RESULT(ok)
+
+AC_SUBST(DNSSD_LIB)
+AM_CONDITIONAL(HAVE_INOTIFY, test "x$have_inotify" = "xyes")       
+AM_CONDITIONAL(BUILD_GUI, test "x$build_gui" = "xyes")       
+AM_CONDITIONAL(BUILD_SESSION_PLUGIN, test "x$build_session_plugin" = "xyes")       
+MCS_FLAGS="$MCS_FLAGS -define:$platform"
 
 dnl muine
 have_muine=no
@@ -107,6 +136,7 @@ AC_OUTPUT([
 Makefile
 deps/Makefile
 deps/daap-sharp/Makefile
+deps/daap-sharp/daap-sharp.dll.config
 deps/taglib-sharp/Makefile
 icons/Makefile
 src/Makefile
