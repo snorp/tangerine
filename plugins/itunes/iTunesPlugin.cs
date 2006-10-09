@@ -27,7 +27,6 @@ namespace Tangerine.Plugins {
 #else
             dbpath = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + @"/Music/iTunes/iTunes Music Library.xml";
 #endif
-            Console.WriteLine ("Using dbpath: " + dbpath);
 
             itunesDir = Path.GetDirectoryName (dbpath);
 
