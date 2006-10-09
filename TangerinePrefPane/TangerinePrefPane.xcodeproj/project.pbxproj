@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D202CEA0486D31800D8A456 /* TangerinePrefPane_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* TangerinePrefPane_Prefix.pch */; };
+		8D202CEB0486D31800D8A456 /* TangerinePrefPanePref.h in Headers */ = {isa = PBXBuildFile; fileRef = F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */; };
+		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		8D202CF10486D31800D8A456 /* TangerinePrefPanePref.m in Sources */ = {isa = PBXBuildFile; fileRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */; };
+		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
+		F3A63CEE0ADAC26B0034B74F /* start-daemon.sh in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CED0ADAC26B0034B74F /* start-daemon.sh */; };
+		F3A63CF30ADAC27C0034B74F /* start-daemon.sh in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CED0ADAC26B0034B74F /* start-daemon.sh */; };
+		F3A63CFD0ADAC39F0034B74F /* Nini.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CFC0ADAC39F0034B74F /* Nini.dll */; };
+		F3A63D000ADAC3D30034B74F /* log4net.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CFF0ADAC3D30034B74F /* log4net.dll */; };
+		F3A63D020ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D010ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll */; };
+		F3A63D050ADAC40B0034B74F /* daap-sharp.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D030ADAC40B0034B74F /* daap-sharp.dll */; };
+		F3A63D080ADAC41B0034B74F /* taglib-sharp.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D070ADAC41B0034B74F /* taglib-sharp.dll */; };
+		F3A63D0A0ADAC4290034B74F /* tangerine.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D090ADAC4290034B74F /* tangerine.dll */; };
+		F3A63D0C0ADAC4400034B74F /* tangerine-daemon.exe in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D0B0ADAC4400034B74F /* tangerine-daemon.exe */; };
+		F3A63D0D0ADAC45B0034B74F /* tangerine-daemon.exe in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D0B0ADAC4400034B74F /* tangerine-daemon.exe */; };
+		F3A63D0E0ADAC45B0034B74F /* tangerine.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D090ADAC4290034B74F /* tangerine.dll */; };
+		F3A63D0F0ADAC45B0034B74F /* taglib-sharp.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D070ADAC41B0034B74F /* taglib-sharp.dll */; };
+		F3A63D100ADAC45B0034B74F /* daap-sharp.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D030ADAC40B0034B74F /* daap-sharp.dll */; };
+		F3A63D120ADAC45B0034B74F /* ICSharpCode.SharpZipLib.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D010ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll */; };
+		F3A63D130ADAC45B0034B74F /* log4net.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CFF0ADAC3D30034B74F /* log4net.dll */; };
+		F3A63D140ADAC45B0034B74F /* Nini.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CFC0ADAC39F0034B74F /* Nini.dll */; };
+		F3A63D170ADAC4A70034B74F /* daap-sharp.dll.config in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D160ADAC4A70034B74F /* daap-sharp.dll.config */; };
+		F3A63D180ADAC4AD0034B74F /* daap-sharp.dll.config in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D160ADAC4A70034B74F /* daap-sharp.dll.config */; };
+		F3A63D1C0ADAC50F0034B74F /* db4o.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1A0ADAC50F0034B74F /* db4o.dll */; };
+		F3A63D1D0ADAC50F0034B74F /* tangerine-file.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */; };
+		F3A63D200ADAD2A10034B74F /* itunes.provider in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1E0ADAD2A10034B74F /* itunes.provider */; };
+		F3A63D210ADAD2A10034B74F /* tangerine-itunes.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */; };
+		F3A63D240ADAD2C40034B74F /* itunes.provider in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1E0ADAD2A10034B74F /* itunes.provider */; };
+		F3A63D250ADAD2C40034B74F /* tangerine-itunes.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */; };
+		F3A63D260ADAD2C40034B74F /* db4o.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1A0ADAC50F0034B74F /* db4o.dll */; };
+		F3A63D270ADAD2C40034B74F /* tangerine-file.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */; };
+		F3CFB17D0AD856DC00F49CDC /* TangerinePrefPanePref.nib in Resources */ = {isa = PBXBuildFile; fileRef = F3CFB17C0AD856DC00F49CDC /* TangerinePrefPanePref.nib */; };
+		F3CFB1800AD856EA00F49CDC /* tangerine-64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F3CFB17E0AD856EA00F49CDC /* tangerine-64.tiff */; };
+		F3CFB1810AD856EA00F49CDC /* tangerine-128.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F3CFB17F0AD856EA00F49CDC /* tangerine-128.tiff */; };
+		F3CFB2210AD985FF00F49CDC /* TangerineIniParser.h in Headers */ = {isa = PBXBuildFile; fileRef = F3CFB21F0AD985FF00F49CDC /* TangerineIniParser.h */; };
+		F3CFB2220AD985FF00F49CDC /* TangerineIniParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CFB2200AD985FF00F49CDC /* TangerineIniParser.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F3A63CEB0ADAC2220034B74F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Daemon;
+			dstSubfolderSpec = 1;
+			files = (
+				F3A63D0D0ADAC45B0034B74F /* tangerine-daemon.exe in CopyFiles */,
+				F3A63D0E0ADAC45B0034B74F /* tangerine.dll in CopyFiles */,
+				F3A63D0F0ADAC45B0034B74F /* taglib-sharp.dll in CopyFiles */,
+				F3A63D100ADAC45B0034B74F /* daap-sharp.dll in CopyFiles */,
+				F3A63D180ADAC4AD0034B74F /* daap-sharp.dll.config in CopyFiles */,
+				F3A63D120ADAC45B0034B74F /* ICSharpCode.SharpZipLib.dll in CopyFiles */,
+				F3A63D130ADAC45B0034B74F /* log4net.dll in CopyFiles */,
+				F3A63D140ADAC45B0034B74F /* Nini.dll in CopyFiles */,
+				F3A63CF30ADAC27C0034B74F /* start-daemon.sh in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3A63D220ADAD2AA0034B74F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Daemon/plugins;
+			dstSubfolderSpec = 1;
+			files = (
+				F3A63D240ADAD2C40034B74F /* itunes.provider in CopyFiles */,
+				F3A63D250ADAD2C40034B74F /* tangerine-itunes.dll in CopyFiles */,
+				F3A63D260ADAD2C40034B74F /* db4o.dll in CopyFiles */,
+				F3A63D270ADAD2C40034B74F /* tangerine-file.dll in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCFA20370C41700C91783 /* TangerinePrefPane_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TangerinePrefPane_Prefix.pch; sourceTree = "<group>"; };
+		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D202CF80486D31800D8A456 /* TangerinePrefPane.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangerinePrefPane.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3A63CED0ADAC26B0034B74F /* start-daemon.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = "start-daemon.sh"; sourceTree = "<group>"; };
+		F3A63CFC0ADAC39F0034B74F /* Nini.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = Nini.dll; path = ../deps/Nini.dll; sourceTree = SOURCE_ROOT; };
+		F3A63CFF0ADAC3D30034B74F /* log4net.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = log4net.dll; path = ../deps/log4net.dll; sourceTree = SOURCE_ROOT; };
+		F3A63D010ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = ICSharpCode.SharpZipLib.dll; path = ../deps/ICSharpCode.SharpZipLib.dll; sourceTree = SOURCE_ROOT; };
+		F3A63D030ADAC40B0034B74F /* daap-sharp.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "daap-sharp.dll"; path = "../deps/daap-sharp/daap-sharp.dll"; sourceTree = SOURCE_ROOT; };
+		F3A63D070ADAC41B0034B74F /* taglib-sharp.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "taglib-sharp.dll"; path = "../deps/taglib-sharp/taglib-sharp.dll"; sourceTree = SOURCE_ROOT; };
+		F3A63D090ADAC4290034B74F /* tangerine.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = tangerine.dll; path = ../src/tangerine.dll; sourceTree = SOURCE_ROOT; };
+		F3A63D0B0ADAC4400034B74F /* tangerine-daemon.exe */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tangerine-daemon.exe"; path = "../src/tangerine-daemon.exe"; sourceTree = SOURCE_ROOT; };
+		F3A63D160ADAC4A70034B74F /* daap-sharp.dll.config */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = "daap-sharp.dll.config"; path = "../deps/daap-sharp/daap-sharp.dll.config"; sourceTree = SOURCE_ROOT; };
+		F3A63D1A0ADAC50F0034B74F /* db4o.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = db4o.dll; path = ../plugins/file/db4o.dll; sourceTree = SOURCE_ROOT; };
+		F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tangerine-file.dll"; path = "../plugins/file/tangerine-file.dll"; sourceTree = SOURCE_ROOT; };
+		F3A63D1E0ADAD2A10034B74F /* itunes.provider */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = itunes.provider; path = ../plugins/itunes/itunes.provider; sourceTree = SOURCE_ROOT; };
+		F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tangerine-itunes.dll"; path = "../plugins/itunes/tangerine-itunes.dll"; sourceTree = SOURCE_ROOT; };
+		F3CFB17C0AD856DC00F49CDC /* TangerinePrefPanePref.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = TangerinePrefPanePref.nib; sourceTree = "<group>"; };
+		F3CFB17E0AD856EA00F49CDC /* tangerine-64.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "tangerine-64.tiff"; sourceTree = "<group>"; };
+		F3CFB17F0AD856EA00F49CDC /* tangerine-128.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "tangerine-128.tiff"; sourceTree = "<group>"; };
+		F3CFB21F0AD985FF00F49CDC /* TangerineIniParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TangerineIniParser.h; sourceTree = "<group>"; };
+		F3CFB2200AD985FF00F49CDC /* TangerineIniParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TangerineIniParser.m; sourceTree = "<group>"; };
+		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
+		F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TangerinePrefPanePref.h; sourceTree = "<group>"; };
+		F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TangerinePrefPanePref.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D202CF20486D31800D8A456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
+				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* TangerinePrefPane */ = {
+			isa = PBXGroup;
+			children = (
+				F3A63D190ADAC4EB0034B74F /* Tangerine Plugins */,
+				F3A63CFE0ADAC3AE0034B74F /* Tangerine */,
+				F3CFB17E0AD856EA00F49CDC /* tangerine-64.tiff */,
+				F3CFB17F0AD856EA00F49CDC /* tangerine-128.tiff */,
+				F3CFB17C0AD856DC00F49CDC /* TangerinePrefPanePref.nib */,
+				08FB77AFFE84173DC02AAC07 /* Classes */,
+				32DBCFA10370C40200C91783 /* Other Sources */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = TangerinePrefPane;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D202CF70486D31800D8A456 /* Info.plist */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */,
+				F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */,
+				F3CFB21F0AD985FF00F49CDC /* TangerineIniParser.h */,
+				F3CFB2200AD985FF00F49CDC /* TangerineIniParser.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D202CF80486D31800D8A456 /* TangerinePrefPane.prefPane */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32DBCFA10370C40200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCFA20370C41700C91783 /* TangerinePrefPane_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		F3A63CFE0ADAC3AE0034B74F /* Tangerine */ = {
+			isa = PBXGroup;
+			children = (
+				F3A63D160ADAC4A70034B74F /* daap-sharp.dll.config */,
+				F3A63D0B0ADAC4400034B74F /* tangerine-daemon.exe */,
+				F3A63D090ADAC4290034B74F /* tangerine.dll */,
+				F3A63D070ADAC41B0034B74F /* taglib-sharp.dll */,
+				F3A63D030ADAC40B0034B74F /* daap-sharp.dll */,
+				F3A63D010ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll */,
+				F3A63CFF0ADAC3D30034B74F /* log4net.dll */,
+				F3A63CFC0ADAC39F0034B74F /* Nini.dll */,
+				F3A63CED0ADAC26B0034B74F /* start-daemon.sh */,
+			);
+			name = Tangerine;
+			sourceTree = "<group>";
+		};
+		F3A63D190ADAC4EB0034B74F /* Tangerine Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				F3A63D1E0ADAD2A10034B74F /* itunes.provider */,
+				F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */,
+				F3A63D1A0ADAC50F0034B74F /* db4o.dll */,
+				F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */,
+			);
+			name = "Tangerine Plugins";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D202CE90486D31800D8A456 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D202CEA0486D31800D8A456 /* TangerinePrefPane_Prefix.pch in Headers */,
+				8D202CEB0486D31800D8A456 /* TangerinePrefPanePref.h in Headers */,
+				F3CFB2210AD985FF00F49CDC /* TangerineIniParser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D202CE80486D31800D8A456 /* TangerinePrefPane */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TangerinePrefPane" */;
+			buildPhases = (
+				8D202CE90486D31800D8A456 /* Headers */,
+				8D202CEC0486D31800D8A456 /* Resources */,
+				8D202CF00486D31800D8A456 /* Sources */,
+				8D202CF20486D31800D8A456 /* Frameworks */,
+				8D202CF50486D31800D8A456 /* Rez */,
+				F3A63CEB0ADAC2220034B74F /* CopyFiles */,
+				F3A63D220ADAD2AA0034B74F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TangerinePrefPane;
+			productInstallPath = "$(HOME)/Library/PreferencePanes";
+			productName = TangerinePrefPane;
+			productReference = 8D202CF80486D31800D8A456 /* TangerinePrefPane.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TangerinePrefPane" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* TangerinePrefPane */;
+			projectDirPath = "";
+			targets = (
+				8D202CE80486D31800D8A456 /* TangerinePrefPane */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D202CEC0486D31800D8A456 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */,
+				F3CFB17D0AD856DC00F49CDC /* TangerinePrefPanePref.nib in Resources */,
+				F3CFB1800AD856EA00F49CDC /* tangerine-64.tiff in Resources */,
+				F3CFB1810AD856EA00F49CDC /* tangerine-128.tiff in Resources */,
+				F3A63CEE0ADAC26B0034B74F /* start-daemon.sh in Resources */,
+				F3A63CFD0ADAC39F0034B74F /* Nini.dll in Resources */,
+				F3A63D000ADAC3D30034B74F /* log4net.dll in Resources */,
+				F3A63D020ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll in Resources */,
+				F3A63D050ADAC40B0034B74F /* daap-sharp.dll in Resources */,
+				F3A63D080ADAC41B0034B74F /* taglib-sharp.dll in Resources */,
+				F3A63D0A0ADAC4290034B74F /* tangerine.dll in Resources */,
+				F3A63D0C0ADAC4400034B74F /* tangerine-daemon.exe in Resources */,
+				F3A63D170ADAC4A70034B74F /* daap-sharp.dll.config in Resources */,
+				F3A63D1C0ADAC50F0034B74F /* db4o.dll in Resources */,
+				F3A63D1D0ADAC50F0034B74F /* tangerine-file.dll in Resources */,
+				F3A63D200ADAD2A10034B74F /* itunes.provider in Resources */,
+				F3A63D210ADAD2A10034B74F /* tangerine-itunes.dll in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		8D202CF50486D31800D8A456 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D202CF00486D31800D8A456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D202CF10486D31800D8A456 /* TangerinePrefPanePref.m in Sources */,
+				F3CFB2220AD985FF00F49CDC /* TangerineIniParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DBD214908BA80EA00186707 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TangerinePrefPane_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = TangerinePrefPane;
+				WRAPPER_EXTENSION = prefPane;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DBD214A08BA80EA00186707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = TangerinePrefPane_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = TangerinePrefPane;
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Release;
+		};
+		1DBD214D08BA80EA00186707 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		1DBD214E08BA80EA00186707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DBD214808BA80EA00186707 /* Build configuration list for PBXNativeTarget "TangerinePrefPane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DBD214908BA80EA00186707 /* Debug */,
+				1DBD214A08BA80EA00186707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DBD214C08BA80EA00186707 /* Build configuration list for PBXProject "TangerinePrefPane" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DBD214D08BA80EA00186707 /* Debug */,
+				1DBD214E08BA80EA00186707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

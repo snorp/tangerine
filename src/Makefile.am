@@ -3,17 +3,19 @@ TANG_DAEMON = tangerine-daemon.exe
 
 TANG_PROPS_ASSEMBLY = tangerine-properties.exe
 
+if BUILD_GUI
+GUI_ASSEMBLY = $(TANG_PROPS_ASSEMBLY)
+else
+GUI_ASSEMBLY =
+endif
+
 asmdir = $(prefix)/lib/tangerine
 asm_DATA =				\
 	$(TANG_ASSEMBLY)		\
 	$(TANG_DAEMON)			\
 	tangerine-properties.exe.config	\
 	tangerine-daemon.exe.config	\
-	$(TANG_PLUGINS)
-
-if BUILD_GUI
-asm_DATA += $(TANG_PROPS_ASSEMBLY)
-endif
+	$(GUI_ASSEMBLY)
 
 if HAVE_INOTIFY
 gluelibdir = $(pkglibdir)
@@ -75,7 +77,6 @@ EXTRA_DIST =				\
 	$(TANG_DAEMONSOURCES)		\
 	$(TANG_PROPSOURCES)		\
 	$(app_DATA)			\
-	$(icon_DATA)			\
 	tangerine-properties.glade	\
 	tangerine-properties.in		\
 	tangerine-properties.exe.config	\

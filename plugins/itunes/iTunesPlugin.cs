@@ -22,7 +22,12 @@ namespace Tangerine.Plugins {
         private object refreshLock = new object ();
         
         public iTunesPlugin () {
+#if WINDOWS
             dbpath = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic) + @"\iTunes\iTunes Music Library.xml";
+#else
+            dbpath = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + @"/Music/iTunes/iTunes Music Library.xml";
+#endif
+            Console.WriteLine ("Using dbpath: " + dbpath);
 
             itunesDir = Path.GetDirectoryName (dbpath);
 

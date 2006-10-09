@@ -1,0 +1,209 @@
+// !$*UTF8*$!
+{
+	089C1669FE841209C02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = F3CFB3320AD9CA1C00F49CDC /* System Preferences */;
+		activeTarget = 8D202CE80486D31800D8A456 /* TangerinePrefPane */;
+		addToTargets = (
+			8D202CE80486D31800D8A456 /* TangerinePrefPane */,
+		);
+		breakpoints = (
+		);
+		breakpointsGroup = F3CFB34B0AD9CB8600F49CDC /* XCBreakpointsBucket */;
+		codeSenseManager = F3CFB17A0AD8568100F49CDC /* Code sense */;
+		executables = (
+			F3CFB3320AD9CA1C00F49CDC /* System Preferences */,
+		);
+		perUserDictionary = {
+			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXBreakpointsDataSource_BreakpointID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					210,
+					20,
+					110,
+					109,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXBreakpointsDataSource_ActionID,
+					PBXBreakpointsDataSource_TypeID,
+					PBXBreakpointsDataSource_BreakpointID,
+					PBXBreakpointsDataSource_UseID,
+					PBXBreakpointsDataSource_LocationID,
+					PBXBreakpointsDataSource_ConditionID,
+					PBXBreakpointsDataSource_ContinueID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					57.5835,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					193,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					200,
+					10,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 182124261;
+			PBXWorkspaceStateSaveDate = 182124261;
+		};
+		sourceControlManager = F3CFB1790AD8568100F49CDC /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D202CE80486D31800D8A456 /* TangerinePrefPane */ = {
+		activeExec = 0;
+	};
+	8D202CF70486D31800D8A456 /* Info.plist */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {726, 629}}";
+			sepNavSelRange = "{365, 0}";
+			sepNavVisRect = "{{0, 0}, {726, 629}}";
+			sepNavWindowFrame = "{{84, 107}, {765, 702}}";
+		};
+	};
+	F3A63CED0ADAC26B0034B74F /* start-daemon.sh */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 485}}";
+			sepNavSelRange = "{104, 0}";
+			sepNavVisRect = "{{0, 0}, {711, 485}}";
+			sepNavWindowFrame = "{{49, 606}, {750, 558}}";
+		};
+	};
+	F3CFB1790AD8568100F49CDC /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+		scmType = "";
+	};
+	F3CFB17A0AD8568100F49CDC /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	F3CFB21F0AD985FF00F49CDC /* TangerineIniParser.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {726, 629}}";
+			sepNavSelRange = "{565, 0}";
+			sepNavVisRect = "{{0, 0}, {726, 629}}";
+			sepNavWindowFrame = "{{513, 285}, {750, 558}}";
+		};
+	};
+	F3CFB2200AD985FF00F49CDC /* TangerineIniParser.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 2338}}";
+			sepNavSelRange = "{3498, 0}";
+			sepNavVisRect = "{{0, 0}, {711, 485}}";
+		};
+	};
+	F3CFB3320AD9CA1C00F49CDC /* System Preferences */ = {
+		isa = PBXExecutable;
+		activeArgIndex = 2147483647;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		launchableReference = F3CFB3330AD9CA1C00F49CDC /* System Preferences.app */;
+		libgmallocEnabled = 1;
+		name = "System Preferences";
+		savedGlobals = {
+		};
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	F3CFB3330AD9CA1C00F49CDC /* System Preferences.app */ = {
+		isa = PBXFileReference;
+		explicitFileType = wrapper.application;
+		name = "System Preferences.app";
+		path = "/Applications/System Preferences.app";
+		sourceTree = "<absolute>";
+	};
+	F3CFB34B0AD9CB8600F49CDC /* XCBreakpointsBucket */ = {
+		isa = XCBreakpointsBucket;
+		name = TangerinePrefPane;
+		objects = (
+		);
+	};
+	F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 602}}";
+			sepNavSelRange = "{951, 0}";
+			sepNavVisRect = "{{0, 117}, {711, 485}}";
+			sepNavWindowFrame = "{{849, 467}, {750, 558}}";
+		};
+	};
+	F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {752, 2576}}";
+			sepNavSelRange = "{2013, 0}";
+			sepNavVisRect = "{{0, 747}, {711, 485}}";
+			sepNavWindowFrame = "{{49, 606}, {750, 558}}";
+		};
+	};
+}

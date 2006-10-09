@@ -1,0 +1,50 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {changed = id; chooseButtonPressed = id; }; 
+            CLASS = NSPreferencePane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "_firstKeyView" = id; 
+                "_initialKeyView" = id; 
+                "_lastKeyView" = id; 
+                "_window" = id; 
+                automaticRadio = id; 
+                chooseButton = id; 
+                dirRadio = id; 
+                dirText = id; 
+                enabledCheckBox = id; 
+                itunesRadio = id; 
+                passwordText = id; 
+                radioGroup = id; 
+                shareNameText = id; 
+                status = id; 
+                userLimitStepper = id; 
+                userLimitText = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {changed = id; }; 
+            CLASS = TangerinePrefPaneController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                automaticRadio = id; 
+                chooseButton = id; 
+                dirRadio = id; 
+                dirText = id; 
+                enabledCheckBox = id; 
+                itunesRadio = id; 
+                passwordText = id; 
+                radioGroup = id; 
+                shareNameText = id; 
+                status = id; 
+                userLimitStepper = id; 
+                userLimitText = id; 
+            }; 
+            SUPERCLASS = NSPreferencePane; 
+        }
+    ); 
+    IBVersion = 1; 
+}

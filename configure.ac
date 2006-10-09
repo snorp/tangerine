@@ -28,35 +28,7 @@ if test "x$MCS" = "x" ; then
    AC_MSG_ERROR([Can not find "gmcs" in your PATH])
 fi
 
-
-AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")
-AM_CONDITIONAL(ENABLE_MDNSD, test "x$enable_mdnsd" = "xyes")
-
-if test "x$enable_mdnsd" = "xyes"; then
-        MCS_FLAGS="-define:ENABLE_MDNSD"
-        AC_SUBST(MCS_FLAGS)
-else
-        PKG_CHECK_MODULES(AVAHI, avahi-sharp >= 0.6.11)
-        MCS_FLAGS=$AVAHI_LIBS
-        AC_SUBST(MCS_FLAGS)
-fi
-
 AC_ARG_ENABLE(beagle, AC_HELP_STRING([--disable-beagle], [Do not build the beagle plugin]), enable_beagle="no", enable_beagle="yes")
-
-if test "x$enable_beagle" = "xyes"; then \
-    dnl beagle
-    BEAGLE_REQUIRED=0.1.4
-    PKG_CHECK_MODULES(BEAGLE, beagle-0.0 >= $BEAGLE_REQUIRED,
-                      have_beagle=yes, have_beagle=no)
-    if test "x$have_beagle" = "xyes"; then \
-        BEAGLE_PATH="`$PKG_CONFIG --variable=libdir beagle-0.0`/beagle"
-        BEAGLE_ASSEMBLIES="$BEAGLE_PATH/Beagle.dll $BEAGLE_PATH/Util.dll"
-        AC_SUBST(BEAGLE_LIBS)
-        AC_SUBST(BEAGLE_ASSEMBLIES)
-    fi
-else
-    have_beagle=no
-fi
 
 dnl ipod-sharp
 IPOD_SHARP_REQUIRED=0.6.0
@@ -71,6 +43,7 @@ fi
 have_inotify="no"
 build_gui="no"
 build_session_plugin="no"
+build_itunes_plugin="no"
 platform="none"
 DNSSD_LIB="none"
 AC_MSG_CHECKING([host platform characteristics])
@@ -95,16 +68,48 @@ case "$host" in
         have_inotify="no"
         build_gui="no"
         build_session_plugin="no"
+        build_itunes_plugin="yes"
         platform="MACOSX"
         DNSSD_LIB="libSystem.B.dylib"
         ;;
 esac
 AC_MSG_RESULT(ok)
 
+if test "x$enable_beagle" = "xyes"; then \
+    dnl beagle
+    BEAGLE_REQUIRED=0.1.4
+    PKG_CHECK_MODULES(BEAGLE, beagle-0.0 >= $BEAGLE_REQUIRED,
+                      have_beagle=yes, have_beagle=no)
+    if test "x$have_beagle" = "xyes"; then \
+        BEAGLE_PATH="`$PKG_CONFIG --variable=libdir beagle-0.0`/beagle"
+        BEAGLE_ASSEMBLIES="$BEAGLE_PATH/Beagle.dll $BEAGLE_PATH/Util.dll"
+        AC_SUBST(BEAGLE_LIBS)
+        AC_SUBST(BEAGLE_ASSEMBLIES)
+    fi
+else
+    have_beagle=no
+fi
+
+
+AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")
+AM_CONDITIONAL(ENABLE_MDNSD, test "x$enable_mdnsd" = "xyes")
+
+if test "x$enable_mdnsd" = "xyes"; then
+        MCS_FLAGS="-define:ENABLE_MDNSD"
+        AC_SUBST(MCS_FLAGS)
+else
+        PKG_CHECK_MODULES(AVAHI, avahi-sharp >= 0.6.11)
+        MCS_FLAGS=$AVAHI_LIBS
+        AC_SUBST(MCS_FLAGS)
+fi
+
+
 AC_SUBST(DNSSD_LIB)
 AM_CONDITIONAL(HAVE_INOTIFY, test "x$have_inotify" = "xyes")       
 AM_CONDITIONAL(BUILD_GUI, test "x$build_gui" = "xyes")       
-AM_CONDITIONAL(BUILD_SESSION_PLUGIN, test "x$build_session_plugin" = "xyes")       
+AM_CONDITIONAL(BUILD_SESSION_PLUGIN, test "x$build_session_plugin" = "xyes")
+AM_CONDITIONAL(BUILD_ITUNES_PLUGIN, test "x$build_itunes_plugin" = "xyes")
+
 MCS_FLAGS="$MCS_FLAGS -define:$platform"
 
 dnl muine
@@ -150,6 +155,7 @@ plugins/rhythmbox/Makefile
 plugins/amarok/Makefile
 plugins/muine/Makefile
 plugins/muine/MuineDatabase.cs
+plugins/itunes/Makefile
 tangerine.pc
 ])
 
