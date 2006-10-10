@@ -1,3 +1,4 @@
+SUBDIRS = SpotlightHelper
 
 PLUGIN_ASSEMBLY = tangerine-spotlight.dll
 

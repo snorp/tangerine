@@ -45,6 +45,7 @@ build_gui="no"
 build_session_plugin="no"
 build_itunes_plugin="no"
 build_spotlight_plugin="no"
+build_prefpane="no"
 platform="none"
 DNSSD_LIB="none"
 AC_MSG_CHECKING([host platform characteristics])
@@ -71,6 +72,7 @@ case "$host" in
         build_session_plugin="no"
         build_itunes_plugin="yes"
         build_spotlight_plugin="yes"
+	build_prefpane="yes"
         platform="MACOSX"
         DNSSD_LIB="libSystem.B.dylib"
         ;;
@@ -112,6 +114,7 @@ AM_CONDITIONAL(BUILD_GUI, test "x$build_gui" = "xyes")
 AM_CONDITIONAL(BUILD_SESSION_PLUGIN, test "x$build_session_plugin" = "xyes")
 AM_CONDITIONAL(BUILD_ITUNES_PLUGIN, test "x$build_itunes_plugin" = "xyes")
 AM_CONDITIONAL(BUILD_SPOTLIGHT_PLUGIN, test "x$build_spotlight_plugin" = "xyes")
+AM_CONDITIONAL(BUILD_PREFPANE, test "x$build_prefpane" = "xyes")
 
 MCS_FLAGS="$MCS_FLAGS -define:$platform"
 
@@ -160,6 +163,7 @@ plugins/muine/Makefile
 plugins/muine/MuineDatabase.cs
 plugins/itunes/Makefile
 plugins/spotlight/Makefile
+TangerinePrefPane/Makefile
 tangerine.pc
 ])
 
