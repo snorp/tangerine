@@ -61,7 +61,6 @@
     if (!section_table && create) {
         section_table = NSCreateMapTable(NSObjectMapKeyCallBacks, NSObjectMapValueCallBacks, 0);
         NSMapInsert(table, section, section_table);
-        printf("Creating section: %s\n", [section cString]);
     }
     
     return section_table;

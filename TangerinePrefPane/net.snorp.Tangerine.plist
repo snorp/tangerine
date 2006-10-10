@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>Tangerine</string>
+	<key>OnDemand</key>
+	<false/>
+	<key>Program</key>
+	<string>@PROGRAM@</string>
+	<key>ProgramArguments</key>
+	<array>
+        <string>@PROGRAM@</string>
+    </array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>ServiceDescription</key>
+	<string>iTunes music sharing agent</string>
+</dict>
+</plist>

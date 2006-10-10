@@ -95,8 +95,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 182124261;
-			PBXWorkspaceStateSaveDate = 182124261;
+			PBXPerProjectTemplateStateSaveDate = 182205900;
+			PBXWorkspaceStateSaveDate = 182205900;
+		};
+		perUserProjectItems = {
+			F38BD3D40ADC490B00D3FAC3 /* PBXTextBookmark */ = F38BD3D40ADC490B00D3FAC3 /* PBXTextBookmark */;
+			F38BD3D50ADC490B00D3FAC3 /* PBXTextBookmark */ = F38BD3D50ADC490B00D3FAC3 /* PBXTextBookmark */;
+			F38BD3D70ADC492100D3FAC3 /* PBXTextBookmark */ = F38BD3D70ADC492100D3FAC3 /* PBXTextBookmark */;
+			F38BD3D80ADC492100D3FAC3 /* PBXTextBookmark */ = F38BD3D80ADC492100D3FAC3 /* PBXTextBookmark */;
 		};
 		sourceControlManager = F3CFB1790AD8568100F49CDC /* Source Control */;
 		userBuildSettings = {
@@ -113,10 +119,54 @@
 			sepNavWindowFrame = "{{84, 107}, {765, 702}}";
 		};
 	};
+	F38BD3D40ADC490B00D3FAC3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: parse error before 'writeToFile'";
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		rLen = 1;
+		rLoc = 39;
+		rType = 1;
+	};
+	F38BD3D50ADC490B00D3FAC3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		name = "[templateContent writeToFile:launchdItemPath atomically:1];";
+		rLen = 68;
+		rLoc = 1756;
+		rType = 0;
+		vrLen = 889;
+		vrLoc = 1315;
+	};
+	F38BD3D70ADC492100D3FAC3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "warning: 'NSFileManager' may not respond to '-createDirectoryAtPath:attributes:attributes:'";
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		rLen = 1;
+		rLoc = 38;
+		rType = 1;
+	};
+	F38BD3D80ADC492100D3FAC3 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		name = "[[NSFileManager defaultManager] createDirectoryAtPath:[@\"~/Library/LaunchAgents\" stringByExpandingTildeInPath] attributes:nil attributes:nil];";
+		rLen = 136;
+		rLoc = 1620;
+		rType = 0;
+		vrLen = 890;
+		vrLoc = 1315;
+	};
 	F3A63CED0ADAC26B0034B74F /* start-daemon.sh */ = {
 		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {711, 429}}";
+			sepNavSelRange = "{82, 0}";
+			sepNavVisRect = "{{0, 0}, {711, 429}}";
+			sepNavWindowFrame = "{{49, 606}, {750, 558}}";
+		};
+	};
+	F3A63E120ADB1BB70034B74F /* net.snorp.Tangerine.plist */ = {
+		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {711, 485}}";
-			sepNavSelRange = "{104, 0}";
+			sepNavSelRange = "{216, 0}";
 			sepNavVisRect = "{{0, 0}, {711, 485}}";
 			sepNavWindowFrame = "{{49, 606}, {750, 558}}";
 		};
@@ -143,9 +193,10 @@
 	};
 	F3CFB2200AD985FF00F49CDC /* TangerineIniParser.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {711, 2338}}";
-			sepNavSelRange = "{3498, 0}";
-			sepNavVisRect = "{{0, 0}, {711, 485}}";
+			sepNavIntBoundsRect = "{{0, 0}, {726, 2324}}";
+			sepNavSelRange = "{1426, 0}";
+			sepNavVisRect = "{{0, 562}, {726, 629}}";
+			sepNavWindowFrame = "{{38, 450}, {765, 702}}";
 		};
 	};
 	F3CFB3320AD9CA1C00F49CDC /* System Preferences */ = {
@@ -200,10 +251,10 @@
 	};
 	F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {752, 2576}}";
-			sepNavSelRange = "{2013, 0}";
-			sepNavVisRect = "{{0, 747}, {711, 485}}";
-			sepNavWindowFrame = "{{49, 606}, {750, 558}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1350, 2338}}";
+			sepNavSelRange = "{1620, 151}";
+			sepNavVisRect = "{{0, 502}, {1350, 103}}";
+			sepNavWindowFrame = "{{49, 393}, {1068, 771}}";
 		};
 	};
 }

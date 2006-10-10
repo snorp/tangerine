@@ -9,7 +9,7 @@
     <key>CFBundleName</key>
     <string>Music Sharing</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>tangerine-64.tiff</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.apple.prefpanel</string>
 	<key>CFBundleInfoDictionaryVersion</key>

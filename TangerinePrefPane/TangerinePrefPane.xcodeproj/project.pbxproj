@@ -11,8 +11,14 @@
 		8D202CEB0486D31800D8A456 /* TangerinePrefPanePref.h in Headers */ = {isa = PBXBuildFile; fileRef = F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D202CF10486D31800D8A456 /* TangerinePrefPanePref.m in Sources */ = {isa = PBXBuildFile; fileRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */; };
-		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
+		F38BD1640ADBFFBE00D3FAC3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38BD1630ADBFFBE00D3FAC3 /* Cocoa.framework */; };
+		F38BD1660ADBFFC800D3FAC3 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38BD1650ADBFFC800D3FAC3 /* AppKit.framework */; };
+		F38BD16D0ADBFFE100D3FAC3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38BD16C0ADBFFE100D3FAC3 /* PreferencePanes.framework */; };
+		F38BD2A70ADC32A000D3FAC3 /* tangerine-spotlight.dll in Resources */ = {isa = PBXBuildFile; fileRef = F38BD2A60ADC32A000D3FAC3 /* tangerine-spotlight.dll */; };
+		F38BD2B00ADC335500D3FAC3 /* tangerine-spotlight.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38BD2A60ADC32A000D3FAC3 /* tangerine-spotlight.dll */; };
+		F38BD2B20ADC337100D3FAC3 /* spotlight.provider in Resources */ = {isa = PBXBuildFile; fileRef = F38BD2B10ADC337100D3FAC3 /* spotlight.provider */; };
+		F38BD2B30ADC337D00D3FAC3 /* spotlight.provider in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38BD2B10ADC337100D3FAC3 /* spotlight.provider */; };
+		F38BD3B40ADC3E3F00D3FAC3 /* SpotlightHelper.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38BD3AE0ADC3E2A00D3FAC3 /* SpotlightHelper.dylib */; };
 		F3A63CEE0ADAC26B0034B74F /* start-daemon.sh in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CED0ADAC26B0034B74F /* start-daemon.sh */; };
 		F3A63CF30ADAC27C0034B74F /* start-daemon.sh in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CED0ADAC26B0034B74F /* start-daemon.sh */; };
 		F3A63CFD0ADAC39F0034B74F /* Nini.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CFC0ADAC39F0034B74F /* Nini.dll */; };
@@ -39,6 +45,7 @@
 		F3A63D250ADAD2C40034B74F /* tangerine-itunes.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */; };
 		F3A63D260ADAD2C40034B74F /* db4o.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1A0ADAC50F0034B74F /* db4o.dll */; };
 		F3A63D270ADAD2C40034B74F /* tangerine-file.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */; };
+		F3A63E130ADB1BB70034B74F /* net.snorp.Tangerine.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3A63E120ADB1BB70034B74F /* net.snorp.Tangerine.plist */; };
 		F3CFB17D0AD856DC00F49CDC /* TangerinePrefPanePref.nib in Resources */ = {isa = PBXBuildFile; fileRef = F3CFB17C0AD856DC00F49CDC /* TangerinePrefPanePref.nib */; };
 		F3CFB1800AD856EA00F49CDC /* tangerine-64.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F3CFB17E0AD856EA00F49CDC /* tangerine-64.tiff */; };
 		F3CFB1810AD856EA00F49CDC /* tangerine-128.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F3CFB17F0AD856EA00F49CDC /* tangerine-128.tiff */; };
@@ -58,6 +65,7 @@
 				F3A63D0F0ADAC45B0034B74F /* taglib-sharp.dll in CopyFiles */,
 				F3A63D100ADAC45B0034B74F /* daap-sharp.dll in CopyFiles */,
 				F3A63D180ADAC4AD0034B74F /* daap-sharp.dll.config in CopyFiles */,
+				F38BD3B40ADC3E3F00D3FAC3 /* SpotlightHelper.dylib in CopyFiles */,
 				F3A63D120ADAC45B0034B74F /* ICSharpCode.SharpZipLib.dll in CopyFiles */,
 				F3A63D130ADAC45B0034B74F /* log4net.dll in CopyFiles */,
 				F3A63D140ADAC45B0034B74F /* Nini.dll in CopyFiles */,
@@ -71,8 +79,10 @@
 			dstPath = Contents/Daemon/plugins;
 			dstSubfolderSpec = 1;
 			files = (
-				F3A63D240ADAD2C40034B74F /* itunes.provider in CopyFiles */,
+				F38BD2B00ADC335500D3FAC3 /* tangerine-spotlight.dll in CopyFiles */,
+				F38BD2B30ADC337D00D3FAC3 /* spotlight.provider in CopyFiles */,
 				F3A63D250ADAD2C40034B74F /* tangerine-itunes.dll in CopyFiles */,
+				F3A63D240ADAD2C40034B74F /* itunes.provider in CopyFiles */,
 				F3A63D260ADAD2C40034B74F /* db4o.dll in CopyFiles */,
 				F3A63D270ADAD2C40034B74F /* tangerine-file.dll in CopyFiles */,
 			);
@@ -83,11 +93,15 @@
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* TangerinePrefPane_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TangerinePrefPane_Prefix.pch; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* TangerinePrefPane.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangerinePrefPane.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		F38BD1630ADBFFBE00D3FAC3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		F38BD1650ADBFFC800D3FAC3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		F38BD16C0ADBFFE100D3FAC3 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
+		F38BD2A60ADC32A000D3FAC3 /* tangerine-spotlight.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tangerine-spotlight.dll"; path = "../plugins/spotlight/tangerine-spotlight.dll"; sourceTree = SOURCE_ROOT; };
+		F38BD2B10ADC337100D3FAC3 /* spotlight.provider */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = spotlight.provider; path = ../plugins/spotlight/spotlight.provider; sourceTree = SOURCE_ROOT; };
+		F38BD3AE0ADC3E2A00D3FAC3 /* SpotlightHelper.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = SpotlightHelper.dylib; path = ../plugins/spotlight/SpotlightHelper/build/Release/SpotlightHelper.dylib; sourceTree = SOURCE_ROOT; };
 		F3A63CED0ADAC26B0034B74F /* start-daemon.sh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.sh; path = "start-daemon.sh"; sourceTree = "<group>"; };
 		F3A63CFC0ADAC39F0034B74F /* Nini.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = Nini.dll; path = ../deps/Nini.dll; sourceTree = SOURCE_ROOT; };
 		F3A63CFF0ADAC3D30034B74F /* log4net.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = log4net.dll; path = ../deps/log4net.dll; sourceTree = SOURCE_ROOT; };
@@ -101,12 +115,12 @@
 		F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tangerine-file.dll"; path = "../plugins/file/tangerine-file.dll"; sourceTree = SOURCE_ROOT; };
 		F3A63D1E0ADAD2A10034B74F /* itunes.provider */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = itunes.provider; path = ../plugins/itunes/itunes.provider; sourceTree = SOURCE_ROOT; };
 		F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tangerine-itunes.dll"; path = "../plugins/itunes/tangerine-itunes.dll"; sourceTree = SOURCE_ROOT; };
+		F3A63E120ADB1BB70034B74F /* net.snorp.Tangerine.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = net.snorp.Tangerine.plist; sourceTree = "<group>"; };
 		F3CFB17C0AD856DC00F49CDC /* TangerinePrefPanePref.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = TangerinePrefPanePref.nib; sourceTree = "<group>"; };
 		F3CFB17E0AD856EA00F49CDC /* tangerine-64.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "tangerine-64.tiff"; sourceTree = "<group>"; };
 		F3CFB17F0AD856EA00F49CDC /* tangerine-128.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "tangerine-128.tiff"; sourceTree = "<group>"; };
 		F3CFB21F0AD985FF00F49CDC /* TangerineIniParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TangerineIniParser.h; sourceTree = "<group>"; };
 		F3CFB2200AD985FF00F49CDC /* TangerineIniParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TangerineIniParser.m; sourceTree = "<group>"; };
-		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
 		F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TangerinePrefPanePref.h; sourceTree = "<group>"; };
 		F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TangerinePrefPanePref.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,8 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
-				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
+				F38BD1640ADBFFBE00D3FAC3 /* Cocoa.framework in Frameworks */,
+				F38BD1660ADBFFC800D3FAC3 /* AppKit.framework in Frameworks */,
+				F38BD16D0ADBFFE100D3FAC3 /* PreferencePanes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +159,9 @@
 		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F38BD16C0ADBFFE100D3FAC3 /* PreferencePanes.framework */,
+				F38BD1650ADBFFC800D3FAC3 /* AppKit.framework */,
+				F38BD1630ADBFFBE00D3FAC3 /* Cocoa.framework */,
 				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
 				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
@@ -154,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF70486D31800D8A456 /* Info.plist */,
+				F3A63E120ADB1BB70034B74F /* net.snorp.Tangerine.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
@@ -173,8 +192,6 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
-				F506C035013D953901CA16C8 /* PreferencePanes.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -183,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				089C1672FE841209C02AAC07 /* Foundation.framework */,
-				089C167FFE841241C02AAC07 /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -223,6 +239,9 @@
 		F3A63D190ADAC4EB0034B74F /* Tangerine Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				F38BD3AE0ADC3E2A00D3FAC3 /* SpotlightHelper.dylib */,
+				F38BD2B10ADC337100D3FAC3 /* spotlight.provider */,
+				F38BD2A60ADC32A000D3FAC3 /* tangerine-spotlight.dll */,
 				F3A63D1E0ADAD2A10034B74F /* itunes.provider */,
 				F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */,
 				F3A63D1A0ADAC50F0034B74F /* db4o.dll */,
@@ -306,6 +325,9 @@
 				F3A63D1D0ADAC50F0034B74F /* tangerine-file.dll in Resources */,
 				F3A63D200ADAD2A10034B74F /* itunes.provider in Resources */,
 				F3A63D210ADAD2A10034B74F /* tangerine-itunes.dll in Resources */,
+				F3A63E130ADB1BB70034B74F /* net.snorp.Tangerine.plist in Resources */,
+				F38BD2A70ADC32A000D3FAC3 /* tangerine-spotlight.dll in Resources */,
+				F38BD2B20ADC337100D3FAC3 /* spotlight.provider in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +379,13 @@
 				GCC_PREFIX_HEADER = TangerinePrefPane_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_2)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../plugins/spotlight/SpotlightHelper/build/Release\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/../plugins/spotlight/SpotlightHelper/build/Release\"";
 				PRODUCT_NAME = TangerinePrefPane;
 				WRAPPER_EXTENSION = prefPane;
 				ZERO_LINK = YES;
@@ -376,6 +405,13 @@
 				GCC_PREFIX_HEADER = TangerinePrefPane_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_2)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../plugins/spotlight/SpotlightHelper/build/Release\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/../plugins/spotlight/SpotlightHelper/build/Release\"";
 				PRODUCT_NAME = TangerinePrefPane;
 				WRAPPER_EXTENSION = prefPane;
 			};

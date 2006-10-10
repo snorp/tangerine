@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo $$ > ~/.tangerine.pid
 asmdir=`dirname $0`
-exec mono $asmdir/tangerine-daemon.exe
+export LD_LIBRARY_PATH="$asmdir:$LD_LIBRARY_PATH"
+exec -a tangerine mono $asmdir/tangerine-daemon.exe

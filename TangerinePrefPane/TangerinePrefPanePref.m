@@ -13,14 +13,43 @@
 
 @implementation TangerinePrefPanePref
 
+- (BOOL) getDaemonEnabled
+{
+    NSString *launchdItemPath = [@"~/Library/LaunchAgents/net.snorp.Tangerine.plist" stringByExpandingTildeInPath];
+    return [[NSFileManager defaultManager] fileExistsAtPath:launchdItemPath];
+}
+
+/* FIXME: I am lame for using NSTask */
+- (void) setDaemonEnabled:(BOOL) enabled
+{
+    NSString *launchdItemPath = [@"~/Library/LaunchAgents/net.snorp.Tangerine.plist" stringByExpandingTildeInPath];
+    BOOL launchdItemPathExists = [[NSFileManager defaultManager] fileExistsAtPath:launchdItemPath];
+    
+    if (enabled && launchdItemPathExists) {
+        /* just restart it (by stopping it, launchd will restart it for me) */
+        [NSTask launchedTaskWithLaunchPath:@"/bin/launchctl" arguments:[NSArray arrayWithObjects:@"stop", @"Tangerine", nil]];
+    } else if (enabled) {
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    
+        NSString *autostartPath = [[bundle bundlePath] stringByAppendingPathComponent:@"/Contents/Daemon/start-daemon.sh"];
+    
+        NSMutableString *templateContent = [NSMutableString stringWithContentsOfFile:[bundle pathForResource:@"net.snorp.Tangerine" ofType:@"plist"]];
+        [templateContent replaceOccurrencesOfString:@"@PROGRAM@" withString:autostartPath options:0 range:NSMakeRange(0, [templateContent length])];
+    
+        [[NSFileManager defaultManager] createDirectoryAtPath:[@"~/Library/LaunchAgents" stringByExpandingTildeInPath] attributes:nil];
+        [templateContent writeToFile:launchdItemPath atomically:1];
+        [NSTask launchedTaskWithLaunchPath:@"/bin/launchctl" arguments:[NSArray arrayWithObjects:@"load", @"-w", launchdItemPath, nil]];
+    } else if (!enabled && launchdItemPathExists) {
+        NSTask *task = [NSTask launchedTaskWithLaunchPath:@"/bin/launchctl" arguments:[NSArray arrayWithObjects:@"unload", launchdItemPath, nil]];
+        [task waitUntilExit];
+
+        [[NSFileManager defaultManager] removeFileAtPath:launchdItemPath handler:nil];
+    }
+}
+
 - (void)setFromConfig
 {
-/*
-    NSDictionary *loginitems = [NSDictionary dictionaryWithContentsOfFile:
-        [@"~/Library/Preferences/loginwindow.plist" stringByExpandingTildeInPath]];
-        */
-        
-        
+    [enabledCheckBox setState:[self getDaemonEnabled]];
     [shareNameText setStringValue:[config getValue:@"name" section:@"Tangerine"]];
     [dirText setStringValue:[[config getValue:@"directories" section:@"FilePlugin"] stringByAbbreviatingWithTildeInPath]];
     
@@ -69,49 +98,6 @@
     
 }
 
-- (int) readPid {
-    NSString *pidstr = [NSString stringWithContentsOfFile:[@"~/.tangerine.pid" stringByExpandingTildeInPath]];
-    
-    int pid = [pidstr intValue];
-    if (pid <= 0) {
-        return -1;
-    }
-    
-    return pid;
-}
-
-- (void) startDaemon
-{
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString * path = [[bundle bundlePath] stringByAppendingPathComponent:@"/Contents/Daemon/start-daemon.sh"];
-
-    [NSTask launchedTaskWithLaunchPath:path arguments:[[[NSArray alloc] init] autorelease]];
-}
-
-- (void) stopDaemon:(BOOL)wait
-{
-    int pid = [self readPid];
-    if (pid <= 0) {
-        return;
-    }
-    
-    if (kill(pid, SIGTERM) != 0) {
-        return;
-    }
-    
-    if (wait) {
-        while (kill(pid, 0) == 0) {
-            usleep(5000);
-        }
-    }
-}
-
-- (void) restartDaemon
-{
-    [self stopDaemon: 1];
-    [self startDaemon];
-}
-
 - (void)saveChanges
 {
     [config setValue:@"name" section:@"Tangerine" value:[shareNameText stringValue]];
@@ -142,11 +128,7 @@
     
     [config save];
     
-    if ([enabledCheckBox state]) {
-        [self restartDaemon];
-    } else {
-        [self stopDaemon: 0];
-    }
+    [self setDaemonEnabled:[enabledCheckBox state]];
 }
 
 - (IBAction)changed:(id)sender
