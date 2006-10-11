@@ -51,7 +51,6 @@ namespace Tangerine.Plugins {
         }
 
         private void QueryLoop () {
-            Daemon.Log.Debug ("Running query");
             tangerine_run_music_query (cb);			
         }
 
@@ -67,10 +66,15 @@ namespace Tangerine.Plugins {
                     }
                 }
 
+                if (updatedTracks.Values.Count == tracks.Values.Count) {
+                    updatedTracks.Clear ();
+                    return;
+                }
+                
+                Daemon.Log.DebugFormat ("Committing {0} total tracks", updatedTracks.Count);
+                
                 tracks = updatedTracks;
                 updatedTracks = new Dictionary<string, Track> ();
-
-                Daemon.Log.DebugFormat ("Committing {0} total tracks", tracks.Count);
 
                 // that's all for now
                 lock (Daemon.Server) {
@@ -81,30 +85,33 @@ namespace Tangerine.Plugins {
             }
 
             string path = tangerine_item_get_path (item);
+            if (path == null || path == String.Empty) {
+                return;
+            }
 
             Track track;
             if (tracks.ContainsKey (path)) {
                 track = tracks[path];				
-                } else {
-                    track = new Track ();
+            } else {
+                track = new Track ();
 
-                    track.FileName = path;
-                    track.Title = tangerine_item_get_title (item);
-                    track.Album = tangerine_item_get_album (item);
-                    track.Artist = tangerine_item_get_artist (item);
-                    track.Duration = TimeSpan.FromSeconds (tangerine_item_get_duration(item));
-                    track.BitRate = tangerine_item_get_bitrate (item);
+                track.FileName = path;
+                track.Title = tangerine_item_get_title (item);
+                track.Album = tangerine_item_get_album (item);
+                track.Artist = tangerine_item_get_artist (item);
+                track.Duration = TimeSpan.FromSeconds (tangerine_item_get_duration(item));
+                track.BitRate = tangerine_item_get_bitrate (item);
 
-                    lock (Daemon.DefaultDatabase) {
-                        Daemon.DefaultDatabase.AddTrack (track);
-                    }
+                lock (Daemon.DefaultDatabase) {
+                    Daemon.DefaultDatabase.AddTrack (track);
                 }
-
-                updatedTracks[path] = track;
             }
 
-            public void Dispose () {
-                tangerine_stop_music_query ();
-            }
+            updatedTracks[path] = track;
+        }
+
+        public void Dispose () {
+            tangerine_stop_music_query ();
         }
     }
+}

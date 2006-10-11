@@ -16,7 +16,7 @@
 					20,
 					243,
 					20,
-					48.1626,
+					48,
 					43,
 					43,
 					20,
@@ -192,6 +192,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {788, 2058}}";
 			sepNavSelRange = "{725, 0}";
 			sepNavVisRect = "{{0, 0}, {726, 573}}";
+			sepNavWindowFrame = "{{107, 318}, {1068, 771}}";
 		};
 	};
 	F38BD1470ADBFEC700D3FAC3 /* Source Control */ = {
@@ -219,7 +220,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSLog(\"Bam!\");";
 		rLen = 1;
-		rLoc = 1902;
+		rLoc = 1993;
 		rType = 0;
 		vrLen = 186;
 		vrLoc = 86;
@@ -237,7 +238,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1885;
+		rLoc = 1976;
 		rType = 0;
 		vrLen = 247;
 		vrLoc = 86;
@@ -247,7 +248,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1885;
+		rLoc = 1976;
 		rType = 0;
 		vrLen = 221;
 		vrLoc = 86;
@@ -265,7 +266,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1885;
+		rLoc = 1976;
 		rType = 0;
 		vrLen = 221;
 		vrLoc = 86;
@@ -313,7 +314,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "{";
 		rLen = 72;
-		rLoc = 1813;
+		rLoc = 1904;
 		rType = 0;
 		vrLen = 221;
 		vrLoc = 86;
@@ -331,7 +332,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1885;
+		rLoc = 1976;
 		rType = 0;
 		vrLen = 439;
 		vrLoc = 203;
@@ -351,7 +352,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: dealloc";
 		rLen = 0;
-		rLoc = 1749;
+		rLoc = 1840;
 		rType = 0;
 		vrLen = 821;
 		vrLoc = 856;
@@ -361,7 +362,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 18";
 		rLen = 0;
-		rLoc = 1812;
+		rLoc = 1903;
 		rType = 0;
 		vrLen = 614;
 		vrLoc = 0;
@@ -381,7 +382,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 18";
 		rLen = 0;
-		rLoc = 1812;
+		rLoc = 1903;
 		rType = 0;
 		vrLen = 620;
 		vrLoc = 0;
@@ -401,7 +402,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 18";
 		rLen = 0;
-		rLoc = 1812;
+		rLoc = 1903;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 0;
@@ -421,7 +422,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_start_music_query";
 		rLen = 0;
-		rLoc = 1812;
+		rLoc = 1903;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 0;
@@ -461,7 +462,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 10";
 		rLen = 0;
-		rLoc = 1751;
+		rLoc = 1842;
 		rType = 0;
 		vrLen = 568;
 		vrLoc = 0;
@@ -481,7 +482,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 16";
 		rLen = 0;
-		rLoc = 1751;
+		rLoc = 1842;
 		rType = 0;
 		vrLen = 604;
 		vrLoc = 0;
@@ -501,7 +502,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 19";
 		rLen = 0;
-		rLoc = 1290;
+		rLoc = 1381;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -521,7 +522,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 13";
 		rLen = 0;
-		rLoc = 818;
+		rLoc = 824;
 		rType = 0;
 		vrLen = 637;
 		vrLoc = 0;
@@ -541,7 +542,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: dealloc";
 		rLen = 0;
-		rLoc = 1749;
+		rLoc = 1840;
 		rType = 0;
 		vrLen = 821;
 		vrLoc = 856;
@@ -561,7 +562,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: init";
 		rLen = 0;
-		rLoc = 1362;
+		rLoc = 1453;
 		rType = 0;
 		vrLen = 818;
 		vrLoc = 856;
@@ -589,7 +590,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 74";
 		rLen = 0;
-		rLoc = 1902;
+		rLoc = 1993;
 		rType = 0;
 		vrLen = 412;
 		vrLoc = 173;
@@ -609,7 +610,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "@end";
 		rLen = 5;
-		rLoc = 1745;
+		rLoc = 1836;
 		rType = 0;
 		vrLen = 250;
 		vrLoc = 1559;
@@ -627,7 +628,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "[helper start];";
 		rLen = 18;
-		rLoc = 1885;
+		rLoc = 1976;
 		rType = 0;
 		vrLen = 214;
 		vrLoc = 1616;
@@ -647,7 +648,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 60";
 		rLen = 0;
-		rLoc = 1659;
+		rLoc = 1750;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 1316;
@@ -657,7 +658,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 59";
 		rLen = 0;
-		rLoc = 1636;
+		rLoc = 1727;
 		rType = 0;
 		vrLen = 883;
 		vrLoc = 856;
@@ -677,7 +678,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 60";
 		rLen = 0;
-		rLoc = 1659;
+		rLoc = 1750;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 1316;
@@ -697,7 +698,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 60";
 		rLen = 0;
-		rLoc = 1659;
+		rLoc = 1750;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 3;
@@ -707,7 +708,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 58";
 		rLen = 0;
-		rLoc = 1599;
+		rLoc = 1690;
 		rType = 0;
 		vrLen = 1071;
 		vrLoc = 578;
@@ -727,7 +728,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 58";
 		rLen = 0;
-		rLoc = 1599;
+		rLoc = 1690;
 		rType = 0;
 		vrLen = 1277;
 		vrLoc = 0;
@@ -737,7 +738,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 58";
 		rLen = 0;
-		rLoc = 1599;
+		rLoc = 1690;
 		rType = 0;
 		vrLen = 1277;
 		vrLoc = 0;
@@ -757,7 +758,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 79";
 		rLen = 0;
-		rLoc = 1814;
+		rLoc = 1905;
 		rType = 0;
 		vrLen = 632;
 		vrLoc = 1407;
@@ -767,7 +768,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 57";
 		rLen = 0;
-		rLoc = 1569;
+		rLoc = 1660;
 		rType = 0;
 		vrLen = 725;
 		vrLoc = 1171;
@@ -785,7 +786,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "callback (item);";
 		rLen = 0;
-		rLoc = 725;
+		rLoc = 731;
 		rType = 0;
 		vrLen = 415;
 		vrLoc = 438;
@@ -803,7 +804,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "callback (item);";
 		rLen = 0;
-		rLoc = 725;
+		rLoc = 731;
 		rType = 0;
 		vrLen = 415;
 		vrLoc = 438;
@@ -813,7 +814,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_run_music_query";
 		rLen = 0;
-		rLoc = 1809;
+		rLoc = 1900;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 174;
@@ -853,7 +854,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "callback (item);";
 		rLen = 0;
-		rLoc = 725;
+		rLoc = 731;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 173;
@@ -873,7 +874,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_run_music_query";
 		rLen = 0;
-		rLoc = 1809;
+		rLoc = 1900;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 174;
@@ -901,7 +902,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "{";
 		rLen = 2;
-		rLoc = 1366;
+		rLoc = 1457;
 		rType = 0;
 		vrLen = 267;
 		vrLoc = 1202;
@@ -931,7 +932,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: init";
 		rLen = 0;
-		rLoc = 1362;
+		rLoc = 1453;
 		rType = 0;
 		vrLen = 1024;
 		vrLoc = 673;
@@ -941,7 +942,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 82";
 		rLen = 0;
-		rLoc = 1855;
+		rLoc = 1946;
 		rType = 0;
 		vrLen = 597;
 		vrLoc = 1636;
@@ -961,7 +962,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: init";
 		rLen = 0;
-		rLoc = 1362;
+		rLoc = 1453;
 		rType = 0;
 		vrLen = 1024;
 		vrLoc = 673;
@@ -981,7 +982,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_get_string_value";
 		rLen = 0;
-		rLoc = 2075;
+		rLoc = 2166;
 		rType = 0;
 		vrLen = 597;
 		vrLoc = 1636;
@@ -1001,7 +1002,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 82";
 		rLen = 0;
-		rLoc = 1855;
+		rLoc = 1946;
 		rType = 0;
 		vrLen = 597;
 		vrLoc = 1636;
@@ -1041,7 +1042,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 100";
 		rLen = 0;
-		rLoc = 2256;
+		rLoc = 2347;
 		rType = 0;
 		vrLen = 605;
 		vrLoc = 1636;
@@ -1051,7 +1052,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 105";
 		rLen = 0;
-		rLoc = 2256;
+		rLoc = 2347;
 		rType = 0;
 		vrLen = 643;
 		vrLoc = 1671;
@@ -1061,7 +1062,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 105";
 		rLen = 0;
-		rLoc = 2255;
+		rLoc = 2346;
 		rType = 0;
 		vrLen = 651;
 		vrLoc = 1671;
@@ -1079,7 +1080,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "return tangerine_item_get_string (item, kMDItemPath);";
 		rLen = 61;
-		rLoc = 2316;
+		rLoc = 2407;
 		rType = 0;
 		vrLen = 307;
 		vrLoc = 2293;
@@ -1103,7 +1104,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSArray *array = [item valueForAttribute:kMDItemAuthors];";
 		rLen = 65;
-		rLoc = 2438;
+		rLoc = 2529;
 		rType = 0;
 		vrLen = 320;
 		vrLoc = 2350;
@@ -1121,7 +1122,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "const char *val = [[item valueForAttribute:key] cString];";
 		rLen = 62;
-		rLoc = 2116;
+		rLoc = 2207;
 		rType = 0;
 		vrLen = 256;
 		vrLoc = 2045;
@@ -1139,7 +1140,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "return (short) [item valueForAttribute:@\"kMDItemAudioBitRate\"];";
 		rLen = 98;
-		rLoc = 3103;
+		rLoc = 3194;
 		rType = 0;
 		vrLen = 259;
 		vrLoc = 2917;
@@ -1159,7 +1160,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_item_get_string";
 		rLen = 0;
-		rLoc = 2099;
+		rLoc = 2190;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1945;
@@ -1169,7 +1170,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 105";
 		rLen = 0;
-		rLoc = 2255;
+		rLoc = 2346;
 		rType = 0;
 		vrLen = 651;
 		vrLoc = 1671;
@@ -1189,7 +1190,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_item_get_string";
 		rLen = 0;
-		rLoc = 2099;
+		rLoc = 2190;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1945;
@@ -1209,7 +1210,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 148";
 		rLen = 0;
-		rLoc = 3200;
+		rLoc = 3291;
 		rType = 0;
 		vrLen = 941;
 		vrLoc = 2294;
@@ -1295,7 +1296,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 36";
 		rLen = 0;
-		rLoc = 769;
+		rLoc = 775;
 		rType = 0;
 		vrLen = 1002;
 		vrLoc = 0;
@@ -1305,7 +1306,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 128";
 		rLen = 0;
-		rLoc = 2760;
+		rLoc = 2851;
 		rType = 0;
 		vrLen = 1324;
 		vrLoc = 0;
@@ -1315,7 +1316,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 23";
 		rLen = 0;
-		rLoc = 725;
+		rLoc = 731;
 		rType = 0;
 		vrLen = 1297;
 		vrLoc = 0;

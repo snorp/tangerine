@@ -19,7 +19,7 @@ static QueryHelper *helper;
                 callback (item);
             }
             @catch (NSException *e) {
-                NSLog([NSString stringWithFormat:@"Problem with file '%@', dropping", [item valueForAttribute:@"kMDItemPath"]]);
+                /* NSLog([NSString stringWithFormat:@"Problem with file '%@', dropping", [item valueForAttribute:@"kMDItemPath"]]); */
             }
         }
         
@@ -34,7 +34,7 @@ static QueryHelper *helper;
     if (self != nil) {
         pool = [[NSAutoreleasePool alloc] init];
         query = [[NSMetadataQuery alloc] init];
-        [query setPredicate:[NSPredicate predicateWithFormat:@"kMDItemContentType == 'public.mp3'"]];
+        [query setPredicate:[NSPredicate predicateWithFormat:@"kMDItemContentType == 'public.mp3' || kMDItemContentType == 'public.aac' || kMDItemContentType == 'public.mpeg-4-audio'"]];
         [query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUserHomeScope]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryNotified:) name:nil object:query];
 
