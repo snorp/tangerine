@@ -163,6 +163,7 @@ plugins/muine/Makefile
 plugins/muine/MuineDatabase.cs
 plugins/itunes/Makefile
 plugins/spotlight/Makefile
+plugins/spotlight/SpotlightHelper/Makefile
 TangerinePrefPane/Makefile
 tangerine.pc
 ])
