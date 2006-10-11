@@ -212,7 +212,7 @@
 		comments = "warning: passing argument 1 of 'NSLog' from incompatible pointer type";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 0;
-		rLoc = 81;
+		rLoc = 82;
 		rType = 1;
 	};
 	F38BD1520ADBFF5600D3FAC3 /* PBXTextBookmark */ = {
@@ -220,7 +220,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSLog(\"Bam!\");";
 		rLen = 1;
-		rLoc = 1993;
+		rLoc = 2044;
 		rType = 0;
 		vrLen = 186;
 		vrLoc = 86;
@@ -230,7 +230,7 @@
 		comments = "warning: unused variable 'query'";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 0;
-		rLoc = 81;
+		rLoc = 82;
 		rType = 1;
 	};
 	F38BD1580ADBFF8D00D3FAC3 /* PBXTextBookmark */ = {
@@ -238,7 +238,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1976;
+		rLoc = 2027;
 		rType = 0;
 		vrLen = 247;
 		vrLoc = 86;
@@ -248,7 +248,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1976;
+		rLoc = 2027;
 		rType = 0;
 		vrLen = 221;
 		vrLoc = 86;
@@ -266,7 +266,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1976;
+		rLoc = 2027;
 		rType = 0;
 		vrLen = 221;
 		vrLoc = 86;
@@ -296,7 +296,7 @@
 		comments = "error: conflicting types for 'tangerine_start_music_query'";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 78;
+		rLoc = 79;
 		rType = 1;
 	};
 	F38BD1970ADC026100D3FAC3 /* PBXTextBookmark */ = {
@@ -314,7 +314,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "{";
 		rLen = 72;
-		rLoc = 1904;
+		rLoc = 1955;
 		rType = 0;
 		vrLen = 221;
 		vrLoc = 86;
@@ -324,7 +324,7 @@
 		comments = "warning: unused variable 'query'";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 0;
-		rLoc = 81;
+		rLoc = 82;
 		rType = 1;
 	};
 	F38BD19B0ADC027500D3FAC3 /* PBXTextBookmark */ = {
@@ -332,7 +332,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSMetadataQuery *query = [[NSMetadataQuery alloc] init];";
 		rLen = 0;
-		rLoc = 1976;
+		rLoc = 2027;
 		rType = 0;
 		vrLen = 439;
 		vrLoc = 203;
@@ -352,7 +352,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: dealloc";
 		rLen = 0;
-		rLoc = 1840;
+		rLoc = 1891;
 		rType = 0;
 		vrLen = 821;
 		vrLoc = 856;
@@ -362,7 +362,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 18";
 		rLen = 0;
-		rLoc = 1903;
+		rLoc = 1954;
 		rType = 0;
 		vrLen = 614;
 		vrLoc = 0;
@@ -382,7 +382,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 18";
 		rLen = 0;
-		rLoc = 1903;
+		rLoc = 1954;
 		rType = 0;
 		vrLen = 620;
 		vrLoc = 0;
@@ -402,7 +402,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 18";
 		rLen = 0;
-		rLoc = 1903;
+		rLoc = 1954;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 0;
@@ -422,7 +422,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_start_music_query";
 		rLen = 0;
-		rLoc = 1903;
+		rLoc = 1954;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 0;
@@ -462,7 +462,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 10";
 		rLen = 0;
-		rLoc = 1842;
+		rLoc = 1893;
 		rType = 0;
 		vrLen = 568;
 		vrLoc = 0;
@@ -482,7 +482,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 16";
 		rLen = 0;
-		rLoc = 1842;
+		rLoc = 1893;
 		rType = 0;
 		vrLen = 604;
 		vrLoc = 0;
@@ -502,7 +502,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 19";
 		rLen = 0;
-		rLoc = 1381;
+		rLoc = 1432;
 		rType = 0;
 		vrLen = 710;
 		vrLoc = 0;
@@ -542,7 +542,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: dealloc";
 		rLen = 0;
-		rLoc = 1840;
+		rLoc = 1891;
 		rType = 0;
 		vrLen = 821;
 		vrLoc = 856;
@@ -562,7 +562,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: init";
 		rLen = 0;
-		rLoc = 1453;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 818;
 		vrLoc = 856;
@@ -582,7 +582,7 @@
 		comments = "warning: incomplete implementation of class 'QueryHelper'";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 72;
+		rLoc = 73;
 		rType = 1;
 	};
 	F38BD1DA0ADC089500D3FAC3 /* PBXTextBookmark */ = {
@@ -590,7 +590,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 74";
 		rLen = 0;
-		rLoc = 1993;
+		rLoc = 2044;
 		rType = 0;
 		vrLen = 412;
 		vrLoc = 173;
@@ -610,7 +610,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "@end";
 		rLen = 5;
-		rLoc = 1836;
+		rLoc = 1887;
 		rType = 0;
 		vrLen = 250;
 		vrLoc = 1559;
@@ -620,7 +620,7 @@
 		comments = "warning: 'QueryHelper' may not respond to '-start'";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 81;
+		rLoc = 82;
 		rType = 1;
 	};
 	F38BD1DF0ADC08A000D3FAC3 /* PBXTextBookmark */ = {
@@ -628,7 +628,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "[helper start];";
 		rLen = 18;
-		rLoc = 1976;
+		rLoc = 2027;
 		rType = 0;
 		vrLen = 214;
 		vrLoc = 1616;
@@ -648,7 +648,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 60";
 		rLen = 0;
-		rLoc = 1750;
+		rLoc = 1801;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 1316;
@@ -658,7 +658,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 59";
 		rLen = 0;
-		rLoc = 1727;
+		rLoc = 1778;
 		rType = 0;
 		vrLen = 883;
 		vrLoc = 856;
@@ -678,7 +678,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 60";
 		rLen = 0;
-		rLoc = 1750;
+		rLoc = 1801;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 1316;
@@ -698,7 +698,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 60";
 		rLen = 0;
-		rLoc = 1750;
+		rLoc = 1801;
 		rType = 0;
 		vrLen = 1240;
 		vrLoc = 3;
@@ -708,7 +708,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 58";
 		rLen = 0;
-		rLoc = 1690;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1071;
 		vrLoc = 578;
@@ -728,7 +728,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 58";
 		rLen = 0;
-		rLoc = 1690;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1277;
 		vrLoc = 0;
@@ -738,7 +738,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 58";
 		rLen = 0;
-		rLoc = 1690;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1277;
 		vrLoc = 0;
@@ -758,7 +758,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 79";
 		rLen = 0;
-		rLoc = 1905;
+		rLoc = 1956;
 		rType = 0;
 		vrLen = 632;
 		vrLoc = 1407;
@@ -768,7 +768,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 57";
 		rLen = 0;
-		rLoc = 1660;
+		rLoc = 1711;
 		rType = 0;
 		vrLen = 725;
 		vrLoc = 1171;
@@ -814,7 +814,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_run_music_query";
 		rLen = 0;
-		rLoc = 1900;
+		rLoc = 1951;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 174;
@@ -874,7 +874,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_run_music_query";
 		rLen = 0;
-		rLoc = 1900;
+		rLoc = 1951;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 174;
@@ -894,7 +894,7 @@
 		comments = "warning: conflicting types for '-(void)setCallback:(SpotlightHelperCallback*)cb'";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 45;
+		rLoc = 46;
 		rType = 1;
 	};
 	F38BD21B0ADC0CD400D3FAC3 /* PBXTextBookmark */ = {
@@ -902,7 +902,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "{";
 		rLen = 2;
-		rLoc = 1457;
+		rLoc = 1508;
 		rType = 0;
 		vrLen = 267;
 		vrLoc = 1202;
@@ -932,7 +932,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: init";
 		rLen = 0;
-		rLoc = 1453;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 1024;
 		vrLoc = 673;
@@ -942,7 +942,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 82";
 		rLen = 0;
-		rLoc = 1946;
+		rLoc = 1997;
 		rType = 0;
 		vrLen = 597;
 		vrLoc = 1636;
@@ -962,7 +962,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: init";
 		rLen = 0;
-		rLoc = 1453;
+		rLoc = 1504;
 		rType = 0;
 		vrLen = 1024;
 		vrLoc = 673;
@@ -982,7 +982,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_get_string_value";
 		rLen = 0;
-		rLoc = 2166;
+		rLoc = 2217;
 		rType = 0;
 		vrLen = 597;
 		vrLoc = 1636;
@@ -1002,7 +1002,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 82";
 		rLen = 0;
-		rLoc = 1946;
+		rLoc = 1997;
 		rType = 0;
 		vrLen = 597;
 		vrLoc = 1636;
@@ -1042,7 +1042,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 100";
 		rLen = 0;
-		rLoc = 2347;
+		rLoc = 2398;
 		rType = 0;
 		vrLen = 605;
 		vrLoc = 1636;
@@ -1052,7 +1052,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 105";
 		rLen = 0;
-		rLoc = 2347;
+		rLoc = 2398;
 		rType = 0;
 		vrLen = 643;
 		vrLoc = 1671;
@@ -1062,7 +1062,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 105";
 		rLen = 0;
-		rLoc = 2346;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 651;
 		vrLoc = 1671;
@@ -1072,7 +1072,7 @@
 		comments = "warning: passing argument 2 of 'tangerine_item_get_string' from incompatible pointer type";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 108;
+		rLoc = 109;
 		rType = 1;
 	};
 	F38BD2540ADC2CB300D3FAC3 /* PBXTextBookmark */ = {
@@ -1080,7 +1080,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "return tangerine_item_get_string (item, kMDItemPath);";
 		rLen = 61;
-		rLoc = 2407;
+		rLoc = 2458;
 		rType = 0;
 		vrLen = 307;
 		vrLoc = 2293;
@@ -1096,7 +1096,7 @@
 		comments = "warning: passing argument 1 of 'valueForAttribute:' from incompatible pointer type";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 114;
+		rLoc = 115;
 		rType = 1;
 	};
 	F38BD25F0ADC2D1100D3FAC3 /* PBXTextBookmark */ = {
@@ -1104,7 +1104,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "NSArray *array = [item valueForAttribute:kMDItemAuthors];";
 		rLen = 65;
-		rLoc = 2529;
+		rLoc = 2580;
 		rType = 0;
 		vrLen = 320;
 		vrLoc = 2350;
@@ -1114,7 +1114,7 @@
 		comments = "warning: passing argument 1 of 'valueForAttribute:' from incompatible pointer type";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 97;
+		rLoc = 98;
 		rType = 1;
 	};
 	F38BD2640ADC2D5600D3FAC3 /* PBXTextBookmark */ = {
@@ -1122,7 +1122,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "const char *val = [[item valueForAttribute:key] cString];";
 		rLen = 62;
-		rLoc = 2207;
+		rLoc = 2258;
 		rType = 0;
 		vrLen = 256;
 		vrLoc = 2045;
@@ -1132,7 +1132,7 @@
 		comments = "warning: cast from pointer to integer of different size";
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		rLen = 1;
-		rLoc = 144;
+		rLoc = 145;
 		rType = 1;
 	};
 	F38BD2690ADC2DCB00D3FAC3 /* PBXTextBookmark */ = {
@@ -1140,7 +1140,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "return (short) [item valueForAttribute:@\"kMDItemAudioBitRate\"];";
 		rLen = 98;
-		rLoc = 3194;
+		rLoc = 3245;
 		rType = 0;
 		vrLen = 259;
 		vrLoc = 2917;
@@ -1160,7 +1160,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_item_get_string";
 		rLen = 0;
-		rLoc = 2190;
+		rLoc = 2241;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1945;
@@ -1170,7 +1170,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 105";
 		rLen = 0;
-		rLoc = 2346;
+		rLoc = 2397;
 		rType = 0;
 		vrLen = 651;
 		vrLoc = 1671;
@@ -1190,7 +1190,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: tangerine_item_get_string";
 		rLen = 0;
-		rLoc = 2190;
+		rLoc = 2241;
 		rType = 0;
 		vrLen = 843;
 		vrLoc = 1945;
@@ -1210,7 +1210,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 148";
 		rLen = 0;
-		rLoc = 3291;
+		rLoc = 3342;
 		rType = 0;
 		vrLen = 941;
 		vrLoc = 2294;
@@ -1306,7 +1306,7 @@
 		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
 		name = "QueryHelper.m: 128";
 		rLen = 0;
-		rLoc = 2851;
+		rLoc = 2902;
 		rType = 0;
 		vrLen = 1324;
 		vrLoc = 0;
