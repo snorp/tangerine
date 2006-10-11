@@ -1,7 +1,7 @@
 // !$*UTF8*$!
 {
 	089C1669FE841209C02AAC07 /* Project object */ = {
-		activeBuildConfigurationName = Debug;
+		activeBuildConfigurationName = Release;
 		activeExecutable = F3CFB3320AD9CA1C00F49CDC /* System Preferences */;
 		activeTarget = 8D202CE80486D31800D8A456 /* TangerinePrefPane */;
 		addToTargets = (

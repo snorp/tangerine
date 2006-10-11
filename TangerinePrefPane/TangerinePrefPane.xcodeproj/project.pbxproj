@@ -14,20 +14,10 @@
 		F38BD1640ADBFFBE00D3FAC3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38BD1630ADBFFBE00D3FAC3 /* Cocoa.framework */; };
 		F38BD1660ADBFFC800D3FAC3 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38BD1650ADBFFC800D3FAC3 /* AppKit.framework */; };
 		F38BD16D0ADBFFE100D3FAC3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F38BD16C0ADBFFE100D3FAC3 /* PreferencePanes.framework */; };
-		F38BD2A70ADC32A000D3FAC3 /* tangerine-spotlight.dll in Resources */ = {isa = PBXBuildFile; fileRef = F38BD2A60ADC32A000D3FAC3 /* tangerine-spotlight.dll */; };
 		F38BD2B00ADC335500D3FAC3 /* tangerine-spotlight.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38BD2A60ADC32A000D3FAC3 /* tangerine-spotlight.dll */; };
-		F38BD2B20ADC337100D3FAC3 /* spotlight.provider in Resources */ = {isa = PBXBuildFile; fileRef = F38BD2B10ADC337100D3FAC3 /* spotlight.provider */; };
 		F38BD2B30ADC337D00D3FAC3 /* spotlight.provider in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38BD2B10ADC337100D3FAC3 /* spotlight.provider */; };
 		F38BD3B40ADC3E3F00D3FAC3 /* SpotlightHelper.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F38BD3AE0ADC3E2A00D3FAC3 /* SpotlightHelper.dylib */; };
-		F3A63CEE0ADAC26B0034B74F /* start-daemon.sh in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CED0ADAC26B0034B74F /* start-daemon.sh */; };
 		F3A63CF30ADAC27C0034B74F /* start-daemon.sh in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CED0ADAC26B0034B74F /* start-daemon.sh */; };
-		F3A63CFD0ADAC39F0034B74F /* Nini.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CFC0ADAC39F0034B74F /* Nini.dll */; };
-		F3A63D000ADAC3D30034B74F /* log4net.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63CFF0ADAC3D30034B74F /* log4net.dll */; };
-		F3A63D020ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D010ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll */; };
-		F3A63D050ADAC40B0034B74F /* daap-sharp.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D030ADAC40B0034B74F /* daap-sharp.dll */; };
-		F3A63D080ADAC41B0034B74F /* taglib-sharp.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D070ADAC41B0034B74F /* taglib-sharp.dll */; };
-		F3A63D0A0ADAC4290034B74F /* tangerine.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D090ADAC4290034B74F /* tangerine.dll */; };
-		F3A63D0C0ADAC4400034B74F /* tangerine-daemon.exe in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D0B0ADAC4400034B74F /* tangerine-daemon.exe */; };
 		F3A63D0D0ADAC45B0034B74F /* tangerine-daemon.exe in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D0B0ADAC4400034B74F /* tangerine-daemon.exe */; };
 		F3A63D0E0ADAC45B0034B74F /* tangerine.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D090ADAC4290034B74F /* tangerine.dll */; };
 		F3A63D0F0ADAC45B0034B74F /* taglib-sharp.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D070ADAC41B0034B74F /* taglib-sharp.dll */; };
@@ -35,12 +25,7 @@
 		F3A63D120ADAC45B0034B74F /* ICSharpCode.SharpZipLib.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D010ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll */; };
 		F3A63D130ADAC45B0034B74F /* log4net.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CFF0ADAC3D30034B74F /* log4net.dll */; };
 		F3A63D140ADAC45B0034B74F /* Nini.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63CFC0ADAC39F0034B74F /* Nini.dll */; };
-		F3A63D170ADAC4A70034B74F /* daap-sharp.dll.config in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D160ADAC4A70034B74F /* daap-sharp.dll.config */; };
 		F3A63D180ADAC4AD0034B74F /* daap-sharp.dll.config in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D160ADAC4A70034B74F /* daap-sharp.dll.config */; };
-		F3A63D1C0ADAC50F0034B74F /* db4o.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1A0ADAC50F0034B74F /* db4o.dll */; };
-		F3A63D1D0ADAC50F0034B74F /* tangerine-file.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1B0ADAC50F0034B74F /* tangerine-file.dll */; };
-		F3A63D200ADAD2A10034B74F /* itunes.provider in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1E0ADAD2A10034B74F /* itunes.provider */; };
-		F3A63D210ADAD2A10034B74F /* tangerine-itunes.dll in Resources */ = {isa = PBXBuildFile; fileRef = F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */; };
 		F3A63D240ADAD2C40034B74F /* itunes.provider in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1E0ADAD2A10034B74F /* itunes.provider */; };
 		F3A63D250ADAD2C40034B74F /* tangerine-itunes.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1F0ADAD2A10034B74F /* tangerine-itunes.dll */; };
 		F3A63D260ADAD2C40034B74F /* db4o.dll in CopyFiles */ = {isa = PBXBuildFile; fileRef = F3A63D1A0ADAC50F0034B74F /* db4o.dll */; };
@@ -312,22 +297,7 @@
 				F3CFB17D0AD856DC00F49CDC /* TangerinePrefPanePref.nib in Resources */,
 				F3CFB1800AD856EA00F49CDC /* tangerine-64.tiff in Resources */,
 				F3CFB1810AD856EA00F49CDC /* tangerine-128.tiff in Resources */,
-				F3A63CEE0ADAC26B0034B74F /* start-daemon.sh in Resources */,
-				F3A63CFD0ADAC39F0034B74F /* Nini.dll in Resources */,
-				F3A63D000ADAC3D30034B74F /* log4net.dll in Resources */,
-				F3A63D020ADAC3E60034B74F /* ICSharpCode.SharpZipLib.dll in Resources */,
-				F3A63D050ADAC40B0034B74F /* daap-sharp.dll in Resources */,
-				F3A63D080ADAC41B0034B74F /* taglib-sharp.dll in Resources */,
-				F3A63D0A0ADAC4290034B74F /* tangerine.dll in Resources */,
-				F3A63D0C0ADAC4400034B74F /* tangerine-daemon.exe in Resources */,
-				F3A63D170ADAC4A70034B74F /* daap-sharp.dll.config in Resources */,
-				F3A63D1C0ADAC50F0034B74F /* db4o.dll in Resources */,
-				F3A63D1D0ADAC50F0034B74F /* tangerine-file.dll in Resources */,
-				F3A63D200ADAD2A10034B74F /* itunes.provider in Resources */,
-				F3A63D210ADAD2A10034B74F /* tangerine-itunes.dll in Resources */,
 				F3A63E130ADB1BB70034B74F /* net.snorp.Tangerine.plist in Resources */,
-				F38BD2A70ADC32A000D3FAC3 /* tangerine-spotlight.dll in Resources */,
-				F38BD2B20ADC337100D3FAC3 /* spotlight.provider in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

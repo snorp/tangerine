@@ -226,8 +226,10 @@ namespace Tangerine {
             AddUsers ();
 
             try {
-                server.Commit ();
-                server.Start ();
+				lock (server) {
+				    server.Commit ();
+				    server.Start ();
+				}
             } catch (Exception e) {
                 LogError ("Failed to start server", e);
                 Shutdown ();
