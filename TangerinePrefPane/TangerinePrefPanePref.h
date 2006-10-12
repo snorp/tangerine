@@ -27,7 +27,7 @@
     IBOutlet NSStepper *userLimitStepper;
     
 @private
-    int dirty;
+    BOOL dirty;
     TangerineIniParser *config;
 }
 

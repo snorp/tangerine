@@ -50,8 +50,27 @@
 - (void)setFromConfig
 {
     [enabledCheckBox setState:[self getDaemonEnabled]];
-    [shareNameText setStringValue:[config getValue:@"name" section:@"Tangerine"]];
-    [dirText setStringValue:[[config getValue:@"directories" section:@"FilePlugin"] stringByAbbreviatingWithTildeInPath]];
+    
+    NSString *share_name = [config getValue:@"name" section:@"Tangerine"];
+    if (share_name == nil || [share_name length] == 0) {
+        share_name = [NSString stringWithFormat:@"%@'s Music", NSUserName()];
+    }
+    
+    [shareNameText setStringValue:share_name];
+    
+    NSString *directory = [[config getValue:@"directories" section:@"FilePlugin"] stringByAbbreviatingWithTildeInPath];
+    if (directory == nil || [directory length] == 0) {
+        directory = @"~/Music";
+    }
+    
+    [dirText setStringValue:directory];
+    
+    NSString *max_users = [config getValue:@"max_users" section:@"Tangerine"];
+    if (max_users != nil && [max_users length] > 0) {
+        [userLimitText setStringValue:max_users];
+    } else {
+        [userLimitText setIntValue:0];
+    }
     
     [automaticRadio setState:0];
     [itunesRadio setState:0];
@@ -72,22 +91,79 @@
     NSString *plugins = [config getValue:@"plugins" section:@"Tangerine"];
     if ([plugins compare:@"spotlight"] == NSOrderedSame) {
         [automaticRadio setState:1];
-    } else if ([plugins compare:@"itunes"] == NSOrderedSame) {
+    } else if ([plugins compare:@"itunes"] == NSOrderedSame || plugins == nil || [plugins length] == 0) {
         [itunesRadio setState:1];
     } else {
         [dirRadio setState:1];
     }
 }
 
+- (BOOL) checkMono
+{
+    if (![[NSFileManager defaultManager] fileExistsAtPath:@"/usr/bin/mono"]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Mono is not installed" defaultButton:@"Close" alternateButton:nil
+                                  otherButton:nil informativeTextWithFormat:@"You must have Mono installed in order to use Tangerine.\n\nhttp://www.mono-project.com"];
+
+        [alert beginSheetModalForWindow:[[self mainView] window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void) didSelect
+{
+    if (![self checkMono]) {
+        [enabledCheckBox setState:0];
+        [enabledCheckBox setEnabled:NO];
+        [self refreshEnabled];
+        dirty = 0;
+    } else {
+        [enabledCheckBox setEnabled:YES];
+    }
+}
+
 - (void) mainViewDidLoad
 {
-    dirty = 0;
     config = [[TangerineIniParser alloc] init];
     [config setFile:[@"~/.tangerine" stringByExpandingTildeInPath]];
     [config parse];
     
     [self setFromConfig];
     [self refreshEnabled];
+    dirty = NO;
+}
+
+- (void) showShareNameError
+{
+    NSAlert *alert = [NSAlert alertWithMessageText:@"You must specify a share name." defaultButton:@"Close" alternateButton:nil
+                              otherButton:nil informativeTextWithFormat:@"A share name must be set in order to enable music sharing."];
+    
+    [alert beginSheetModalForWindow:[[self mainView] window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+- (void) showDirectoryError
+{
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Specified folder is not valid" defaultButton:@"Close" alternateButton:nil
+                                       otherButton:nil informativeTextWithFormat:@"A valid folder must be specified when using the 'in Folder' selection."];
+    
+    [alert beginSheetModalForWindow:[[self mainView] window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+- (NSPreferencePaneUnselectReply)shouldUnselect
+{
+    if (![enabledCheckBox state])
+        return NSUnselectNow;
+    
+    if ([[shareNameText stringValue] length] == 0) {
+        [self showShareNameError];
+        return NSUnselectCancel;
+    } else if ([dirRadio state] && ![[NSFileManager defaultManager] fileExistsAtPath:[[dirText stringValue] stringByExpandingTildeInPath]]) {
+        [self showDirectoryError];
+        return NSUnselectCancel;
+    } else {
+        return NSUnselectNow;
+    }
 }
 
 - (void)didUnselect
@@ -102,7 +178,7 @@
 {
     [config setValue:@"name" section:@"Tangerine" value:[shareNameText stringValue]];
     [config setValue:@"log_file" section:@"Tangerine" value:[@"~/.tangerine.log" stringByExpandingTildeInPath]];
-    /*[config setValue:@"max_users" section:@"Tangerine" value:[userLimitText stringValue]];*/
+    [config setValue:@"max_users" section:@"Tangerine" value:[userLimitText stringValue]];
     
     if ([automaticRadio state]) {
         [config setValue:@"plugins" section:@"Tangerine" value:@"spotlight"];
@@ -133,21 +209,25 @@
 
 - (IBAction)changed:(id)sender
 {
-    dirty = 1;
+    dirty = YES;
     [self refreshEnabled];
+}
+
+- (void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode  contextInfo:(void  *)contextInfo
+{
+    if (returnCode == NSOKButton) {
+        [dirText setStringValue:[[panel filename] stringByAbbreviatingWithTildeInPath]];
+    }
 }
 
 - (IBAction)chooseButtonPressed:(id)sender
 {
-    printf("Choose button pressed!");\
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setCanChooseFiles:0];
     [panel setCanChooseDirectories:1];
     
-    int result = [panel runModalForDirectory:NSHomeDirectory() file:nil types:nil];
-    if (result == NSOKButton) {
-        [dirText setStringValue:[[panel filename] stringByAbbreviatingWithTildeInPath]];
-    }
+    [panel beginSheetForDirectory:nil file:nil types:nil modalForWindow:[[self mainView] window] modalDelegate:self
+                   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 - (void)refreshEnabled
@@ -155,7 +235,7 @@
     int enabled = [enabledCheckBox state];
     
     [shareNameText setEnabled:enabled];
-    [dirText setEnabled:[dirRadio state]];
+    [dirText setEnabled:(enabled && [dirRadio state])];
     [chooseButton setEnabled:(enabled && [dirRadio state])];
     [radioGroup setEnabled:enabled];
     [passwordText setEnabled:enabled];

@@ -1,6 +1,11 @@
 {
     IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {"" = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
         {
             ACTIONS = {changed = id; chooseButtonPressed = id; }; 
             CLASS = NSPreferencePane; 
@@ -39,7 +44,6 @@
                 passwordText = id; 
                 radioGroup = id; 
                 shareNameText = id; 
-                status = id; 
                 userLimitStepper = id; 
                 userLimitText = id; 
             }; 
