@@ -31,13 +31,15 @@ namespace Tangerine.Plugins {
 
 #if LINUX || MACOSX
             string defaultDir = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), "Music");
+            char splitChar = ':';
 #else
             string defaultDir = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic);
+            char splitChar = ';';
 #endif
             if (Daemon.ConfigSource.Configs["FilePlugin"] == null) {
                 directories = new string[] { defaultDir };
             } else {
-                directories = Daemon.ConfigSource.Configs["FilePlugin"].Get ("directories", defaultDir).Split (';');
+                directories = Daemon.ConfigSource.Configs["FilePlugin"].Get ("directories", defaultDir).Split (splitChar);
             }
 
             server = Daemon.Server;

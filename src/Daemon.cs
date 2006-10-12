@@ -17,6 +17,7 @@ using log4net.Repository.Hierarchy;
 using log4net.Layout;
 using log4net.Appender;
 using Nini.Config;
+using Nini.Ini;
 using DAAP;
 
 #if LINUX || MACOSX
@@ -82,7 +83,10 @@ namespace Tangerine {
             cfgSource = new IniConfigSource ();
 
             if (File.Exists (ConfigPath)) {
-                cfgSource.Load (ConfigPath);
+                IniReader ireader = new IniReader (ConfigPath);
+                ireader.SetCommentDelimiters(new char[] { '#' });
+                ireader.SetAssignDelimiters(new char[] { '=' });
+                cfgSource = new IniConfigSource (new IniDocument (ireader));
             }
 
             IConfig cfg = cfgSource.Configs["Tangerine"];
