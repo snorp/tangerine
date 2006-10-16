@@ -65,9 +65,12 @@
     
     [dirText setStringValue:directory];
     
-    NSString *max_users = [config getValue:@"max_users" section:@"Tangerine"];
-    if (max_users != nil && [max_users length] > 1) {
-        [userLimitText setStringValue:max_users];
+    NSString *max_users_str = [config getValue:@"max_users" section:@"Tangerine"];
+    int max_users = [max_users_str intValue];
+
+    if (max_users > 0) {
+        [userLimitText setIntValue:max_users];
+        [userLimitCheckBox setState:1];
     } else {
         [userLimitText setIntValue:1];
     }
@@ -83,6 +86,7 @@
             char buf[BUFSIZ];
             fgets(buf, BUFSIZ, f);
             [passwordText setStringValue:[NSString stringWithUTF8String:buf]];
+            [passwordCheckBox setState:1];
         }
         
         fclose (f);

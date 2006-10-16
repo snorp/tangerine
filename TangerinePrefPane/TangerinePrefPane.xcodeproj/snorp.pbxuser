@@ -95,16 +95,17 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 182707701;
-			PBXWorkspaceStateSaveDate = 182707701;
+			PBXPerProjectTemplateStateSaveDate = 182731547;
+			PBXWorkspaceStateSaveDate = 182731547;
 		};
 		perUserProjectItems = {
-			F399730A0AE3E5FD00FF1CF5 /* PBXTextBookmark */ = F399730A0AE3E5FD00FF1CF5 /* PBXTextBookmark */;
-			F3D824350AE01A270090D038 = F3D824350AE01A270090D038 /* PBXTextBookmark */;
-			F3D824360AE01A270090D038 = F3D824360AE01A270090D038 /* PBXTextBookmark */;
-			F3D824370AE01A270090D038 = F3D824370AE01A270090D038 /* PBXTextBookmark */;
-			F3D824380AE01A270090D038 = F3D824380AE01A270090D038 /* PBXTextBookmark */;
-			F3D8245B0AE03EFC0090D038 = F3D8245B0AE03EFC0090D038 /* PBXTextBookmark */;
+			F376A1E80AE44322008709C2 /* PBXBookmark */ = F376A1E80AE44322008709C2 /* PBXBookmark */;
+			F376A1FA0AE44553008709C2 /* PBXTextBookmark */ = F376A1FA0AE44553008709C2 /* PBXTextBookmark */;
+			F376A1FB0AE44553008709C2 /* PBXTextBookmark */ = F376A1FB0AE44553008709C2 /* PBXTextBookmark */;
+			F376A2030AE4456C008709C2 /* PBXTextBookmark */ = F376A2030AE4456C008709C2 /* PBXTextBookmark */;
+			F376A2070AE44583008709C2 /* PBXTextBookmark */ = F376A2070AE44583008709C2 /* PBXTextBookmark */;
+			F376A20C0AE445DA008709C2 /* PBXTextBookmark */ = F376A20C0AE445DA008709C2 /* PBXTextBookmark */;
+			F376A2110AE4460F008709C2 /* PBXTextBookmark */ = F376A2110AE4460F008709C2 /* PBXTextBookmark */;
 		};
 		sourceControlManager = F3CFB1790AD8568100F49CDC /* Source Control */;
 		userBuildSettings = {
@@ -121,15 +122,67 @@
 			sepNavWindowFrame = "{{84, 107}, {765, 702}}";
 		};
 	};
-	F399730A0AE3E5FD00FF1CF5 /* PBXTextBookmark */ = {
+	F376A1E80AE44322008709C2 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+	};
+	F376A1FA0AE44553008709C2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: parse error before ';' token";
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		rLen = 0;
+		rLoc = 70;
+		rType = 1;
+	};
+	F376A1FB0AE44553008709C2 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
-		name = "TangerinePrefPanePref.m: 69";
+		name = "NSLog((@\"setting max_users\");";
+		rLen = 1;
+		rLoc = 3066;
+		rType = 0;
+		vrLen = 380;
+		vrLoc = 2862;
+	};
+	F376A2030AE4456C008709C2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		name = "TangerinePrefPanePref.m: 71";
 		rLen = 0;
-		rLoc = 3041;
+		rLoc = 3066;
+		rType = 0;
+		vrLen = 1865;
+		vrLoc = 2309;
+	};
+	F376A2070AE44583008709C2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		name = "TangerinePrefPanePref.m: 70";
+		rLen = 0;
+		rLoc = 3063;
+		rType = 0;
+		vrLen = 1865;
+		vrLoc = 2309;
+	};
+	F376A20C0AE445DA008709C2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		name = "TangerinePrefPanePref.m: 71";
+		rLen = 0;
+		rLoc = 3066;
 		rType = 0;
 		vrLen = 1778;
-		vrLoc = 2160;
+		vrLoc = 2309;
+	};
+	F376A2110AE4460F008709C2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
+		name = "TangerinePrefPanePref.m: 77";
+		rLen = 0;
+		rLoc = 3216;
+		rType = 0;
+		vrLen = 1778;
+		vrLoc = 2309;
 	};
 	F3A63CED0ADAC26B0034B74F /* start-daemon.sh */ = {
 		uiCtxt = {
@@ -217,56 +270,6 @@
 		objects = (
 		);
 	};
-	F3D824350AE01A270090D038 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */;
-		name = "TangerinePrefPanePref.h: userLimitCheckBox";
-		rLen = 0;
-		rLoc = 819;
-		rType = 0;
-		vrLen = 1063;
-		vrLoc = 0;
-	};
-	F3D824360AE01A270090D038 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
-		name = "TangerinePrefPanePref.m: 241";
-		rLen = 0;
-		rLoc = 9176;
-		rType = 0;
-		vrLen = 1408;
-		vrLoc = 7596;
-	};
-	F3D824370AE01A270090D038 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
-		name = "TangerinePrefPanePref.m: 241";
-		rLen = 0;
-		rLoc = 9176;
-		rType = 0;
-		vrLen = 1408;
-		vrLoc = 7596;
-	};
-	F3D824380AE01A270090D038 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */;
-		name = "TangerinePrefPanePref.h: userLimitCheckBox";
-		rLen = 0;
-		rLoc = 819;
-		rType = 0;
-		vrLen = 1063;
-		vrLoc = 0;
-	};
-	F3D8245B0AE03EFC0090D038 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */;
-		name = "TangerinePrefPanePref.m: 69";
-		rLen = 0;
-		rLoc = 3041;
-		rType = 0;
-		vrLen = 1778;
-		vrLoc = 2160;
-	};
 	F506C03C013D9D7901CA16C8 /* TangerinePrefPanePref.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1029, 698}}";
@@ -277,9 +280,9 @@
 	};
 	F506C03D013D9D7901CA16C8 /* TangerinePrefPanePref.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1029, 3570}}";
-			sepNavSelRange = "{3041, 0}";
-			sepNavVisRect = "{{0, 611}, {1029, 698}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1029, 3626}}";
+			sepNavSelRange = "{3216, 0}";
+			sepNavVisRect = "{{0, 701}, {1029, 698}}";
 			sepNavWindowFrame = "{{222, 211}, {1068, 771}}";
 		};
 	};

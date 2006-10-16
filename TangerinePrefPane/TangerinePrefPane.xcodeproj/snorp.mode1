@@ -185,7 +185,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>F376A1E90AE44322008709C2</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>TangerinePrefPanePref.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>F376A2020AE4456C008709C2</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>TangerinePrefPanePref.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>F376A2110AE4460F008709C2</string>
+						<key>history</key>
+						<array>
+							<string>F376A1E80AE44322008709C2</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1068, 730}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>222 211 1068 771 0 0 1600 1178 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -293,7 +334,7 @@
 							<real>282</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>748 320 736 634 0 0 1600 1178 </string>
+						<string>629 535 736 634 0 0 1600 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -330,7 +371,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {432, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>748 320 736 634 0 0 1600 1178 </string>
+								<string>629 535 736 634 0 0 1600 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -352,7 +393,7 @@
 								<key>Frame</key>
 								<string>{{0, 5}, {432, 588}}</string>
 								<key>RubberWindowFrame</key>
-								<string>748 320 736 634 0 0 1600 1178 </string>
+								<string>629 535 736 634 0 0 1600 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -376,9 +417,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>F39973080AE3E5FD00FF1CF5</string>
+				<string>F376A2000AE4456C008709C2</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>F39973090AE3E5FD00FF1CF5</string>
+				<string>F376A2010AE4456C008709C2</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -491,7 +532,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>F3D8241E0AE018D50090D038</string>
+	<string>F376A1E90AE44322008709C2</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -514,12 +555,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>F3CFB1B10AD85C1D00F49CDC</string>
 		<string>/Users/snorp/Desktop/tangerine/TangerinePrefPane/TangerinePrefPane.xcodeproj</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
+		<string>F376A1E90AE44322008709C2</string>
 	</array>
 	<key>WindowString</key>
-	<string>748 320 736 634 0 0 1600 1178 </string>
+	<string>629 535 736 634 0 0 1600 1178 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -535,12 +577,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>TangerinePrefPanePref.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -596,7 +640,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>F3CFB1B10AD85C1D00F49CDC</string>
-				<string>F399730B0AE3E5FD00FF1CF5</string>
+				<string>F376A1FC0AE44553008709C2</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -966,9 +1010,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C0AD2B3069F1EA900FABCE6</string>
-				<string>F399730C0AE3E5FD00FF1CF5</string>
+				<string>F376A1FD0AE44553008709C2</string>
 				<string>1CD0528B0623707200166675</string>
-				<string>F399730D0AE3E5FD00FF1CF5</string>
+				<string>F376A1FE0AE44553008709C2</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.run</string>
@@ -977,7 +1021,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
