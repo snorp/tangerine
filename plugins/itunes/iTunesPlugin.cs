@@ -161,7 +161,7 @@ namespace Tangerine.Plugins {
                 newTracks[trackId] = track;
 
                 track.FileName = uri.LocalPath;
-                if (track.FileName.StartsWith (@"\\localhost\")) {
+                if (track.FileName.StartsWith ("\\\\localhost\\")) {
                     track.FileName = track.FileName.Substring (12);
                 }
 
