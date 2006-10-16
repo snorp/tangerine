@@ -53,8 +53,12 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 182189753;
-			PBXWorkspaceStateSaveDate = 182189753;
+			PBXPerProjectTemplateStateSaveDate = 182709441;
+			PBXWorkspaceStateSaveDate = 182709441;
+		};
+		perUserProjectItems = {
+			F399731F0AE3ECC300FF1CF5 /* PBXBookmark */ = F399731F0AE3ECC300FF1CF5 /* PBXBookmark */;
+			F399732F0AE3EDA900FF1CF5 /* PBXTextBookmark */ = F399732F0AE3EDA900FF1CF5 /* PBXTextBookmark */;
 		};
 		sourceControlManager = F38BD1470ADBFEC700D3FAC3 /* Source Control */;
 		userBuildSettings = {
@@ -73,10 +77,10 @@
 	};
 	F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {788, 2058}}";
-			sepNavSelRange = "{725, 0}";
-			sepNavVisRect = "{{0, 0}, {726, 573}}";
-			sepNavWindowFrame = "{{107, 318}, {1068, 771}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1136, 2058}}";
+			sepNavSelRange = "{1170, 0}";
+			sepNavVisRect = "{{107, 191}, {1029, 698}}";
+			sepNavWindowFrame = "{{246, 320}, {1068, 771}}";
 		};
 	};
 	F38BD1470ADBFEC700D3FAC3 /* Source Control */ = {
@@ -96,5 +100,19 @@
 		name = "Project Breakpoints";
 		objects = (
 		);
+	};
+	F399731F0AE3ECC300FF1CF5 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
+	};
+	F399732F0AE3EDA900FF1CF5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = F38BD1440ADBFEC700D3FAC3 /* QueryHelper.m */;
+		name = "QueryHelper.m: 37";
+		rLen = 0;
+		rLoc = 1170;
+		rType = 0;
+		vrLen = 1377;
+		vrLoc = 339;
 	};
 }

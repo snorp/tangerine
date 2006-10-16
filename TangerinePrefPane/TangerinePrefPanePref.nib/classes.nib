@@ -21,10 +21,12 @@
                 dirText = id; 
                 enabledCheckBox = id; 
                 itunesRadio = id; 
+                passwordCheckBox = id; 
                 passwordText = id; 
                 radioGroup = id; 
                 shareNameText = id; 
                 status = id; 
+                userLimitCheckBox = id; 
                 userLimitStepper = id; 
                 userLimitText = id; 
             }; 

@@ -25,6 +25,8 @@
     IBOutlet NSTextField *passwordText;
     IBOutlet NSTextField *userLimitText;
     IBOutlet NSStepper *userLimitStepper;
+    IBOutlet NSButton *passwordCheckBox;
+    IBOutlet NSButton *userLimitCheckBox;
     
 @private
     BOOL dirty;

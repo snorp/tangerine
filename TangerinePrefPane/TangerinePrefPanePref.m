@@ -53,7 +53,7 @@
     
     NSString *share_name = [config getValue:@"name" section:@"Tangerine"];
     if (share_name == nil || [share_name length] == 0) {
-        share_name = [NSString stringWithFormat:@"%@'s Music", NSUserName()];
+        share_name = [NSString stringWithFormat:@"%@'s Music", NSFullUserName()];
     }
     
     [shareNameText setStringValue:share_name];
@@ -66,10 +66,10 @@
     [dirText setStringValue:directory];
     
     NSString *max_users = [config getValue:@"max_users" section:@"Tangerine"];
-    if (max_users != nil && [max_users length] > 0) {
+    if (max_users != nil && [max_users length] > 1) {
         [userLimitText setStringValue:max_users];
     } else {
-        [userLimitText setIntValue:0];
+        [userLimitText setIntValue:1];
     }
     
     [automaticRadio setState:0];
@@ -178,7 +178,13 @@
 {
     [config setValue:@"name" section:@"Tangerine" value:[shareNameText stringValue]];
     [config setValue:@"log_file" section:@"Tangerine" value:[@"~/.tangerine.log" stringByExpandingTildeInPath]];
-    [config setValue:@"max_users" section:@"Tangerine" value:[userLimitText stringValue]];
+    
+    NSString *max_users = [userLimitText stringValue];
+    if (![userLimitCheckBox state]) {
+        max_users = @"0";
+    }
+    
+    [config setValue:@"max_users" section:@"Tangerine" value:max_users];
     
     if ([automaticRadio state]) {
         [config setValue:@"plugins" section:@"Tangerine" value:@"spotlight"];
@@ -191,7 +197,7 @@
     
     NSString *password_file = [@"~/.tangerine.passwd" stringByExpandingTildeInPath];
     NSString *password = [passwordText stringValue];
-    if (password && [password length] > 0) {
+    if ([passwordCheckBox state] && password && [password length] > 0) {
         FILE *f = fopen([password_file cString], "w+");
         fprintf(f, "%s", [password cString]);
         fclose(f);
@@ -238,9 +244,11 @@
     [dirText setEnabled:(enabled && [dirRadio state])];
     [chooseButton setEnabled:(enabled && [dirRadio state])];
     [radioGroup setEnabled:enabled];
-    [passwordText setEnabled:enabled];
-    [userLimitText setEnabled:enabled];
-    [userLimitStepper setEnabled:enabled];
+    [passwordCheckBox setEnabled:enabled];
+    [userLimitCheckBox setEnabled:enabled];
+    [passwordText setEnabled:(enabled && [passwordCheckBox state])];
+    [userLimitText setEnabled:(enabled && [userLimitCheckBox state])];
+    [userLimitStepper setEnabled:(enabled && [userLimitCheckBox state])];
 }
 
 @end

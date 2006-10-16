@@ -185,7 +185,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>F39973200AE3ECC300FF1CF5</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>QueryHelper.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>F399732E0AE3EDA900FF1CF5</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>QueryHelper.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>F399732F0AE3EDA900FF1CF5</string>
+						<key>history</key>
+						<array>
+							<string>F399731F0AE3ECC300FF1CF5</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1068, 730}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>246 320 1068 771 0 0 1600 1178 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -256,8 +297,6 @@
 							<array>
 								<string>0867D691FE84028FC02AAC07</string>
 								<string>1C37FBAC04509CD000000102</string>
-								<string>F38BD2880ADC2FC600D3FAC3</string>
-								<string>F38BD2890ADC2FC600D3FAC3</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
@@ -369,9 +408,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>F38BD1B70ADC073E00D3FAC3</string>
+				<string>F399732C0AE3EDA900FF1CF5</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>F38BD1B80ADC073E00D3FAC3</string>
+				<string>F399732D0AE3EDA900FF1CF5</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -484,7 +523,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>F38BD4090ADC9A7F00D3FAC3</string>
+	<string>F39973200AE3ECC300FF1CF5</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -508,6 +547,8 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>F38BD1530ADBFF5600D3FAC3</string>
+		<string>F39973200AE3ECC300FF1CF5</string>
+		<string>/Users/snorp/Desktop/tangerine/plugins/spotlight/SpotlightHelper/SpotlightHelper.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>531 749 690 397 0 0 1600 1178 </string>
@@ -531,7 +572,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>QueryHelper.m</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -548,8 +589,6 @@
 							<string>208pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -589,7 +628,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>F38BD1530ADBFF5600D3FAC3</string>
-				<string>F38BD1540ADBFF5600D3FAC3</string>
+				<string>F39973300AE3EDA900FF1CF5</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

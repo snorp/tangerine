@@ -35,7 +35,6 @@ static QueryHelper *helper;
         pool = [[NSAutoreleasePool alloc] init];
         query = [[NSMetadataQuery alloc] init];
         [query setPredicate:[NSPredicate predicateWithFormat:@"kMDItemContentType == 'public.mp3' || kMDItemContentType == 'public.aac' || kMDItemContentType == 'public.mpeg-4-audio'"]];
-        [query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUserHomeScope]];
         [query setNotificationBatchingInterval:5];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryNotified:) name:nil object:query];
 
