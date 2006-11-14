@@ -178,24 +178,46 @@ namespace Tangerine.Plugins {
             }
         }
 
-        public static void UpdateTrack (Track track, string file) {
+        public static bool UpdateTrack (Track track, string file) {
             TagLib.File af;
+
+            FileInfo info = new FileInfo (file);
+            if((int) info.Length >= 0) {
+                track.Size = (int) info.Length;
+            } else {
+                return false;
+            }
 
             try {
                 af = TagLib.File.Create (file);
             } catch (Exception e) {
-                return;
+                return false;
             }
 
-            if (af.Tag.Artists != null && af.Tag.Genres.Length > 0) {
+            if(af.AudioProperties.Duration.TotalSeconds >= 1) {
+                track.Duration = af.AudioProperties.Duration;
+            } else {
+                return false;
+            }
+
+            if((short) af.AudioProperties.Bitrate >=0) {
+                track.BitRate = (short) af.AudioProperties.Bitrate;
+            }else{
+                return false;
+            }
+
+            if (af.Tag.Artists != null && af.Tag.Artists.Length > 0) {
                 track.Artist = af.Tag.Artists[0];
             } else {
                 track.Artist = String.Empty;
             }
             
             track.Album = af.Tag.Album;
-            track.Title = af.Tag.Title;
-            track.Duration = af.AudioProperties.Duration;
+            if (track.Artist != String.Empty || (af.Tag.Title != null && af.Tag.Title != String.Empty) || (af.Tag.Album != null && af.Tag.Album != String.Empty)) {
+                track.Title = af.Tag.Title;
+            } else {
+                track.Title = info.Name;
+            }
             track.FileName = file;
             track.Format = Path.GetExtension (file).Substring (1);
 
@@ -205,31 +227,31 @@ namespace Tangerine.Plugins {
                 track.Genre = String.Empty;
             }
             
-            FileInfo info = new FileInfo (file);
-            track.Size = (int) info.Length;
             track.TrackCount = (int) af.Tag.TrackCount;
             track.TrackNumber = (int) af.Tag.Track;
             track.Year = (int) af.Tag.Year;
-            track.BitRate = (short) af.AudioProperties.Bitrate;
+
+            return true;
         }
 
         private void AddTrack (string file) {
             if (trackHash.ContainsKey (file))
                 return;
             
-            Track track;
+            Track track = new Track ();;
+            bool gotInfo = false;
 
-            if (trackHash.ContainsKey (file)) {
-                track = trackHash[file];
-            } else {
-                track = new Track ();
-                db.AddTrack (track);
+            try{
+                gotInfo = UpdateTrack (track, file);
+            } catch (Exception e) {
+                gotInfo = false;
             }
-
-            UpdateTrack (track, file);
-
-            trackHash[file] = track;
-            odb.Set (track);
+               
+            if(gotInfo) { 
+                db.AddTrack (track);   
+                trackHash[file] = track;
+                odb.Set (track);
+            }
         }
 
         private void RemoveTrack (string file) {
