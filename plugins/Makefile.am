@@ -1,2 +1,13 @@
 
-SUBDIRS = file ipod beagle session banshee rhythmbox amarok muine itunes spotlight
+SUBDIRS = 		\
+	file		\
+	ipod		\
+	beagle		\
+	session		\
+	banshee		\
+	lsongs		\
+	rhythmbox	\
+	amarok		\
+	muine		\
+	itunes		\
+	spotlight

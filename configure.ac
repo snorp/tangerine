@@ -157,6 +157,7 @@ plugins/ipod/Makefile
 plugins/beagle/Makefile
 plugins/session/Makefile
 plugins/banshee/Makefile
+plugins/lsongs/Makefile
 plugins/rhythmbox/Makefile
 plugins/amarok/Makefile
 plugins/muine/Makefile
