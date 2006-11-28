@@ -111,6 +111,7 @@ namespace Tangerine.Plugins {
                     track.Title = hit.GetFirstProperty ("fixme:title");
                     track.Genre = hit.GetFirstProperty ("fixme:genre");
                     track.FileName = hit.Uri.LocalPath;
+                    track.Format = Path.GetExtension (track.FileName).Substring (1);
                 } else {
                     track = GetTrackFromFile (hit.Uri.LocalPath);
                 }

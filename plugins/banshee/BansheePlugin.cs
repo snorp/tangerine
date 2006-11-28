@@ -105,6 +105,7 @@ namespace Tangerine.Plugins {
                 track.TrackNumber = (int) reader[8];
                 track.TrackCount = (int) reader[9];
                 track.Duration = TimeSpan.FromSeconds ((int) reader[10]);
+                track.Format = Path.GetExtension (track.FileName).Substring (1);
                 
                 Daemon.DefaultDatabase.AddTrack (track);
                 tracks[id] = track;
