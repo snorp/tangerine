@@ -264,7 +264,6 @@ namespace Tangerine {
         }
 
         private void SavePrefs () {
-            Daemon.Port = 0;
             Daemon.PasswordFile = passwdPath;
             Daemon.LogFile = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
                                                      ".tangerine-log");
