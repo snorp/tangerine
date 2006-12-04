@@ -8,9 +8,10 @@ using DAAP;
 using log4net;
 using Beagle;
 
+[assembly: Tangerine.Plugin ("beagle", typeof (Tangerine.Plugins.BeaglePlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("beagle")]
     public class BeaglePlugin : IDisposable {
 
         private Server server;

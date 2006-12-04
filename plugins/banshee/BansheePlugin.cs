@@ -9,9 +9,10 @@ using Nini;
 using DAAP;
 using log4net;
 
+[assembly: Tangerine.Plugin ("banshee", typeof (Tangerine.Plugins.BansheePlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("banshee")]
     public class BansheePlugin : IDisposable {
 
         private IDbConnection conn;

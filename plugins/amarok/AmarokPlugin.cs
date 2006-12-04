@@ -9,9 +9,10 @@ using Nini;
 using DAAP;
 using log4net;
 
+[assembly: Tangerine.Plugin ("amarok", typeof (Tangerine.Plugins.AmarokPlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("amarok")]
     public class AmarokPlugin : IDisposable {
 
         private IDbConnection conn;

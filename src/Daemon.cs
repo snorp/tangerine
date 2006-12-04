@@ -112,8 +112,11 @@ namespace Tangerine {
             IsPublished = (bool) cfg.GetBoolean ("publish", true);
             string names = cfg.Get ("plugins", "file,session");
 
-            if (names != null)
+            if (names != null && names != String.Empty) {
                 PluginNames = names.Split(',');
+            } else {
+                PluginNames = new string[0];
+            }
         }
 
         public static bool IsSaveNeeded () {

@@ -8,23 +8,31 @@ using log4net;
 
 namespace Tangerine {
 
+    [AttributeUsage(AttributeTargets.Assembly)]
     public class PluginAttribute : Attribute {
 
         private string name;
+        private Type type;
 
         public string Name {
             get { return name; }
             set { name = value; }
         }
 
-        public PluginAttribute (string name) {
+        public Type Type {
+            get { return type; }
+            set { type = value; }
+        }
+
+        public PluginAttribute (string name, Type type) {
             this.name = name;
+            this.type = type;
         }
     }
 
     public class PluginManager {
 
-        private static Dictionary<string, Assembly> pluginAssemblies = new Dictionary<string, Assembly> ();
+        private static Dictionary<string, Type> pluginTypes = new Dictionary<string, Type> ();
         private static ArrayList plugins = new ArrayList ();
 
         public static string PluginDirectory {
@@ -34,9 +42,9 @@ namespace Tangerine {
         }
 
         public static void LoadPlugins (string[] names) {
-            LoadPluginAssemblies (PluginDirectory);
+            LoadPluginTypes (PluginDirectory);
 #if DEBUG
-            LoadPluginAssemblies (AppDomain.CurrentDomain.BaseDirectory);
+            LoadPluginTypes (AppDomain.CurrentDomain.BaseDirectory);
 #endif
 
             LoadPluginObjects (names);
@@ -45,17 +53,21 @@ namespace Tangerine {
                 Daemon.Log.Warn ("No plugins were loaded");
         }
 
-        private static void LoadPluginAssemblies (string dir) {
+        private static void LoadPluginTypes (string dir) {
             if (!Directory.Exists (dir)) {
                 return;
             }
             
             foreach (string file in Directory.GetFiles (dir, "*.dll")) {
-                if (pluginAssemblies.ContainsKey (file))
-                    continue;
-
                 try {
-                    pluginAssemblies[file] = Assembly.LoadFrom (file);
+                    Assembly asm = Assembly.LoadFrom (file);
+
+                    object[] attrs = asm.GetCustomAttributes (typeof (PluginAttribute), false);
+                    if (attrs != null && attrs.Length > 0) {
+                        foreach (PluginAttribute attr in attrs) {
+                            pluginTypes[attr.Name] = attr.Type;
+                        }
+                    }
                 } catch (Exception e) {
                     Daemon.LogError (String.Format ("Failed to load plugin assembly '{0}'", file), e);
                 }
@@ -63,21 +75,17 @@ namespace Tangerine {
         }
 
         private static void LoadPluginObjects (string[] names) {
-            foreach (Assembly asm in pluginAssemblies.Values) {
-                foreach (Type type in asm.GetTypes ()) {
-                    PluginAttribute attr = Attribute.GetCustomAttribute (type, typeof (PluginAttribute)) as PluginAttribute;
+            foreach (string name in names) {
+                if (!pluginTypes.ContainsKey (name)) {
+                    Daemon.Log.WarnFormat ("No plugin named '{0}' was found", name);
+                    continue;
+                }
 
-                    if (attr == null)
-                        continue;
-                    
-                    if (names == null || names.Length == 0 || Array.IndexOf (names, attr.Name) >= 0) {
-                        try {
-                            plugins.Add (Activator.CreateInstance (type));
-                            Daemon.Log.InfoFormat ("Loaded plugin '{0}'", attr.Name);
-                        } catch (Exception e) {
-                            Daemon.LogError (String.Format ("Failed to load '{0}'", attr.Name), e);
-                        }
-                    }
+                try {
+                    plugins.Add (Activator.CreateInstance (pluginTypes[name]));
+                    Daemon.Log.InfoFormat ("Loaded plugin '{0}'", name);
+                } catch (Exception e) {
+                    Daemon.LogError (String.Format ("Failed to load '{0}'", name), e);
                 }
             }
         }

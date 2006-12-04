@@ -9,9 +9,10 @@ using DAAP;
 using log4net;
 using com.db4o;
 
+[assembly: Tangerine.Plugin ("file", typeof (Tangerine.Plugins.FilePlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("file")]
     public class FilePlugin : IDisposable {
         private Dictionary<string, Track> trackHash = new Dictionary<string, Track> ();
         private Dictionary<string, Playlist> playlistHash = new Dictionary<string, Playlist> ();

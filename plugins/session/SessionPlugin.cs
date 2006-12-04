@@ -5,9 +5,10 @@ using System.Collections;
 using System.Threading;
 using System.Runtime.InteropServices;
 
+[assembly: Tangerine.Plugin ("session", typeof (Tangerine.Plugins.SessionPlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("session")]
     public class SessionPlugin : IDisposable {
 
         [DllImport ("libsessionglue")]

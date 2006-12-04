@@ -7,9 +7,11 @@ using Nini;
 using DAAP;
 using log4net;
 
+[assembly: Tangerine.Plugin ("ipod", typeof (Tangerine.Plugins.IPodPlugin))]
+
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("ipod")]
     public class IPodPlugin {
         private Server server;
         private Database db;

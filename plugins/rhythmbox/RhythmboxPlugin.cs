@@ -8,9 +8,10 @@ using Nini;
 using DAAP;
 using log4net;
 
+[assembly: Tangerine.Plugin ("rhythmbox", typeof (Tangerine.Plugins.RhythmboxPlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("rhythmbox")]
     public class RhythmboxPlugin : IDisposable {
 
         private Dictionary<string, Track> tracks = new Dictionary<string, Track> ();

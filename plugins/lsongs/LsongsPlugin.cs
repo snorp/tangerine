@@ -7,9 +7,10 @@ using Nini;
 using DAAP;
 using log4net;
 
+[assembly: Tangerine.Plugin ("lsongs", typeof (Tangerine.Plugins.LsongsPlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("lsongs")]
     public class LsongsPlugin : IDisposable {
 
         private Dictionary<string, Track> tracks = new Dictionary<string, Track> ();
