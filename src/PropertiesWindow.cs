@@ -76,7 +76,13 @@ namespace Tangerine {
         private SpinButton limitSpinButton;
 
         [Glade.Widget]
+        private CheckButton userLimitButton;
+
+        [Glade.Widget]
         private Entry passwordEntry;
+
+        [Glade.Widget]
+        private CheckButton passwordButton;
 
         public PropertiesWindow () : base ("Tangerine Music Sharing", null, DialogFlags.NoSeparator) {
             Resizable = false;
@@ -113,6 +119,14 @@ namespace Tangerine {
             };
 
             enabledButton.Toggled += delegate {
+                SetSensitive ();
+            };
+
+            userLimitButton.Toggled += delegate {
+                SetSensitive ();
+            };
+
+            passwordButton.Toggled += delegate {
                 SetSensitive ();
             };
 
@@ -169,6 +183,8 @@ namespace Tangerine {
             prefsControls.Sensitive = enabledButton.Active;
             directoryButton.Sensitive = specifyRadio.Active;
             providerCombo.Sensitive = providerRadio.Active;
+            limitSpinButton.Sensitive = userLimitButton.Active;
+            passwordEntry.Sensitive = passwordButton.Active;
         }
 
         private string Combine (params string[] paths) {
@@ -223,6 +239,7 @@ namespace Tangerine {
             SetProvider (Daemon.PluginNames[0]);
             
             limitSpinButton.Value = Daemon.MaxUsers;
+            userLimitButton.Active = Daemon.MaxUsers > 0;
 
             string defaultDir = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
                                                         "Music");
@@ -240,6 +257,7 @@ namespace Tangerine {
             }
 
             passwordEntry.Text = ReadPassword ();
+            passwordButton.Active = passwordEntry.Text != null && passwordEntry.Text != String.Empty;
 
             enabledButton.Active = Daemon.IsAutostartEnabled;
         }
@@ -254,7 +272,7 @@ namespace Tangerine {
         }
 
         private void WritePassword () {
-            if (passwordEntry.Text == String.Empty || passwordEntry.Text == null) {
+            if (!passwordEntry.Sensitive || passwordEntry.Text == String.Empty || passwordEntry.Text == null) {
                 File.Delete (passwdPath);
             } else {
                 using (StreamWriter writer = new StreamWriter (File.Open (passwdPath, FileMode.Create))) {
@@ -265,9 +283,19 @@ namespace Tangerine {
 
         private void SavePrefs () {
             Daemon.PasswordFile = passwdPath;
+            if (!passwordEntry.Sensitive) {
+                File.Delete (passwdPath);
+            }
+            
             Daemon.LogFile = System.IO.Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal),
                                                      ".tangerine-log");
-            Daemon.MaxUsers = (int) limitSpinButton.Value;
+
+            if (limitSpinButton.Sensitive) {
+                Daemon.MaxUsers = (int) limitSpinButton.Value;
+            } else {
+                Daemon.MaxUsers = 0; // unlimited
+            }
+            
             Daemon.Name = nameEntry.Text;
 
             string pluginName;

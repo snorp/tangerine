@@ -2,19 +2,19 @@
 PLUGIN_ASSEMBLY = tangerine-file.dll
 
 plugindir = $(prefix)/lib/tangerine/plugins
-plugin_DATA = $(PLUGIN_ASSEMBLY) db4o.dll
+plugin_DATA = $(PLUGIN_ASSEMBLY) Db4objects.Db4o.dll
 
 CLEANFILES = $(PLUGIN_ASSEMBLY)
 
 PLUGINSOURCES = $(srcdir)/FilePlugin.cs
 
-PLUGIN_DEPS = 						\
+PLUGIN_DEPS = 							\
 	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
-	-r:$(top_srcdir)/deps/Nini.dll			\
+	-r:$(top_srcdir)/deps/Nini.dll				\
 	-r:$(top_builddir)/deps/taglib-sharp/taglib-sharp.dll	\
-	-r:$(srcdir)/db4o.dll				\
-	-r:$(top_srcdir)/deps/log4net.dll		\
-	-r:Mono.Posix					\
+	-r:$(srcdir)/Db4objects.Db4o.dll			\
+	-r:$(top_srcdir)/deps/log4net.dll			\
+	-r:Mono.Posix						\
 	-r:$(top_builddir)/src/tangerine.dll
 
 tangerine-file.dll: $(PLUGINSOURCES)

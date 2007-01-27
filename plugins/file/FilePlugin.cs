@@ -7,7 +7,7 @@ using System.Threading;
 using Nini;
 using DAAP;
 using log4net;
-using com.db4o;
+using Db4objects.Db4o;
 
 [assembly: Tangerine.Plugin ("file", typeof (Tangerine.Plugins.FilePlugin))]
 
@@ -22,7 +22,7 @@ namespace Tangerine.Plugins {
         private string[] directories;
         private bool running = true;
 
-        private ObjectContainer odb;
+        private IObjectContainer odb;
 
         private Server server;
         private Database db;
@@ -110,11 +110,12 @@ namespace Tangerine.Plugins {
                 if (!Directory.Exists (Daemon.ConfigDirectory)) {
                     Directory.CreateDirectory (Daemon.ConfigDirectory);
                 }
-                
-                odb = Db4o.OpenFile (Path.Combine (Daemon.ConfigDirectory, "tracks.db"));
+
+                Db4oFactory.Configure().AllowVersionUpdates (true);
+                odb = Db4oFactory.OpenFile (Path.Combine (Daemon.ConfigDirectory, "tracks.db"));
             }
 
-            ObjectSet result = odb.Get (typeof (Track));
+            IObjectSet result = odb.Get (typeof (Track));
             log.DebugFormat ("{0} songs in database", result.Count);
             
             foreach (Track song in result) {
@@ -191,7 +192,7 @@ namespace Tangerine.Plugins {
 
             try {
                 af = TagLib.File.Create (file);
-            } catch (Exception e) {
+            } catch {
                 return false;
             }
 
@@ -244,7 +245,7 @@ namespace Tangerine.Plugins {
 
             try{
                 gotInfo = UpdateTrack (track, file);
-            } catch (Exception e) {
+            } catch {
                 gotInfo = false;
             }
                
