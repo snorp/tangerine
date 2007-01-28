@@ -53,9 +53,12 @@
     <Compile Include="deps\taglib-sharp\TagLib\ByteVector.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\ByteVectorList.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\CombinedTag.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\CorruptFileException.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Debugger.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\FileTypes.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Flac\File.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Flac\Picture.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Flac\Properties.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v1\GenreList.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v1\StringHandler.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\FrameHeader.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\AttachedPictureFrame.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\CommentsFrame.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\GeneralEncapsulatedObjectFrame.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\PrivateFrame.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\RelativeVolumeFrame.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Frames\TextIdentificationFrame.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\SynchData.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Id3v2\Tag.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\IntList.cs" />
+    <Compile Include="deps\taglib-sharp\TagLib\ListBase.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Mpc\File.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Mpc\Properties.cs" />
     <Compile Include="deps\taglib-sharp\TagLib\Mpeg4\AppleTag.cs" />

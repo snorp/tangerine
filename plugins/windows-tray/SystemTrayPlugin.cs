@@ -10,7 +10,8 @@ using DAAP;
 
 namespace Tangerine.Plugins {
 
-    [Plugin ("system-tray")]
+    [assembly: Plugin ("system-tray", typeof (Tangerine.Plugins.SystemTrayPlugin))]
+
     public class SystemTrayPlugin : IDisposable {
         private const string DontAskRegKey = @"Software\Tangerine";
         private NotifyIcon icon;

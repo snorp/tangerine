@@ -8,7 +8,8 @@ using DAAP;
 
 namespace Tangerine.Plugins {
 
-    [Plugin ("google")]
+    [assembly: Plugin ("google", typeof (Tangerine.Plugins.GooglePlugin))]
+
     public class GooglePlugin : IDisposable {
         private const string RegkeyPath = @"Software\Tangerine";
         

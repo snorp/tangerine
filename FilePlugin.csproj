@@ -34,9 +34,9 @@
     <Compile Include="plugins\file\FilePlugin.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="db4o, Version=5.2.2.0, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb">
+    <Reference Include="Db4objects.Db4o, Version=6.0.1.0, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>plugins\file\db4o.dll</HintPath>
+      <HintPath>plugins\file\Db4objects.Db4o.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <SpecificVersion>False</SpecificVersion>

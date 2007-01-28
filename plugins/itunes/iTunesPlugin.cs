@@ -9,7 +9,8 @@ using log4net;
 
 namespace Tangerine.Plugins {
 
-    [Plugin ("itunes")]
+    [assembly: Plugin ("itunes", typeof (Tangerine.Plugins.iTunesPlugin))]
+
     public class iTunesPlugin : IDisposable {
 
         private Dictionary<long, Track> tracks = new Dictionary<long,Track> ();
