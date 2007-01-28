@@ -39,9 +39,9 @@ namespace TangerineProperties.src {
             this.dirRadioButton = new System.Windows.Forms.RadioButton ();
             this.googleRadioButton = new System.Windows.Forms.RadioButton ();
             this.accessControlPanel = new System.Windows.Forms.GroupBox ();
+            this.userLimitCheckBox = new System.Windows.Forms.CheckBox ();
+            this.passwordCheckBox = new System.Windows.Forms.CheckBox ();
             this.maxUsersButton = new System.Windows.Forms.NumericUpDown ();
-            this.label3 = new System.Windows.Forms.Label ();
-            this.label1 = new System.Windows.Forms.Label ();
             this.passwordBox = new System.Windows.Forms.TextBox ();
             this.toolTip1 = new System.Windows.Forms.ToolTip (this.components);
             this.generalOptionsPanel.SuspendLayout ();
@@ -185,9 +185,9 @@ namespace TangerineProperties.src {
             // 
             // accessControlPanel
             // 
+            this.accessControlPanel.Controls.Add (this.userLimitCheckBox);
+            this.accessControlPanel.Controls.Add (this.passwordCheckBox);
             this.accessControlPanel.Controls.Add (this.maxUsersButton);
-            this.accessControlPanel.Controls.Add (this.label3);
-            this.accessControlPanel.Controls.Add (this.label1);
             this.accessControlPanel.Controls.Add (this.passwordBox);
             this.accessControlPanel.Location = new System.Drawing.Point (12, 198);
             this.accessControlPanel.Name = "accessControlPanel";
@@ -196,11 +196,38 @@ namespace TangerineProperties.src {
             this.accessControlPanel.TabStop = false;
             this.accessControlPanel.Text = "Access Control";
             // 
+            // userLimitCheckBox
+            // 
+            this.userLimitCheckBox.AutoSize = true;
+            this.userLimitCheckBox.Location = new System.Drawing.Point (15, 51);
+            this.userLimitCheckBox.Name = "userLimitCheckBox";
+            this.userLimitCheckBox.Size = new System.Drawing.Size (71, 17);
+            this.userLimitCheckBox.TabIndex = 17;
+            this.userLimitCheckBox.Text = "User limit:";
+            this.userLimitCheckBox.UseVisualStyleBackColor = true;
+            this.userLimitCheckBox.CheckedChanged += new System.EventHandler (this.userLimitCheckBox_CheckedChanged);
+            // 
+            // passwordCheckBox
+            // 
+            this.passwordCheckBox.AutoSize = true;
+            this.passwordCheckBox.Location = new System.Drawing.Point (15, 24);
+            this.passwordCheckBox.Name = "passwordCheckBox";
+            this.passwordCheckBox.Size = new System.Drawing.Size (75, 17);
+            this.passwordCheckBox.TabIndex = 16;
+            this.passwordCheckBox.Text = "Password:";
+            this.passwordCheckBox.UseVisualStyleBackColor = true;
+            this.passwordCheckBox.CheckedChanged += new System.EventHandler (this.checkBox1_CheckedChanged);
+            // 
             // maxUsersButton
             // 
-            this.maxUsersButton.Location = new System.Drawing.Point (79, 45);
+            this.maxUsersButton.Location = new System.Drawing.Point (94, 48);
             this.maxUsersButton.Maximum = new decimal (new int[] {
             999,
+            0,
+            0,
+            0});
+            this.maxUsersButton.Minimum = new decimal (new int[] {
+            1,
             0,
             0,
             0});
@@ -208,32 +235,17 @@ namespace TangerineProperties.src {
             this.maxUsersButton.Size = new System.Drawing.Size (45, 20);
             this.maxUsersButton.TabIndex = 15;
             this.toolTip1.SetToolTip (this.maxUsersButton, "Maximum number of simultaneous users, 0 for no limit");
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font ("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label3.Location = new System.Drawing.Point (14, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size (59, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "User limit";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font ("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label1.Location = new System.Drawing.Point (12, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size (61, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Password";
+            this.maxUsersButton.Value = new decimal (new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // passwordBox
             // 
-            this.passwordBox.Location = new System.Drawing.Point (79, 19);
+            this.passwordBox.Location = new System.Drawing.Point (94, 22);
             this.passwordBox.Name = "passwordBox";
-            this.passwordBox.Size = new System.Drawing.Size (122, 20);
+            this.passwordBox.Size = new System.Drawing.Size (188, 20);
             this.passwordBox.TabIndex = 15;
             this.toolTip1.SetToolTip (this.passwordBox, "Password used to access the share, leave blank for none");
             this.passwordBox.UseSystemPasswordChar = true;
@@ -278,14 +290,14 @@ namespace TangerineProperties.src {
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.GroupBox generalOptionsPanel;
         private System.Windows.Forms.GroupBox accessControlPanel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.NumericUpDown maxUsersButton;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton dirRadioButton;
         private System.Windows.Forms.RadioButton googleRadioButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ComboBox providerCombo;
         private System.Windows.Forms.RadioButton providerRadioButton;
+        private System.Windows.Forms.CheckBox passwordCheckBox;
+        private System.Windows.Forms.CheckBox userLimitCheckBox;
     }
 }

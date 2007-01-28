@@ -108,6 +108,8 @@ namespace TangerineProperties.src {
             providerCombo.Enabled = providerRadioButton.Checked;
             musicDirBox.Enabled = dirRadioButton.Checked;
             musicDirButton.Enabled = dirRadioButton.Checked;
+            maxUsersButton.Enabled = userLimitCheckBox.Checked;
+            passwordBox.Enabled = passwordCheckBox.Checked;
         }
 
         private void LoadPrefs () {
@@ -126,8 +128,12 @@ namespace TangerineProperties.src {
             SetProvider (Daemon.PluginNames[0]);
 
             passwordBox.Text = ReadPassword ();
+            passwordCheckBox.Checked = passwordBox.Text != null && passwordBox.Text != String.Empty;
 
-            maxUsersButton.Value = Daemon.MaxUsers;
+            userLimitCheckBox.Checked = Daemon.MaxUsers > 0;
+            if (Daemon.MaxUsers > 0) {
+                maxUsersButton.Value = Daemon.MaxUsers;
+            }
 
             Process[] crawlers = Process.GetProcessesByName("GoogleDesktopCrawl");
             if (crawlers == null || crawlers.Length == 0) {
@@ -148,7 +154,7 @@ namespace TangerineProperties.src {
         }
 
         private string ReadPassword () {
-            if (!File.Exists (passwdPath))
+            if (!File.Exists (Daemon.PasswordFile))
                 return String.Empty;
 
             using (StreamReader reader = new StreamReader (File.Open (passwdPath, FileMode.Open))) {
@@ -191,10 +197,14 @@ namespace TangerineProperties.src {
             }
 
             Daemon.ConfigSource.Configs["FilePlugin"].Set ("directories", musicDirBox.Text);
-            Daemon.MaxUsers = (int) maxUsersButton.Value;
+            if (maxUsersButton.Enabled) {
+                Daemon.MaxUsers = (int) maxUsersButton.Value;
+            } else {
+                Daemon.MaxUsers = 0;
+            }
 
             WritePassword ();
-            if (passwordBox.Text != null && passwordBox.Text != String.Empty) {
+            if (passwordBox.Enabled && passwordBox.Text != null && passwordBox.Text != String.Empty) {
                 Daemon.PasswordFile = passwdPath;
             } else {
                 Daemon.PasswordFile = null;
@@ -253,6 +263,14 @@ namespace TangerineProperties.src {
 
         private void providerRadio_CheckedChanged(object sender, EventArgs e)
         {
+            SetEnabled ();
+        }
+
+        private void checkBox1_CheckedChanged (object sender, EventArgs e) {
+            SetEnabled ();
+        }
+
+        private void userLimitCheckBox_CheckedChanged (object sender, EventArgs e) {
             SetEnabled ();
         }
     }
