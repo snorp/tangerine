@@ -6,9 +6,9 @@ using GoogleDesktopAPILib;
 using Microsoft.Win32;
 using DAAP;
 
-namespace Tangerine.Plugins {
+[assembly: Tangerine.Plugin ("google", typeof (Tangerine.Plugins.GooglePlugin))]
 
-    [assembly: Plugin ("google", typeof (Tangerine.Plugins.GooglePlugin))]
+namespace Tangerine.Plugins {
 
     public class GooglePlugin : IDisposable {
         private const string RegkeyPath = @"Software\Tangerine";

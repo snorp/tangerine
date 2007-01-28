@@ -61,10 +61,12 @@ namespace Tangerine {
             foreach (string file in Directory.GetFiles (dir, "*.dll")) {
                 try {
                     Assembly asm = Assembly.LoadFrom (file);
+                    Daemon.Log.DebugFormat ("Loaded assembly: {0}", asm.ToString ());
 
                     object[] attrs = asm.GetCustomAttributes (typeof (PluginAttribute), false);
                     if (attrs != null && attrs.Length > 0) {
                         foreach (PluginAttribute attr in attrs) {
+                            Daemon.Log.DebugFormat ("Got plugin type {0} = {1}", attr.Name, attr.Type);
                             pluginTypes[attr.Name] = attr.Type;
                         }
                     }

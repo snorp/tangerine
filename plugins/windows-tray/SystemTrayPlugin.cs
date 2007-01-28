@@ -8,9 +8,9 @@ using System.Drawing;
 using Microsoft.Win32;
 using DAAP;
 
-namespace Tangerine.Plugins {
+[assembly: Tangerine.Plugin ("system-tray", typeof (Tangerine.Plugins.SystemTrayPlugin))]
 
-    [assembly: Plugin ("system-tray", typeof (Tangerine.Plugins.SystemTrayPlugin))]
+namespace Tangerine.Plugins {
 
     public class SystemTrayPlugin : IDisposable {
         private const string DontAskRegKey = @"Software\Tangerine";

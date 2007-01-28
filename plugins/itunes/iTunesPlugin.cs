@@ -7,9 +7,9 @@ using System.Xml;
 using DAAP;
 using log4net;
 
-namespace Tangerine.Plugins {
+[assembly: Tangerine.Plugin ("itunes", typeof (Tangerine.Plugins.iTunesPlugin))]
 
-    [assembly: Plugin ("itunes", typeof (Tangerine.Plugins.iTunesPlugin))]
+namespace Tangerine.Plugins {
 
     public class iTunesPlugin : IDisposable {
 
