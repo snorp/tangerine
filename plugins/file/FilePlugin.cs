@@ -240,19 +240,14 @@ namespace Tangerine.Plugins {
             if (trackHash.ContainsKey (file))
                 return;
             
-            Track track = new Track ();;
-            bool gotInfo = false;
-
-            try{
-                gotInfo = UpdateTrack (track, file);
+            Track track = new Track ();
+            try {
+                if (UpdateTrack (track, file)) {
+                    db.AddTrack (track);   
+                    trackHash[file] = track;
+                    odb.Set (track);
+                }
             } catch {
-                gotInfo = false;
-            }
-               
-            if(gotInfo) { 
-                db.AddTrack (track);   
-                trackHash[file] = track;
-                odb.Set (track);
             }
         }
 
