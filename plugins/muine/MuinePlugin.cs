@@ -9,9 +9,10 @@ using Nini;
 using DAAP;
 using log4net;
 
+[assembly: Tangerine.Plugin ("muine", typeof (Tangerine.Plugins.MuinePlugin))]
+
 namespace Tangerine.Plugins {
 
-    [Plugin ("muine")]
     public class MuinePlugin : IDisposable {
 
         private List<Track> tracks = new List<Track> ();
