@@ -108,14 +108,15 @@ namespace Tangerine.Plugins {
         }
 
         private void RefreshTracks () {
-            if (!OpenConnection ())
+            if (!OpenConnection ()) {
                 return;
+            }
 
             Dictionary<int, string> albums = FetchStrings ("album");
             Dictionary<int, string> artists = FetchStrings ("artist");
             Dictionary<int, string> genres = FetchStrings ("genre");
             Dictionary<int, string> years = FetchStrings ("year");
-            
+
             IDbCommand cmd = conn.CreateCommand ();
             cmd.CommandText = "SELECT url, album, artist, genre, title, year, track, bitrate, length FROM tags";
 
@@ -126,11 +127,12 @@ namespace Tangerine.Plugins {
             
             while (reader.Read ()) {
                 string path = (string) reader[0];
-                if (!path.StartsWith ("/"))
-                    continue;
+                if (path.StartsWith (".")) {
+                    path = path.Substring (1);
+                }
 
                 paths.Add (path);
-                
+
                 if (tracks.ContainsKey (path))
                     continue;
 
