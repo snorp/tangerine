@@ -22,6 +22,10 @@ if test "x$MONO" = "x" ; then
    AC_MSG_ERROR([Can not find "mono" in your PATH])
 fi
 
+dnl daap-sharp
+PKG_CHECK_MODULES(DAAP_SHARP, daap-sharp)
+
+
 dnl mcs	   
 AC_PATH_PROG(MCS, gmcs)
 if test "x$MCS" = "x" ; then
@@ -30,16 +34,6 @@ fi
 
 AC_ARG_ENABLE(beagle, AC_HELP_STRING([--disable-beagle], [Do not build the beagle plugin]), enable_beagle="no", enable_beagle="yes")
 
-dnl ipod-sharp
-IPOD_SHARP_REQUIRED=0.6.0
-PKG_CHECK_MODULES(IPOD_SHARP, ipod-sharp >= $IPOD_SHARP_REQUIRED,
-                  have_ipod=yes, have_ipod=no)
-if test "x$have_ipod" = "xyes"; then \
-    IPOD_SHARP_ASSEMBLIES=`$PKG_CONFIG --variable=Libraries ipod-sharp`
-    AC_SUBST(IPOD_SHARP_LIBS)
-    AC_SUBST(IPOD_SHARP_ASSEMBLIES)
-fi
-
 have_inotify="no"
 build_gui="no"
 build_session_plugin="no"
@@ -47,7 +41,6 @@ build_itunes_plugin="no"
 build_spotlight_plugin="no"
 build_prefpane="no"
 platform="none"
-DNSSD_LIB="none"
 AC_MSG_CHECKING([host platform characteristics])
 case "$host" in
     *-*-linux*)
@@ -64,7 +57,6 @@ case "$host" in
         build_gui="yes"
         build_session_plugin="yes"
         platform="LINUX"
-        DNSSD_LIB="libnss_mdns-0.2.so"
         ;;
     *-*-darwin*)
         have_inotify="no"
@@ -74,7 +66,6 @@ case "$host" in
         build_spotlight_plugin="yes"
 	build_prefpane="yes"
         platform="MACOSX"
-        DNSSD_LIB="libSystem.B.dylib"
         ;;
 esac
 AC_MSG_RESULT(ok)
@@ -95,20 +86,6 @@ else
 fi
 
 
-AC_ARG_ENABLE(mdnsd, AC_HELP_STRING([--enable-mdnsd], [Use mDNSResponder instead of Avahi]), enable_mdnsd="yes", enable_mdnsd="no")
-AM_CONDITIONAL(ENABLE_MDNSD, test "x$enable_mdnsd" = "xyes")
-
-if test "x$enable_mdnsd" = "xyes"; then
-        MCS_FLAGS="-define:ENABLE_MDNSD"
-        AC_SUBST(MCS_FLAGS)
-else
-        PKG_CHECK_MODULES(AVAHI, avahi-sharp >= 0.6.11)
-        MCS_FLAGS=$AVAHI_LIBS
-        AC_SUBST(MCS_FLAGS)
-fi
-
-
-AC_SUBST(DNSSD_LIB)
 AM_CONDITIONAL(HAVE_INOTIFY, test "x$have_inotify" = "xyes")       
 AM_CONDITIONAL(BUILD_GUI, test "x$build_gui" = "xyes")       
 AM_CONDITIONAL(BUILD_SESSION_PLUGIN, test "x$build_session_plugin" = "xyes")
@@ -117,6 +94,7 @@ AM_CONDITIONAL(BUILD_SPOTLIGHT_PLUGIN, test "x$build_spotlight_plugin" = "xyes")
 AM_CONDITIONAL(BUILD_PREFPANE, test "x$build_prefpane" = "xyes")
 
 MCS_FLAGS="$MCS_FLAGS -define:$platform"
+AC_SUBST(MCS_FLAGS)
 
 dnl muine
 have_muine=no
@@ -139,21 +117,17 @@ if test "x$MUINE" != "x" ; then
     AC_SUBST(LIBMUINE)
 fi
 
-AM_CONDITIONAL(ENABLE_IPOD, test "x$have_ipod" = "xyes")
 AM_CONDITIONAL(ENABLE_BEAGLE, test "x$have_beagle" = "xyes")
 AM_CONDITIONAL(ENABLE_MUINE, test "x$have_muine" = "xyes")
 
 AC_OUTPUT([
 Makefile
 deps/Makefile
-deps/daap-sharp/Makefile
-deps/daap-sharp/daap-sharp.dll.config
 deps/taglib-sharp/Makefile
 icons/Makefile
 src/Makefile
 plugins/Makefile
 plugins/file/Makefile
-plugins/ipod/Makefile
 plugins/beagle/Makefile
 plugins/session/Makefile
 plugins/banshee/Makefile
@@ -171,14 +145,7 @@ tangerine.pc
 
 echo
 echo "tangerine prefix:    $prefix"
-echo "     iPod plugin:    $have_ipod"
 echo "   Beagle plugin:    $have_beagle"
 echo "    Muine plugin:    $have_muine"
-
-if test "x$enable_mdnsd" = "xyes"; then \
-    echo "        Zeroconf:    mDNSResponder"
-else
-    echo "        Zeroconf:    Avahi"
-fi
 
 echo

@@ -1,10 +1,8 @@
 
 PLUGIN_ASSEMBLY = tangerine-itunes.dll
 
-if BUILD_ITUNES_PLUGIN
 plugindir = $(prefix)/lib/tangerine/plugins
 plugin_DATA = $(PLUGIN_ASSEMBLY) itunes.provider
-endif
 
 CLEANFILES = $(PLUGIN_ASSEMBLY)
 
@@ -19,7 +17,7 @@ PLUGIN_DEPS = 						\
 	-r:Mono.Posix
 
 tangerine-itunes.dll: $(PLUGINSOURCES)
-	$(MCS) $(MCS_FLAGS) -target:library -out:$@ $(PLUGINSOURCES) \
+	$(MCS) -g $(MCS_FLAGS) -target:library -out:$@ $(PLUGINSOURCES) \
 	$(PLUGIN_DEPS)
 
 EXTRA_DIST = $(PLUGINSOURCES) itunes.provider

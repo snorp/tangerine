@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading;
 using System.Xml;
+using System.Xml.XPath;
 using DAAP;
 using log4net;
 
@@ -26,7 +27,8 @@ namespace Tangerine.Plugins {
 #if WINDOWS
             dbpath = Environment.GetFolderPath (Environment.SpecialFolder.MyMusic) + @"\iTunes\iTunes Music Library.xml";
 #else
-            dbpath = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + @"/Music/iTunes/iTunes Music Library.xml";
+            //dbpath = Environment.GetFolderPath (Environment.SpecialFolder.Personal) + @"/Music/iTunes/iTunes Music Library.xml";
+            dbpath = "/home/snorp/Downloads/Library4.xml";
 #endif
 
             itunesDir = Path.GetDirectoryName (dbpath);
@@ -75,38 +77,41 @@ namespace Tangerine.Plugins {
             tracks.Clear ();
         }
 
-        private List<Dictionary<string, object>> ParseDictionaryArray (XmlNodeList children) {
+        private List<Dictionary<string, object>> ParseDictionaryArray (XPathNavigator node) {
             List<Dictionary<string, object>> list = new List<Dictionary<string, object>> ();
 
-            foreach (XmlNode child in children) {
-                list.Add (ParseDictionary (child));
-            }
+            do {
+                list.Add (ParseDictionary (node));
+            } while (node.MoveToNext ());
 
             return list;
         }
 
-        private Dictionary<string, object> ParseDictionary (XmlNode node) {
+        private Dictionary<string, object> ParseDictionary (XPathNavigator node) {
             Dictionary<string, object> dict = new Dictionary<string, object> ();
 
             string key = null;
 
-            foreach (XmlNode child in node.ChildNodes) {
-                switch (child.LocalName) {
+            node.MoveToFirstChild ();
+
+            do {
+                switch (node.LocalName) {
                 case "key":
-                    key = child.InnerText;
+                    key = node.Value;
                     break;
                 case "string":
                 case "date":
-                    dict[key] = child.InnerText;
+                    dict[key] = node.Value;
                     break;
                 case "integer":
-                    dict[key] = Int64.Parse (child.InnerText);
+                    dict[key] = Int64.Parse (node.Value);
                     break;
                 case "array":
-                    dict[key] = ParseDictionaryArray (child.ChildNodes);
+                    node.MoveToFirstChild ();
+                    dict[key] = ParseDictionaryArray (node);
                     break;
                 case "dict":
-                    dict[key] = ParseDictionary (child);
+                    dict[key] = ParseDictionary (node);
                     break;
                 case "true":
                     dict[key] = true;
@@ -117,7 +122,7 @@ namespace Tangerine.Plugins {
                 default:
                     break;
                 }
-            }
+            } while (node.MoveToNext ());
 
             return dict;
         }
@@ -136,13 +141,13 @@ namespace Tangerine.Plugins {
                 return;
             }
 
-            XmlDocument doc = new XmlDocument ();
-            doc.Load (dbpath);
+            XPathDocument doc = new XPathDocument (new XmlTextReader (dbpath));
+            XPathNavigator rootNode = doc.CreateNavigator ();
 
             Dictionary<long, Track> newTracks = new Dictionary<long, Track> ();
 
             // parse the tracks
-            foreach (XmlNode node in doc.SelectNodes("/plist/dict/key[text()='Tracks']/following-sibling::*[1]//dict")) {
+            foreach (XPathNavigator node in rootNode.Select ("/plist/dict/key[text()='Tracks']/following-sibling::*[1]//dict")) {
                 Dictionary<string, object> dict = ParseDictionary (node);
 
                 Uri uri = new Uri ((string) dict["Location"]);
@@ -189,8 +194,9 @@ namespace Tangerine.Plugins {
             tracks = newTracks;
 
             // parse the playlists
-            XmlNode arrayNode = doc.SelectNodes ("/plist/dict/key[text()='Playlists']/following-sibling::*[1]")[0];
-            List<Dictionary<string, object>> list = ParseDictionaryArray (arrayNode.ChildNodes);
+            XPathNavigator arrayNode = rootNode.Select ("/plist/dict/key[text()='Playlists']/following-sibling::*[1]").Current;
+            arrayNode.MoveToFirstChild ();
+            List<Dictionary<string, object>> list = ParseDictionaryArray (arrayNode);
 
             foreach (Dictionary<string, object> dict in list) {
                 if (dict.ContainsKey ("Visible")) {

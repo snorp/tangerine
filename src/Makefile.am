@@ -43,7 +43,8 @@ TANG_DEPS =						\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\
-	$(GLIB_SHARP_LIBS)
+	$(GLIB_SHARP_LIBS)				\
+	$(DAAP_SHARP_LIBS)
 
 $(TANG_ASSEMBLY): $(TANGSOURCES)
 	$(MCS) $(MCS_FLAGS) -unsafe -target:library -out:$@ $(TANGSOURCES) \
@@ -71,6 +72,12 @@ tangerine-properties: tangerine-properties.in
 	sed -e 's,@libdir\@,$(libdir),g' \
 	    -e 's,\${exec_prefix},$(prefix),g' \
 	    -e 's,\@prefix\@,$(prefix),g' $< > $@
+
+install-data-hook:
+	$(INSTALL) -m 0755 `pkg-config --variable=Libraries daap-sharp` $(DESTDIR)$(asmdir)
+        
+uninstall-hook:
+	rm -rf $(DESTDIR)$(asmdir)/daap-sharp*
 
 EXTRA_DIST =				\
 	$(TANGSOURCES)			\

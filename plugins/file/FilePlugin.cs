@@ -196,14 +196,14 @@ namespace Tangerine.Plugins {
                 return false;
             }
 
-            if(af.AudioProperties.Duration.TotalSeconds >= 1) {
-                track.Duration = af.AudioProperties.Duration;
+            if(af.Properties.Duration.TotalSeconds >= 1) {
+                track.Duration = af.Properties.Duration;
             } else {
                 return false;
             }
 
-            if((short) af.AudioProperties.Bitrate >=0) {
-                track.BitRate = (short) af.AudioProperties.Bitrate;
+            if((short) af.Properties.AudioBitrate >=0) {
+                track.BitRate = (short) af.Properties.AudioBitrate;
             }else{
                 return false;
             }
