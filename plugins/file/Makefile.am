@@ -9,9 +9,9 @@ CLEANFILES = $(PLUGIN_ASSEMBLY)
 PLUGINSOURCES = $(srcdir)/FilePlugin.cs
 
 PLUGIN_DEPS = 							\
-	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
+	$(TAGLIB_SHARP_LIBS)					\
+	$(DAAP_SHARP_LIBS)					\
 	-r:$(top_srcdir)/deps/Nini.dll				\
-	-r:$(top_builddir)/deps/taglib-sharp/taglib-sharp.dll	\
 	-r:$(srcdir)/Db4objects.Db4o.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll			\
 	-r:Mono.Posix						\

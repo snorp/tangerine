@@ -39,7 +39,6 @@ TANGSOURCES =				\
 	$(srcdir)/UnixSignal.cs
 
 TANG_DEPS =						\
-	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
 	-r:$(top_srcdir)/deps/Nini.dll			\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:Mono.Posix					\

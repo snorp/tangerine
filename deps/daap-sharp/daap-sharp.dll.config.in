@@ -1,4 +1,0 @@
-<configuration>
-	<dllmap dll="dnssd.dll" target="@DNSSD_LIB@"/>
-</configuration>
-

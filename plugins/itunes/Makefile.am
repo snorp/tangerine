@@ -9,9 +9,8 @@ CLEANFILES = $(PLUGIN_ASSEMBLY)
 PLUGINSOURCES = $(srcdir)/iTunesPlugin.cs
 
 PLUGIN_DEPS = 						\
-	-r:$(top_builddir)/deps/daap-sharp/daap-sharp.dll	\
+	$(DAAP_SHARP_LIBS)				\
 	-r:$(top_srcdir)/deps/Nini.dll			\
-	-r:$(top_srcdir)/deps/taglib-sharp/taglib-sharp.dll	\
 	-r:$(top_srcdir)/deps/log4net.dll		\
 	-r:$(top_builddir)/src/tangerine.dll		\
 	-r:Mono.Posix

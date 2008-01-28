@@ -22,8 +22,9 @@ if test "x$MONO" = "x" ; then
    AC_MSG_ERROR([Can not find "mono" in your PATH])
 fi
 
-dnl daap-sharp
+dnl daap-sharp, taglib-sharp
 PKG_CHECK_MODULES(DAAP_SHARP, daap-sharp)
+PKG_CHECK_MODULES(TAGLIB_SHARP, taglib-sharp)
 
 
 dnl mcs	   
@@ -123,7 +124,6 @@ AM_CONDITIONAL(ENABLE_MUINE, test "x$have_muine" = "xyes")
 AC_OUTPUT([
 Makefile
 deps/Makefile
-deps/taglib-sharp/Makefile
 icons/Makefile
 src/Makefile
 plugins/Makefile
